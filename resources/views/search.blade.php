@@ -20,7 +20,7 @@
     <div class="block w-full p-3 py-4 my-4 text-sm text-gray-700 shadow border border-[#e5e5e5] rounded-lg bg-white md:text-base md:p-3 md:py-6" >
         <div class="grid grid-cols-3 gap-4 content-start ">
             <p class="my-2 ml-4">{{ $employee->name }}</p>
-            <p class="my-2">ชื่อหน่วยงาน</p>
+            <p class="my-2">{{ $employee->organizer->name }}</p>
             <div class="relative">
             <button class="absolute right-2 text-white p-2 px-4 shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534]">
                 ลงทะเบียน

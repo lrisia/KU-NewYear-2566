@@ -11,7 +11,7 @@ class Employee extends Model
     public $timestamps = false;
 
     public function organizer() {
-        $this->belongsTo(Organizer::class);
+        return $this->belongsTo(Organizer::class);
     }
 
     public function prize() {
