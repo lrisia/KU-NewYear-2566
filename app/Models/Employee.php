@@ -17,4 +17,9 @@ class Employee extends Model
     public function prize() {
 
     }
+
+    public function scopeSearchName($query, $search)
+    {
+        return $query->where('name', 'LIKE', "%{$search}%");
+    }
 }

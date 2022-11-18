@@ -12,15 +12,18 @@ class EmployeeController extends Controller
         return 'index';
     }
 
-    public function search(Request $request) {
-        return 'search';
-    }
-
     public function store(Request $request) {
         return 'store';
     }
 
     public function show($id) {
-        return 'show'.$id;
+        return 'show' . $id;
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $employees = Employee::searchName($keyword)->get();
+        return view('search', ['employees' => $employees, 'keyword' => $keyword]);
     }
 }
