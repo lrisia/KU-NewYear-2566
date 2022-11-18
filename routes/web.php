@@ -23,7 +23,6 @@ Route::group(['prefix' => 'register'], function() {
     Route::get('', [EmployeeController::class, 'index']);
     Route::get('search', [EmployeeController::class, 'search']);
     Route::post('store', [EmployeeController::class, 'store']);
-    Route::get('{id}/qr-code', [EmployeeController::class, 'show']);
 });
 
 Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show']);
