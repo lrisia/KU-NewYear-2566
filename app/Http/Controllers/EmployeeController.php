@@ -24,6 +24,6 @@ class EmployeeController extends Controller
     {
         $keyword = $request->input('keyword');
         $employees = Employee::searchName($keyword)->get();
-        return view('search', ['employees' => $employees, 'keyword' => $keyword]);
+        return view('employees.search', ['employees' => $employees, 'keyword' => $keyword]);
     }
 }

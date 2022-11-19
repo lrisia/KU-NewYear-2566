@@ -16,7 +16,7 @@ use App\Http\Controllers\EmployeeController;
 
 Route::get('/', function () {
 //    if \Illuminate\Support\Facades\Auth::user()
-    return view('register');
+    return view('employees.register');
 });
 
 Route::group(['prefix' => 'register'], function() {
