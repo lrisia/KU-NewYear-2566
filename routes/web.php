@@ -16,13 +16,12 @@ use App\Http\Controllers\EmployeeController;
 
 Route::get('/', function () {
 //    if \Illuminate\Support\Facades\Auth::user()
-    return view('register');
+    return redirect()->route('register.index');
 });
 
 Route::group(['prefix' => 'register'], function() {
     Route::get('', [EmployeeController::class, 'index'])->name('register.index');
     Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
-    Route::post('store', [EmployeeController::class, 'store'])->name('register.store');
 });
 
 Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');

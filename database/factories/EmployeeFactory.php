@@ -19,7 +19,6 @@ class EmployeeFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
             'organizer_id' => Organizer::inRandomOrder()->first()->id
         ];
     }
