@@ -17575,42 +17575,75 @@ function genPropsAccessExp(name) {
 /*!***************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CountDown.vue?vue&type=script&lang=js ***!
   \***************************************************************************************************************************************************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-window.addEventListener("load", function () {
-  var HOURS = 1000 * 60 * 60;
-  var MINUTES = 1000 * 60;
-  var daysElement = document.getElementById("days");
-  var hoursElement = document.getElementById("hours");
-  var minutesElement = document.getElementById("minutes");
-  var secondsElement = document.getElementById("seconds");
-  var date = new Date("2022-12-31 00:00:00");
-  var timerEndDate = new Date(date.getTime());
-  var updateTimer = function updateTimer() {
-    var currentTime = new Date().getTime();
-    var difference = timerEndDate.getTime() - currentTime;
-    var remainingDays = Math.floor(difference / (HOURS * 24));
-    var remainingHours = Math.floor(difference % (HOURS * 24) / HOURS);
-    var remainingMinutes = Math.floor(difference % HOURS / MINUTES);
-    var remainingSeconds = Math.floor(difference % MINUTES / 1000);
-    var formattedDays = remainingDays < 10 ? "0".concat(remainingDays) : "".concat(remainingDays);
-    var formattedHours = remainingHours < 10 ? "0".concat(remainingHours) : "".concat(remainingHours);
-    var formattedMinutes = remainingMinutes < 10 ? "0".concat(remainingMinutes) : "".concat(remainingMinutes);
-    var formattedSeconds = remainingSeconds < 10 ? "0".concat(remainingSeconds) : "".concat(remainingSeconds);
-    if (timerEndDate < currentTime) {
-      daysElement.innerText = '00';
-      hoursElement.innerText = '00';
-      minutesElement.innerText = '00';
-      secondsElement.innerText = '00';
-    } else {
-      daysElement.innerText = formattedDays;
-      hoursElement.innerText = formattedHours;
-      minutesElement.innerText = formattedMinutes;
-      secondsElement.innerText = formattedSeconds;
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    date: null
+  },
+  data: function data() {
+    return {
+      now: Math.trunc(new Date().getTime() / 1000),
+      event: this.date,
+      finish: false
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+    var _self = this;
+    window.setInterval(function () {
+      _this.now = Math.trunc(new Date().getTime() / 1000);
+      if (!_this.finish && _this.calculatedDate - _this.now <= 0) {
+        _self.finish = true;
+        _self.$emit('onFinish');
+      }
+    }, 1000);
+  },
+  computed: {
+    secondCount: function secondCount() {
+      return this.calculatedDate - this.now;
+    },
+    calculatedDate: function calculatedDate() {
+      return Math.trunc(Date.parse(this.event) / 1000);
+    },
+    seconds: function seconds() {
+      if (this.secondCount < 0) return 0;
+      return this.twoDigits(this.secondCount % 60);
+    },
+    minutes: function minutes() {
+      if (this.secondCount < 0) return 0;
+      return this.twoDigits(Math.trunc(this.secondCount / 60) % 60);
+    },
+    hours: function hours() {
+      if (this.secondCount < 0) return 0;
+      return this.twoDigits(Math.trunc(this.secondCount / 60 / 60) % 24);
+    },
+    days: function days() {
+      if (this.secondCount < 0) return 0;
+      return this.twoDigits(Math.trunc(this.secondCount / 60 / 60 / 24));
     }
-  };
-  updateTimer();
-  setInterval(updateTimer, 1000);
+  },
+  methods: {
+    twoDigits: function twoDigits(value) {
+      if (value.toString().length <= 1) {
+        return '0' + value.toString();
+      }
+      return value.toString();
+    }
+  },
+  filters: {
+    twoDigits: function twoDigits(value) {
+      if (value.toString().length <= 1) {
+        return '0' + value.toString();
+      }
+      return value.toString();
+    }
+  }
 });
 
 /***/ }),
@@ -17686,12 +17719,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  key: 0,
   "class": "max-w-7xl mx-auto mt-8 p-8 rounded-lg bg-[#D9D9D9]"
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"text-center text-lg md:text-xl\">เหลือเวลาลงทะเบียนอีก</div><div class=\"lg:mx-auto xl:mx-52\"><div class=\"mt-6 md:mt-10 grid grid-cols-4 gap-3 justify-center\"><div class=\"flex items-center flex-col flex-nowrap\"><span class=\"w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl\" id=\"days\"></span><span class=\"title md:text-lg\">วัน</span></div><div class=\"flex items-center flex-col flex-nowrap\"><span class=\"w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl\" id=\"hours\"></span><span class=\"title md:text-lg\">ชั่วโมง</span></div><div class=\"flex items-center flex-col flex-nowrap\"><span class=\"w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl\" id=\"minutes\"></span><span class=\"title md:text-lg\">นาที</span></div><div class=\"flex items-center flex-col flex-nowrap\"><span class=\"w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl\" id=\"seconds\"></span><span class=\"title md:text-lg\">วินาที</span></div></div></div>", 2);
-var _hoisted_4 = [_hoisted_2];
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "text-center text-lg md:text-xl"
+}, "เหลือเวลาลงทะเบียนอีก", -1 /* HOISTED */);
+var _hoisted_3 = {
+  "class": "lg:mx-auto xl:mx-52"
+};
+var _hoisted_4 = {
+  "class": "mt-6 md:mt-10 grid grid-cols-4 gap-3 justify-center"
+};
+var _hoisted_5 = {
+  "class": "flex items-center flex-col flex-nowrap"
+};
+var _hoisted_6 = {
+  "class": "w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl",
+  id: "days"
+};
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "title md:text-lg"
+}, "วัน", -1 /* HOISTED */);
+var _hoisted_8 = {
+  "class": "flex items-center flex-col flex-nowrap"
+};
+var _hoisted_9 = {
+  "class": "w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl",
+  id: "hours"
+};
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "title md:text-lg"
+}, "ชั่วโมง", -1 /* HOISTED */);
+var _hoisted_11 = {
+  "class": "flex items-center flex-col flex-nowrap"
+};
+var _hoisted_12 = {
+  "class": "w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl",
+  id: "minutes"
+};
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "title md:text-lg"
+}, "นาที", -1 /* HOISTED */);
+var _hoisted_14 = {
+  "class": "flex items-center flex-col flex-nowrap"
+};
+var _hoisted_15 = {
+  "class": "w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl",
+  id: "seconds"
+};
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "title md:text-lg"
+}, "วินาที", -1 /* HOISTED */);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_4);
+  return !$data.finish ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.days), 1 /* TEXT */), _hoisted_7]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.hours), 1 /* TEXT */), _hoisted_10]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.minutes), 1 /* TEXT */), _hoisted_13]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.seconds), 1 /* TEXT */), _hoisted_16])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
@@ -37357,9 +37439,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _CountDown_vue_vue_type_template_id_4c6de3f6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CountDown.vue?vue&type=template&id=4c6de3f6 */ "./resources/js/components/CountDown.vue?vue&type=template&id=4c6de3f6");
 /* harmony import */ var _CountDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CountDown.vue?vue&type=script&lang=js */ "./resources/js/components/CountDown.vue?vue&type=script&lang=js");
-/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _CountDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _CountDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[__WEBPACK_IMPORT_KEY__]
-/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
 /* harmony import */ var _var_www_html_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
@@ -37440,13 +37519,9 @@ if (false) {}
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport default from dynamic */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CountDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0___default.a)
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CountDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CountDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CountDown.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CountDown.vue?vue&type=script&lang=js");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CountDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CountDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CountDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CountDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
-/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
  
 
 /***/ }),
