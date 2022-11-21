@@ -19,7 +19,7 @@ class MqttPublisher extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Publish MQTT Message';
 
     /**
      * Execute the console command.
@@ -34,7 +34,6 @@ class MqttPublisher extends Command
 
         $mqtt = MQTT::connection();
         $mqtt->publish($topic, $message);
-        $mqtt->loop(true);
         return Command::SUCCESS;
     }
 }
