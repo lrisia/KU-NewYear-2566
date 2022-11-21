@@ -26,3 +26,7 @@ Route::group(['prefix' => 'register'], function() {
 });
 
 Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');
+
+Route::get('lucky-draw', function () {
+    return view('lucky-draw.index');
+});

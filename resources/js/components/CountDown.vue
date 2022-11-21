@@ -64,6 +64,6 @@
         }
     };
     updateTimer();
-    setInterval(updateTimer, 1000);  
+    setInterval(updateTimer, 1000);
   });
 </script>
