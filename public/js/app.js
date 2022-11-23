@@ -17684,17 +17684,20 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
   data: function data() {
     return {
       connection: {
-        protocol: "ws",
-        host: "broker.hivemq.com",
-        port: 8000,
-        endpoint: "/mqtt",
+        protocol: "wss",
+        host: "mqtt.evwin.ku.ac.th",
+        port: 8080,
+        endpoint: "/",
+        username: "kunewyear",
+        password: "KU-newyear-2566",
         // for more options, please refer to https://github.com/mqttjs/MQTT.js#mqttclientstreambuilder-options
         clean: true,
         connectTimeout: 60 * 1000,
         // ms
         reconnectPeriod: 4000,
         // ms
-        clientId: "raeywenuk" + Math.random().toString(16).substring(2, 8)
+        clientId: "raeywenuk" + Math.random().toString(16).substring(2, 8),
+        keepalive: 60
       },
       client: {
         connected: false
