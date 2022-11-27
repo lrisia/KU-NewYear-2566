@@ -5,7 +5,7 @@
             <p class="my-2">{{ organizer_name }}</p>
             <div class="relative">
                 <span class="absolute right-2">
-                    <register-popup :employee="employee" :organizer_name="organizer_name">
+                    <register-popup :employee="employee" :organizer_name="organizer_name" :url="url">
                     </register-popup>
                 </span>
             </div>
@@ -24,6 +24,10 @@ export default {
             type: String,
             required: true,
         },
+        url: {
+            type: String,
+            required: true,
+        }
     },
 }
 </script>

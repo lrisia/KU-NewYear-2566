@@ -14,27 +14,27 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $error = [];
-        if (!$request->has('employee_id') || $request->get('employee_id') == "") $error["employee_id"] = "employee id missing";
-        if (!$request->has('answer') || $request->get('answer') == "") $error["answer"] = "answer missing";
+        if (!$request->has('employee_id') || $request->input('employee_id') == "") $error["employee_id"] = "employee id missing";
+        if (!$request->has('answer') || $request->input('answer') == "") $error["answer"] = "answer missing";
         if (!empty($error))
             return response()->json([
                 'success' => false,
                 'message' => $error
             ], Response::HTTP_BAD_REQUEST);
-        $answer = $request->get('answer');
-        if (!$request->has('email') && $answer === "yes" || $request->get('email') == "")
+        $answer = $request->input('answer');
+        if (!$request->has('email') && $answer === "yes" || $request->input('email') == "")
             return response()->json([
                 'success' => false,
                 'message' => ["email" => "email missing"]
             ], Response::HTTP_BAD_REQUEST);
-        if (Employee::where('email', $request->get('email'))->count() > 0)
+        if (Employee::where('email', $request->input('email'))->count() == 1)
             return response()->json([
                 'success' => false,
                 'message' => ["email" => "email duplicated"]
             ], Response::HTTP_BAD_REQUEST);
         if ($answer === "yes") {
-            $employee = Employee::find($request->get('employee_id'));
-            $employee->email = $request->get('email');
+            $employee = Employee::find($request->input('employee_id'));
+            $employee->email = $request->input('email');
             $employee->register_at = Carbon::now();
 //            TODO: random 32 number for generate qr-code
             $employee->save();

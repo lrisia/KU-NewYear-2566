@@ -26,7 +26,7 @@
     @foreach($employees as $employee)
         <employee-card :employee="{{ $employee->toJson() }}"
             organizer_name="{{ $employee->organizer->name }}"
-            :key="{{ $employee->id }}">
+            url="{{ url("/api/register/store") }}">
         </employee-card>
     @endforeach
   </div>
