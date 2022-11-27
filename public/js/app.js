@@ -17833,6 +17833,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      isOpen: false,
       data: {
         employee_id: parseInt(this.employee_id),
         answer: '',
@@ -17841,6 +17842,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       error: null,
       finish: true
     };
+  },
+  computed: {
+    isModalVisible: function isModalVisible() {
+      this.data.answer = '';
+      this.data.email = '';
+      this.error = null;
+      this.finish = true;
+      return this.isOpen;
+    }
   },
   props: {
     employee: {
@@ -17853,6 +17863,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    onToggle: function onToggle() {
+      this.isOpen = !this.isOpen;
+    },
     showInput: function showInput() {
       document.getElementById('email_container').style.display = "block";
     },
@@ -18071,147 +18084,186 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  id: "defaultModal",
-  tabindex: "-1",
-  "aria-hidden": "true",
-  "class": "hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 p-4 w-full md:inset-0 h-modal md:h-full"
+  id: "app",
+  "class": "h-full w-full flex items-center justify-center"
 };
 var _hoisted_2 = {
-  "class": "relative w-full max-w-2xl h-full md:h-auto"
+  key: 0,
+  "class": "fixed inset-0 z-30"
 };
 var _hoisted_3 = {
-  "class": "relative bg-white rounded-lg shadow"
+  "class": "flex flex-col items-center justify-center h-full w-full"
 };
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex justify-between items-start p-4 rounded-t border-b border-gray-200 shadow\"><h3 class=\"text-xl font-semibold text-gray-900\"> ยืนยันการลงทะเบียน </h3><button type=\"button\" class=\"text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center\" data-modal-toggle=\"defaultModal\"><svg aria-hidden=\"true\" class=\"w-5 h-5\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z\" clip-rule=\"evenodd\"></path></svg><span class=\"sr-only\">Close modal</span></button></div>", 1);
+var _hoisted_4 = {
+  "class": "modal-wrapper flex items-center z-30"
+};
 var _hoisted_5 = {
-  "class": "p-6 space-y-6"
+  "class": "modal max-w-md mx-auto xl:max-w-5xl lg:max-w-5xl md:max-w-2xl bg-white max-h-screen shadow-lg flex-row rounded relative"
 };
 var _hoisted_6 = {
-  "class": "text-base leading-relaxed text-gray-500 dark:text-gray-400"
+  "class": "modal-header flex p-4 rounded-t border-b border-gray-200 bg-[#F2F2F2] shadow"
 };
-var _hoisted_7 = {
-  "class": "text-black"
-};
-var _hoisted_8 = {
-  "class": "text-base leading-relaxed text-gray-500 dark:text-gray-400"
-};
-var _hoisted_9 = {
-  "class": "text-black"
-};
-var _hoisted_10 = {
-  "class": "text-base leading-relaxed text-gray-500 dark:text-gray-400"
-};
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-lg font-semibold text-gray-900"
+}, " ยืนยันการลงทะเบียน ", -1 /* HOISTED */);
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "aria-hidden": "true",
+  "class": "w-5 h-5",
+  fill: "currentColor",
+  viewBox: "0 0 20 20",
+  xmlns: "http://www.w3.org/2000/svg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "fill-rule": "evenodd",
+  d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",
+  "clip-rule": "evenodd"
+})], -1 /* HOISTED */);
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "sr-only"
+}, "Close modal", -1 /* HOISTED */);
+var _hoisted_10 = [_hoisted_8, _hoisted_9];
 var _hoisted_11 = {
-  key: 0,
-  "class": "ml-4 text-red-500"
+  "class": "modal-body p-5 w-full h-full overflow-y-auto"
 };
 var _hoisted_12 = {
-  "class": "flex max-w-md"
+  "class": "text-base mb-4 leading-relaxed text-gray-500 dark:text-gray-400"
 };
 var _hoisted_13 = {
-  "class": "relative mr-6"
+  "class": "text-black"
 };
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "class": "py-2 pl-6 pr-14 flex bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent peer-checked:shadow-lg",
+var _hoisted_14 = {
+  "class": "text-base my-4 leading-relaxed text-gray-500 dark:text-gray-400"
+};
+var _hoisted_15 = {
+  "class": "text-black"
+};
+var _hoisted_16 = {
+  "class": "text-base my-4 leading-relaxed text-gray-500 dark:text-gray-400"
+};
+var _hoisted_17 = {
+  key: 0,
+  "class": "ml-3 text-red-500"
+};
+var _hoisted_18 = {
+  "class": "flex max-w-md"
+};
+var _hoisted_19 = {
+  "class": "relative mr-4"
+};
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "py-2 px-7 flex justify-center bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent peer-checked:shadow-lg peer-checked:pr-10",
   "for": "answer_yes"
 }, " เข้าร่วมงาน ", -1 /* HOISTED */);
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "absolute hidden w-5 h-5 peer-checked:block top-3 right-5"
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "absolute hidden w-5 h-5 peer-checked:block top-2 right-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   src: "https://cdn-icons-png.flaticon.com/512/390/390973.png",
   alt: "check_icon"
 })], -1 /* HOISTED */);
-var _hoisted_16 = {
+var _hoisted_22 = {
   "class": "relative"
 };
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "class": "py-2 pl-6 pr-14 flex bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-red-500 peer-checked:ring-2 peer-checked:border-transparent peer-checked:shadow-lg",
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "py-2 px-6 flex justify-center bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-red-500 peer-checked:ring-2 peer-checked:border-transparent peer-checked:shadow-lg peer-checked:pr-10",
   "for": "answer_no"
 }, " ไม่เข้าร่วมงาน ", -1 /* HOISTED */);
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "absolute hidden w-5 h-5 peer-checked:block top-3 right-5"
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "absolute hidden w-4 h-4 peer-checked:block top-3 right-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   src: "https://cdn-icons-png.flaticon.com/512/594/594864.png",
   alt: "cancel_icon"
 })], -1 /* HOISTED */);
-var _hoisted_19 = {
+var _hoisted_25 = {
   id: "email_container",
-  "class": "hidden mt-4"
+  "class": "hidden mt-6"
 };
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "email"
 }, "อีเมล: ", -1 /* HOISTED */);
-var _hoisted_21 = {
+var _hoisted_27 = {
   key: 0,
-  "class": "text-red-500 ml-4 inline"
+  "class": "text-red-500 mt-2"
 };
-var _hoisted_22 = {
+var _hoisted_28 = {
   key: 1,
-  "class": "text-red-500 ml-4 inline"
+  "class": "text-red-500 mt-2"
 };
-var _hoisted_23 = {
-  "class": "flex items-center space-x-2 rounded-b mt-4"
+var _hoisted_29 = {
+  "class": "modal-footer mb-4 px-5"
 };
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "data-modal-toggle": "defaultModal",
-  type: "button",
-  "class": "text-gray-700 p-2 px-4 shadow rounded-lg bg-[#f2f0f0] hover:bg-gray-200"
-}, "ยกเลิก", -1 /* HOISTED */);
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "text",
-  "class": "hidden",
-  name: "id",
-  value: "employee_id"
-}, null, -1 /* HOISTED */);
-
+var _hoisted_30 = {
+  "class": "flex items-center justify-center space-x-2 rounded-b"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal toggle "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "text-white p-2 px-4 shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534]",
-    type: "button",
-    "data-modal-toggle": "defaultModal",
     onClick: _cache[0] || (_cache[0] = function () {
-      return $options.clear && $options.clear.apply($options, arguments);
+      return $options.onToggle && $options.onToggle.apply($options, arguments);
     })
-  }, " ลงทะเบียน "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Main modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal header "), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal body "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ชื่อ - นามสกุล: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.employee.name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" หน่วยงาน: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.organizer_name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" เข้าร่วม / ไม่เข้าร่วมงาน "), this.error === 'answer' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_11, "กรุณาเลือกคำตอบ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    onClick: _cache[1] || (_cache[1] = function () {
-      return $options.showInput && $options.showInput.apply($options, arguments);
+  }, " ลงทะเบียน "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Main modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+    name: "fade"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [$options.isModalVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        onClick: _cache[1] || (_cache[1] = function () {
+          return $options.onToggle && $options.onToggle.apply($options, arguments);
+        }),
+        "class": "bg-filter bg-white opacity-25 fixed inset-0 w-full h-full z-20"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: _cache[2] || (_cache[2] = function () {
+          return $options.onToggle && $options.onToggle.apply($options, arguments);
+        }),
+        type: "button",
+        "class": "text-gray-600 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center",
+        "data-modal-toggle": "defaultModal"
+      }, _hoisted_10)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ชื่อ - นามสกุล: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.employee.name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" หน่วยงาน: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.organizer_name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" เข้าร่วม / ไม่เข้าร่วมงาน "), _this.error === 'answer' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_17, "กรุณาเลือกคำตอบ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        onClick: _cache[3] || (_cache[3] = function () {
+          return $options.showInput && $options.showInput.apply($options, arguments);
+        }),
+        "class": "sr-only peer",
+        type: "radio",
+        value: "yes",
+        name: "answer",
+        id: "answer_yes",
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return $data.data.answer = $event;
+        })
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.data.answer]]), _hoisted_20, _hoisted_21]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        onClick: _cache[5] || (_cache[5] = function () {
+          return $options.hideInput && $options.hideInput.apply($options, arguments);
+        }),
+        "class": "sr-only peer",
+        type: "radio",
+        value: "no",
+        name: "answer",
+        id: "answer_no",
+        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+          return $data.data.answer = $event;
+        })
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.data.answer]]), _hoisted_23, _hoisted_24])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+          return $data.data.email = $event;
+        }),
+        type: "email",
+        name: "email",
+        id: "email",
+        "class": "pl-2 bg-gray-50 border border-gray-300 rounded-lg py-1",
+        placeholder: "example@ku.th"
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.data.email]]), _this.error === 'email_1' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_27, "กรุณากรอกอีเมล")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _this.error === 'email_2' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_28, "อีเมลนี้ถูกใช้ไปแล้ว")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: _cache[8] || (_cache[8] = function () {
+          return $options.onToggle && $options.onToggle.apply($options, arguments);
+        }),
+        "class": "text-gray-500 mr-2 bg-gray-50 hover:bg-gray-200 shadow rounded-lg border border-[#DADADA] px-6 py-2"
+      }, "ยกเลิก"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: _cache[9] || (_cache[9] = function () {
+          return $options.submitForm && $options.submitForm.apply($options, arguments);
+        }),
+        type: "button",
+        "class": "text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2"
+      }, "ตกลง")])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
-    "class": "sr-only peer",
-    type: "radio",
-    value: "yes",
-    name: "answer",
-    id: "answer_yes",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.data.answer = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.data.answer]]), _hoisted_14, _hoisted_15]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    onClick: _cache[3] || (_cache[3] = function () {
-      return $options.hideInput && $options.hideInput.apply($options, arguments);
-    }),
-    "class": "sr-only peer",
-    type: "radio",
-    value: "no",
-    name: "answer",
-    id: "answer_no",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $data.data.answer = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.data.answer]]), _hoisted_17, _hoisted_18])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return $data.data.email = $event;
-    }),
-    type: "email",
-    name: "email",
-    id: "email",
-    "class": "pl-2 shadow border rounded-lg py-1",
-    placeholder: "example@ku.th"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.data.email]]), this.error === 'email_1' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_21, "กรุณากรอกอีเมล")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), this.error === 'email_2' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_22, "อีเมลนี้ถูกใช้ไปแล้ว")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[6] || (_cache[6] = function () {
-      return $options.submitForm && $options.submitForm.apply($options, arguments);
-    }),
-    type: "button",
-    "class": "text-white p-2 px-4 shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534]"
-  }, "ตกลง")]), _hoisted_25])])])])], 64 /* STABLE_FRAGMENT */);
+    _: 1 /* STABLE */
+  })])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
