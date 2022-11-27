@@ -22,7 +22,6 @@ class EmployeeSeeder extends Seeder
             for ($i = 0; $i < $member_amount; $i++) {
                 $employee = new Employee();
                 $employee->name = fake()->name();
-                $employee->email = fake()->unique()->safeEmail();
                 $employee->organizer_id = $organizer->id;
                 $employee->save();
             }
