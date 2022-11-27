@@ -18,6 +18,7 @@ Route::get('/', function () {
 //    if \Illuminate\Support\Facades\Auth::user()
     return redirect()->route('register.index');
 });
+Route::get('qr-code/show', [\App\Http\Controllers\OrganizerController::class, 'index'])->name('qr-code.show-test');
 
 Route::group(['prefix' => 'register'], function() {
     Route::get('', [EmployeeController::class, 'index'])->name('register.index');
@@ -29,3 +30,4 @@ Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-c
 Route::get('lucky-draw', function () {
     return view('lucky-draw.index');
 });
+

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Prize::class)->nullable();
             $table->timestamp('got_prize_at')->nullable();
             $table->boolean('took_prize')->nullable();
-//            $table->string('qr_code')->nullable();
+            $table->string('qr_code')->nullable();
         });
     }
 
