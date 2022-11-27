@@ -22,4 +22,8 @@ class Employee extends Model
     {
         return $query->where('name', 'LIKE', "%{$search}%");
     }
+
+    public function scopeNotRegister($query) {
+        return $query->whereNull('register_at');
+    }
 }

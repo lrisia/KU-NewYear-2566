@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->foreignIdFor(\App\Models\Organizer::class);
             $table->timestamp('register_at')->nullable();
             $table->timestamp('arrive_at')->nullable();

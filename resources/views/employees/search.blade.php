@@ -13,21 +13,20 @@
             <button type="submit" class="absolute right-5 bottom-2 bg-[#D9D9D9] text-gray-700 border border-[#d5d5d5] hover:bg-[#c3c1c1] focus:ring-4 focus:outline-none focus:ring-blue-300 shadow rounded-lg text-sm px-6 py-1.5 md:text-base md:mb-0.5">ค้นหา</button>
         </div>
     </form>
+    @if ($employees->count() != 0)
     <h1 class="mt-6 mb-2 md:text-lg">
         ผลการค้นหา "{{$keyword}}"
     </h1>
+    @else
+    <h1 class="mt-6 mb-2 md:text-lg">
+        ไม่พบผลการค้นหา "{{$keyword}}"
+    </h1>
+    @endif
     @foreach($employees as $employee)
-    <div class="block w-full p-3 py-4 my-4 text-sm text-gray-700 shadow border border-[#e5e5e5] rounded-lg bg-white md:text-base md:p-3 md:py-6" >
-        <div class="grid grid-cols-3 gap-4 content-start ">
-            <p class="my-2 ml-4">{{ $employee->name }}</p>
-            <p class="my-2">{{ $employee->organizer->name }}</p>
-            <div class="relative">
-            <button class="absolute right-2 text-white p-2 px-4 shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534]">
-                ลงทะเบียน
-            </button>
-            </div>
-        </div>
-    </div>
+        <employee-card :employee="{{ $employee->toJson() }}"
+            organizer_name="{{ $employee->organizer->name }}"
+            :key="{{ $employee->id }}">
+        </employee-card>
     @endforeach
   </div>
 </section>
