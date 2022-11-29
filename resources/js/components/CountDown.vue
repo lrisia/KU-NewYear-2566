@@ -1,6 +1,6 @@
 <template>
     <div v-if="!finish" class="max-w-7xl mx-auto mt-8 p-8 rounded-lg bg-[#D9D9D9]">
-      <div class="text-center text-lg md:text-xl">เหลือเวลาลงทะเบียนอีก</div>
+      <div class="text-center text-xl md:text-2xl">เหลือเวลาลงทะเบียนอีก</div>
       <div class="lg:mx-auto xl:mx-52">
         <div class="mt-6 md:mt-10 grid grid-cols-4 gap-3 justify-center">
           <div class="flex items-center flex-col flex-nowrap">

@@ -39,7 +39,7 @@
                                 </p>
                                 <p class="text-base my-4 leading-relaxed text-gray-500 dark:text-gray-400">
                                     เข้าร่วม / ไม่เข้าร่วมงาน <span v-if="this.error === 'answer'"
-                                                                    class="ml-3 text-red-500">กรุณาเลือกคำตอบ</span>
+                                                                    class="ml-3 text-red-500 text-sm">กรุณาเลือกคำตอบ</span>
                                 </p>
                                 <ul class="flex max-w-md">
                                     <li class="relative mr-4">
@@ -73,10 +73,11 @@
                                 <div id="email_container" class="hidden mt-6">
                                     <label for="email">อีเมล: </label>
                                     <input v-model="data.email" type="email" name="email" id="email"
-                                           class="pl-2 bg-gray-50 border border-gray-300 rounded-lg py-1"
+                                           class="pl-2 bg-gray-50 border border-gray-300 rounded-lg py-1 ml-1"
                                            placeholder="example@ku.th">
-                                    <p v-if="this.error === 'email_1'" class="text-red-500 mt-2">กรุณากรอกอีเมล</p>
-                                    <p v-if="this.error === 'email_2'" class="text-red-500 mt-2">
+                                    <p class="text-xs text-gray-500 mt-2">(ใช้ในการส่งลิงก์ QR code เพื่อใช้สำหรับเข้าร่วมงาน)</p>
+                                    <p v-if="this.error === 'email_1'" class="text-red-500 mt-2 text-sm">กรุณากรอกอีเมล</p>
+                                    <p v-if="this.error === 'email_2'" class="text-red-500 mt-2 text-sm">
                                         อีเมลนี้ถูกใช้ไปแล้ว</p>
                                 </div>
                             </div>
@@ -150,6 +151,7 @@ export default {
             document.getElementById('email_container').style.display = "none";
         },
         async submitForm() {
+            console.log(this.data)
             try {
                 this.finish = false
                 const response = await axios.post(this.url, this.data)
