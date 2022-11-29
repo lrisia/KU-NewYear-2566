@@ -22,7 +22,8 @@ class RegisterController extends Controller
                 'message' => $error
             ], Response::HTTP_BAD_REQUEST);
         $answer = $request->input('answer');
-        if (!$request->has('email') && $answer === "yes" || $request->input('email') == "")
+        Log::info($answer);
+        if ((!$request->has('email') && $answer === "yes") || ($request->input('email') == ""  && $answer === "yes"))
             return response()->json([
                 'success' => false,
                 'message' => ["email" => "email missing"]

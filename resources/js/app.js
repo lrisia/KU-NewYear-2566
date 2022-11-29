@@ -6,6 +6,7 @@ import RegisterPopup from "./components/RegisterPopup";
 import EmployeeCard from "./components/EmployeeCard";
 import CountDown from "./components/CountDown";
 import MqttTest from "./components/MqttTest";
+import VueSweetalert2 from 'vue-sweetalert2';
 
 const app = createApp({})
 
@@ -15,4 +16,5 @@ app.component('employee-card', EmployeeCard)
 app.component('count-down', CountDown);
 app.component('mqtt-test', MqttTest);
 
+app.use(VueSweetalert2);
 app.mount('#app')

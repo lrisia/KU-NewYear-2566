@@ -14,10 +14,6 @@ class EmployeeController extends Controller
     }
 
     public function store(Request $request) {
-//        TODO: validate email
-//        $request->validate([
-//           'email' => 'required|unique:employees'
-//        ]);
         $employee = Employee::find($request->get('id'));
         $employee->email = $request->get('email');
 //        TODO: generate qr-code

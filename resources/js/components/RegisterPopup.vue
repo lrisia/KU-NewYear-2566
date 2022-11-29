@@ -104,6 +104,7 @@
 <script>
 import axios from 'axios';
 
+
 export default {
     data() {
         return {
@@ -119,10 +120,7 @@ export default {
     },
     computed: {
         isModalVisible() {
-            this.data.answer = '';
-            this.data.email = '';
-            this.error = null;
-            this.finish = true;
+            this.clear()
             return this.isOpen;
         }
     },
@@ -153,10 +151,9 @@ export default {
         async submitForm() {
             if (this.data.answer === "no") console.log("process successful answer is no")
             try {
-                this.finish = false
                 const response = await axios.post(this.url, this.data)
                 this.error = "201"
-                this.finish = true;
+                this.alert();
             } catch (e) {
                 if (this.data.answer === '')
                     this.error = "answer"
@@ -166,11 +163,21 @@ export default {
                     this.error = "email_2"
             }
         },
+        alert() {
+            Swal.fire({
+                title: 'ดำเนินการสำเร็จ',
+                text: 'QR Code จะแสดงในอีก 3 วินาที',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000,
+            }).then(() => {
+                window.open("/register", '_self');
+            });
+        },
         clear() {
             this.data.answer = '';
             this.data.email = '';
             this.error = null;
-            this.finish = true;
         }
     },
 }

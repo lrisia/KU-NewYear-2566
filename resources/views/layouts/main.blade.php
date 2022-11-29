@@ -9,10 +9,10 @@
     <title>KU New Year</title>
     <style ref="{{ mix('css/app.css') }}"></style>
     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 <body>
-    @include('sweetalert::alert')
     @include('layouts.navbar')
 
     <div class="mx-auto max-w-7xl" id="app">
