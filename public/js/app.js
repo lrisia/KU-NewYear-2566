@@ -17888,26 +17888,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
+                if (_this.data.answer === "no") console.log("process successful answer is no");
+                _context.prev = 1;
                 _this.finish = false;
-                _context.next = 4;
+                _context.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(_this.url, _this.data);
-              case 4:
+              case 5:
                 response = _context.sent;
                 _this.error = "201";
                 _this.finish = true;
-                _context.next = 12;
+                _context.next = 13;
                 break;
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](0);
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](1);
                 if (_this.data.answer === '') _this.error = "answer";else if (_this.data.email === '') _this.error = "email_1";else _this.error = "email_2";
-              case 12:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 9]]);
+        }, _callee, null, [[1, 10]]);
       }))();
     },
     clear: function clear() {
@@ -18185,18 +18186,21 @@ var _hoisted_25 = {
 var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "email"
 }, "อีเมล: ", -1 /* HOISTED */);
-var _hoisted_27 = {
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-xs text-gray-500 mt-2"
+}, "(ใช้ในการส่งลิงก์ QR code เพื่อใช้สำหรับเข้าร่วมงาน)", -1 /* HOISTED */);
+var _hoisted_28 = {
   key: 0,
   "class": "text-red-500 mt-2"
 };
-var _hoisted_28 = {
+var _hoisted_29 = {
   key: 1,
   "class": "text-red-500 mt-2"
 };
-var _hoisted_29 = {
+var _hoisted_30 = {
   "class": "modal-footer mb-4 px-5"
 };
-var _hoisted_30 = {
+var _hoisted_31 = {
   "class": "flex items-center justify-center space-x-2 rounded-b"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -18255,7 +18259,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "email",
         "class": "pl-2 bg-gray-50 border border-gray-300 rounded-lg py-1",
         placeholder: "example@ku.th"
-      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.data.email]]), _this.error === 'email_1' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_27, "กรุณากรอกอีเมล")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _this.error === 'email_2' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_28, " อีเมลนี้ถูกใช้ไปแล้ว")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.data.email]]), _hoisted_27, _this.error === 'email_1' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_28, "กรุณากรอกอีเมล")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _this.error === 'email_2' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_29, " อีเมลนี้ถูกใช้ไปแล้ว")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         onClick: _cache[8] || (_cache[8] = function () {
           return $options.onToggle && $options.onToggle.apply($options, arguments);
         }),

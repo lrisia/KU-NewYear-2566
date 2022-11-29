@@ -75,6 +75,7 @@
                                     <input v-model="data.email" type="email" name="email" id="email"
                                            class="pl-2 bg-gray-50 border border-gray-300 rounded-lg py-1"
                                            placeholder="example@ku.th">
+                                    <p class="text-xs text-gray-500 mt-2">(ใช้ในการส่งลิงก์ QR code เพื่อใช้สำหรับเข้าร่วมงาน)</p>
                                     <p v-if="this.error === 'email_1'" class="text-red-500 mt-2">กรุณากรอกอีเมล</p>
                                     <p v-if="this.error === 'email_2'" class="text-red-500 mt-2">
                                         อีเมลนี้ถูกใช้ไปแล้ว</p>
@@ -150,6 +151,7 @@ export default {
             document.getElementById('email_container').style.display = "none";
         },
         async submitForm() {
+            if (this.data.answer === "no") console.log("process successful answer is no")
             try {
                 this.finish = false
                 const response = await axios.post(this.url, this.data)

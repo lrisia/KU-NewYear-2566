@@ -18,6 +18,7 @@ class OrganizerFactory extends Factory
     {
         return [
             'name' => fake()->jobTitle(),
+            'fac_id' => fake()->unique()->numberBetween(1, 20),
             'member_amount' => fake()->numberBetween(50, 200)
         ];
     }

@@ -12,6 +12,7 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 <body>
+    @include('sweetalert::alert')
     @include('layouts.navbar')
 
     <div class="mx-auto max-w-7xl" id="app">

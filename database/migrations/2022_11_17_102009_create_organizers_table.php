@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('organizers', function (Blueprint $table) {
             $table->id();
+            $table->string('fac_id');
             $table->string('name');
-            $table->integer('member_amount');
+            $table->integer('member_amount')->default(0);
         });
     }
 

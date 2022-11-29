@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "php-mqtt/laravel-client": "^1.0",
+        "realrashid/sweet-alert": "^5.1",
         "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "require-dev": {
