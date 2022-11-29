@@ -3,8 +3,8 @@
 @section('content')
 <section>
   <div class="mx-10 justify-center">
-    <count-down :date="new Date('2022-12-31T00:00:00')"></count-down>
-    <form action="{{ route('register.search') }}" method="get" class="mt-10">
+    <count-down></count-down>
+    <form action="{{ route('register.search') }}" method="get" class="my-10">
         <label for="search" class="md:text-lg">ค้นหาชื่อเพื่อลงทะเบียน</label>
         <div class="relative">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

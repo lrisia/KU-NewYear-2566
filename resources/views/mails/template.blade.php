@@ -1,17 +1,14 @@
 <x-mail::message>
-<h1 style="text-align: center;">
+<h1 style="text-align: center"> งานขอบคุณบุคลากร </h1>
 
-# Order Shipped
+<p style="text-align: center">ชื่อ - นามสกุล: {{ $employee->name }}</p>
 
-Your order has been shipped!
-> hello
-* one
-* two
+<p style="text-align: center">หน่วยงาน: {{ $employee->organizer->name }}</p>
 
-Thanks,
-</h1>
-{{ $employee->name }}
-{{ url('/qr-code/' . $employee->qr_code) }}
-<img src="data:image/svg+xml;base64,{!! base64_encode(QrCode::format('svg')->size(100)->generate('Make me into an QrCode!')) !!} ">
+<div style="text-align: center">
+    <a href="{{ url('/qr-code/' . $employee->qr_code) }}">
+        QR Code สำหรับเข้าร่วมงานขอบคุณบุคลากร
+    </a>
+</div>
 
 </x-mail::message>
