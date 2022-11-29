@@ -76,13 +76,8 @@
                                            class="pl-2 bg-gray-50 border border-gray-300 rounded-lg py-1 ml-1"
                                            placeholder="example@ku.th">
                                     <p class="text-xs text-gray-500 mt-2">(ใช้ในการส่งลิงก์ QR code เพื่อใช้สำหรับเข้าร่วมงาน)</p>
-<<<<<<< HEAD
-                                    <p v-if="this.error === 'email_1'" class="text-red-500 mt-2">กรุณากรอกอีเมล</p>
-                                    <p v-if="this.error === 'email_2'" class="text-red-500 mt-2">
-=======
                                     <p v-if="this.error === 'email_1'" class="text-red-500 mt-2 text-sm">กรุณากรอกอีเมล</p>
                                     <p v-if="this.error === 'email_2'" class="text-red-500 mt-2 text-sm">
->>>>>>> 0f6ac385df03cf4191e27fd4b1f0ce29b0caf9df
                                         อีเมลนี้ถูกใช้ไปแล้ว</p>
                                 </div>
                             </div>
