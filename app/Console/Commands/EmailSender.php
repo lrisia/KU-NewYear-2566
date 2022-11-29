@@ -31,7 +31,7 @@ class EmailSender extends Command
     public function handle()
     {
         $email = $this->argument("email");
-        $employee = Employee::first();
+        $employee = Employee::where('email', $email)->first();
         Mail::to($email)->send(new ConfirmRegister($employee));
         return Command::SUCCESS;
     }

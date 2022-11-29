@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Organizer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -13,17 +14,13 @@ class EmployeeController extends Controller
         return view('employees.register');
     }
 
-    public function store(Request $request) {
-        $employee = Employee::find($request->get('id'));
-        $employee->email = $request->get('email');
-//        TODO: generate qr-code
-//        $employee->qr-code =
-        $employee->register_at = Carbon::now();
-        $employee->save();
-    }
-
-    public function show($id) {
-        return 'show' . $id;
+    public function show($qr_code) {
+        $employee = Employee::where('qr_code', $qr_code)->first();
+        $organizer_name = Organizer::where('id', $employee->organizer_id)->first()->name;
+        return view('employees.show', [
+            'employee' => $employee,
+            'organizer_name' => $organizer_name
+        ]);
     }
 
     public function search(Request $request)

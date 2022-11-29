@@ -46,7 +46,7 @@ class ConfirmRegister extends Mailable
     public function content()
     {
         return new Content(
-            markdown: 'mails.test',
+            markdown: 'mails.template',
         );
     }
 
