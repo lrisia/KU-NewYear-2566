@@ -1,18 +1,14 @@
 <x-mail::message>
 <h1 style="text-align: center"> งานขอบคุณบุคลากร </h1>
 
-<p>เรียนคุณ {{ $employee->name }} {{ $employee->organizer->name }}</p>
+<p style="text-align: center">ชื่อ - นามสกุล: {{ $employee->name }}</p>
 
-<p>ระบบได้บันทึกการลงทะเบียนร่วมงานขอบคุณบุคลากรเรียบร้อยแล้ว โปรดนำ QR Code มาแสดงที่หน้างาน เพื่อใช้ยืนยันการเข้าร่วมงานและได้รับสิทธิ์ลุ้นรางวัล โดยเข้าดู QR Code ได้ที่ลิงก์นี้</p>
+<p style="text-align: center">หน่วยงาน: {{ $employee->organizer->name }}</p>
+
 <div style="text-align: center">
     <a href="{{ url('/qr-code/' . $employee->qr_code) }}">
         QR Code สำหรับเข้าร่วมงานขอบคุณบุคลากร
     </a>
 </div>
-<br>
-<p>ขอแสดงความนับถือ</p>
-<p>มหาวิทยาลัยเกษตรศาสตร์ บางเขน</p>
-
-<p style="color: red">อีเมลฉบับนี้เป็นการแจ้งข้อมูลจากระบบอัตโนมัติ กรุณาอย่าตอบกลับ</p>
 
 </x-mail::message>
