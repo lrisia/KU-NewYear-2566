@@ -49,7 +49,7 @@ class RegisterApiController extends Controller
             }
             $employee->qr_code = $qr_code;
             $employee->save();
-            Artisan::call('email:send ' . $employee->email);
+//            Artisan::command('sail artisan email:send ' . $employee->email);
         }
         return response()->json([
             'success' => true,

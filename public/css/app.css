@@ -804,9 +804,12 @@ select {
 .mb-6 {
   margin-bottom: 1.5rem;
 }
+<<<<<<< HEAD
 .-mr-2 {
   margin-right: -0.5rem;
 }
+=======
+>>>>>>> parent of 993a004 (register already automatic send email)
 .block {
   display: block;
 }
@@ -885,6 +888,7 @@ select {
 .max-w-6xl {
   max-width: 72rem;
 }
+<<<<<<< HEAD
 .max-w-xl {
   max-width: 36rem;
 }
@@ -926,6 +930,10 @@ select {
 }
 .cursor-default {
   cursor: default;
+=======
+.cursor-pointer {
+  cursor: pointer;
+>>>>>>> parent of 993a004 (register already automatic send email)
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -1323,6 +1331,7 @@ select {
 .opacity-100 {
   opacity: 1;
 }
+<<<<<<< HEAD
 .opacity-75 {
   opacity: 0.75;
 }
@@ -1331,6 +1340,8 @@ select {
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+=======
+>>>>>>> parent of 993a004 (register already automatic send email)
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
