@@ -650,6 +650,12 @@ video {
 .ml-6 {
   margin-left: 1.5rem;
 }
+.mr-3 {
+  margin-right: 0.75rem;
+}
+.-ml-1 {
+  margin-left: -0.25rem;
+}
 .block {
   display: block;
 }
@@ -718,6 +724,15 @@ video {
 }
 .max-w-md {
   max-width: 28rem;
+}
+@keyframes spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 .cursor-pointer {
   cursor: pointer;
@@ -1044,6 +1059,9 @@ video {
 }
 .opacity-25 {
   opacity: 0.25;
+}
+.opacity-75 {
+  opacity: 0.75;
 }
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);

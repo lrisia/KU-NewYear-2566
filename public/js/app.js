@@ -17844,7 +17844,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         email: ''
       },
       error: null,
-      finish: true
+      waiting: false
     };
   },
   computed: {
@@ -17885,25 +17885,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _this.waiting = true;
                 _this.error = null;
-                _context.prev = 1;
-                _context.next = 4;
+                _context.prev = 2;
+                _context.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(_this.url + '/api/register/store', _this.data);
-              case 4:
+              case 5:
                 response = _context.sent;
                 _this.alert();
-                _context.next = 11;
+                _context.next = 12;
                 break;
-              case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](1);
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](2);
                 if (_this.data.answer === '') _this.error = "answer";else if (_this.data.email === '') _this.error = "email_1";else _this.error = "email_2";
-              case 11:
+              case 12:
+                _this.waiting = false;
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 8]]);
+        }, _callee, null, [[2, 9]]);
       }))();
     },
     alert: function alert() {
@@ -18241,6 +18244,27 @@ var _hoisted_30 = {
 var _hoisted_31 = {
   "class": "flex items-center justify-center space-x-2 rounded-b"
 };
+var _hoisted_32 = {
+  key: 0,
+  "class": "w-5 h-5 mr-3 -ml-1 text-white animate-spin",
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24"
+};
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("circle", {
+  "class": "opacity-25",
+  cx: "12",
+  cy: "12",
+  r: "10",
+  stroke: "currentColor",
+  "stroke-width": "4"
+}, null, -1 /* HOISTED */);
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "class": "opacity-75",
+  fill: "currentColor",
+  d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+}, null, -1 /* HOISTED */);
+var _hoisted_35 = [_hoisted_33, _hoisted_34];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal toggle "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -18307,8 +18331,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $options.submitForm && $options.submitForm.apply($options, arguments);
         }),
         type: "button",
-        "class": "text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2"
-      }, " ตกลง ")])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+        "class": "text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2 flex"
+      }, [$data.waiting ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_32, _hoisted_35)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ตกลง ")])])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1 /* STABLE */
   })])], 64 /* STABLE_FRAGMENT */);
