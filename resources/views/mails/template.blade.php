@@ -6,7 +6,7 @@
 <p style="text-align: center">หน่วยงาน: {{ $employee->organizer->name }}</p>
 
 <div style="text-align: center">
-    <a href="">
+    <a href="{{ url('/qr-code/' . $employee->qr_code) }}">
         QR Code สำหรับเข้าร่วมงานขอบคุณบุคลากร
     </a>
 </div>

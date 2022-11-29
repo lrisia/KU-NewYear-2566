@@ -17885,28 +17885,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(_this.url, _this.data);
-              case 3:
+                _this.error = null;
+                _context.prev = 1;
+                _context.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(_this.url + '/api/register/store', _this.data);
+              case 4:
                 response = _context.sent;
-                _this.error = "201";
                 _this.alert();
                 _context.next = 11;
                 break;
               case 8:
                 _context.prev = 8;
-                _context.t0 = _context["catch"](0);
+                _context.t0 = _context["catch"](1);
                 if (_this.data.answer === '') _this.error = "answer";else if (_this.data.email === '') _this.error = "email_1";else _this.error = "email_2";
               case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[1, 8]]);
       }))();
     },
     alert: function alert() {
+      var _this2 = this;
       Swal.fire({
         title: 'ดำเนินการสำเร็จ',
         html: 'QR Code จะแสดงในอีก <b></b> วินาที',
@@ -17919,9 +17920,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             Swal.getHtmlContainer().querySelector('b').textContent = (Swal.getTimerLeft() / 1000).toFixed(0);
           }, 100);
         }
-      }).then(function () {
-        window.open("/register", '_self');
-      });
+      }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var qr_code, response;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(_this2.data.answer === "no")) {
+                  _context2.next = 4;
+                  break;
+                }
+                window.open("/", '_self');
+                _context2.next = 16;
+                break;
+              case 4:
+                qr_code = null;
+                _context2.prev = 5;
+                _context2.next = 8;
+                return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(_this2.url + "/api/employee/".concat(_this2.employee.id));
+              case 8:
+                response = _context2.sent;
+                qr_code = response.data.employee.qr_code;
+                window.open("/qr-code/".concat(qr_code), '_self');
+                _context2.next = 16;
+                break;
+              case 13:
+                _context2.prev = 13;
+                _context2.t0 = _context2["catch"](5);
+                console.log(_context2.t0);
+              case 16:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[5, 13]]);
+      })));
     },
     clear: function clear() {
       this.data.answer = '';

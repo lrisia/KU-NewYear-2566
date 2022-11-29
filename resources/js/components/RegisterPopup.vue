@@ -149,9 +149,9 @@ export default {
             document.getElementById('email_container').style.display = "none";
         },
         async submitForm() {
+            this.error = null;
             try {
-                const response = await axios.post(this.url, this.data)
-                this.error = "201"
+                const response = await axios.post(this.url + '/api/register/store', this.data)
                 this.alert();
             } catch (e) {
                 if (this.data.answer === '')
@@ -168,8 +168,7 @@ export default {
                 html: 'QR Code จะแสดงในอีก <b></b> วินาที',
                 icon: 'success',
                 showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
+                timer: 3000,                timerProgressBar: true,
                 didOpen: () => {
                     timerInterval = setInterval(() => {
                         Swal.getHtmlContainer().querySelector('b')
@@ -177,8 +176,20 @@ export default {
                                 .toFixed(0)
                     }, 100)
                 }
-            }).then(() => {
-                window.open("/register", '_self');
+            }).then(async () => {
+                if (this.data.answer === "no") {
+                    window.open(`/`, '_self');
+                }
+                else {
+                    let qr_code = null;
+                    try {
+                        const response = await axios.get(this.url + `/api/employee/${this.employee.id}`);
+                        qr_code = response.data.employee.qr_code;
+                        window.open(`/qr-code/${qr_code}`, '_self');
+                    } catch (e) {
+                        console.log(e);
+                    }
+                }
             });
         },
         clear() {
