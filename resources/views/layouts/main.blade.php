@@ -11,6 +11,7 @@
     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet"/>
 </head>
 <body>
     @include('layouts.navbar')

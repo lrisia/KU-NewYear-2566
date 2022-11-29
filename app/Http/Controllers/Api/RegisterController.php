@@ -22,7 +22,6 @@ class RegisterController extends Controller
                 'message' => $error
             ], Response::HTTP_BAD_REQUEST);
         $answer = $request->input('answer');
-        Log::info($answer);
         if ((!$request->has('email') && $answer === "yes") || ($request->input('email') == ""  && $answer === "yes"))
             return response()->json([
                 'success' => false,
@@ -38,6 +37,7 @@ class RegisterController extends Controller
             $employee->email = $request->input('email');
             $employee->register_at = Carbon::now();
 //            TODO: random 32 number for generate qr-code
+            $employee->qr_code = fake()->regexify('[A-Z0-9]{32}');
             $employee->save();
         }
         return response()->json([
