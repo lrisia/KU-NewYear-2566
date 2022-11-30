@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organizer;
 use Illuminate\Http\Request;
 
 class OrganizerController extends Controller
@@ -13,7 +14,8 @@ class OrganizerController extends Controller
      */
     public function index()
     {
-        //
+        $organizers = Organizer::get();
+        return view('organizers.index', ['organizers' => $organizers]);
     }
 
     /**
@@ -45,7 +47,8 @@ class OrganizerController extends Controller
      */
     public function show($id)
     {
-        //
+        $organizer = Organizer::where('name', $id)->firstOrFail();
+        return view('organizers.show', ['organizer' => $organizer]);
     }
 
     /**
