@@ -25,6 +25,11 @@ Route::group(['prefix' => 'register'], function() {
     Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
 });
 
+Route::group(['prefix' => 'registered'], function() {
+    Route::get('', [EmployeeController::class, 'registered'])->name('employees.registered');
+    Route::get('search', [EmployeeController::class, 'searchRegistrant'])->name('employees.search-registrant');
+});
+
 Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');
 
 Route::get('lucky-draw', function () {

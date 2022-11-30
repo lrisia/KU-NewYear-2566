@@ -29,4 +29,18 @@ class EmployeeController extends Controller
         $employees = Employee::searchName($keyword)->whereNull('register_at')->orderBy('name', 'asc')->get();
         return view('employees.search', ['employees' => $employees, 'keyword' => $keyword]);
     }
+    
+    public function registered()
+    {
+        $employees = Employee::whereNotNull('register_at')->orderBy('name', 'asc')->get();
+        return view('employees.registered', ['employees' => $employees]);
+    }
+
+    public function searchRegistrant(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $employees = Employee::searchName($keyword)->whereNotNull('register_at')->orderBy('name', 'asc')->get();
+        return view('employees.search-registrant', ['employees' => $employees, 'keyword' => $keyword]);
+    }
+
 }
