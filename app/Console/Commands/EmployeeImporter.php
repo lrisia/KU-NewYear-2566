@@ -32,29 +32,38 @@ class EmployeeImporter extends Command
     public function handle()
     {
         $filename = $this->argument('filename');
-        $csv = Storage::disk('local')->get('data/' . $filename);
+        $csv = Storage::disk('local')->get("data/{$filename}");
         $skipped_header = false;
-        foreach (explode("\n", $csv) as $line) {
+        $csv_data = explode("\n", $csv);
+
+        $bar = $this->output->createProgressBar(count($csv_data) - 1);
+
+        $bar->start();
+
+        foreach ($csv_data as $line) {
             if (!$skipped_header) {
                 $skipped_header = true;
                 continue;
             }
             $row = explode(",", $line);
             $organizer = Organizer::where('fac_id', $row[4])->first();
-            if (!$organizer) $this->createOrganizer($row[4], $row[5]);
-            $organizer = Organizer::where('fac_id', $row[4])->first();
-            $organizer->member_amount += 1;
+            if (!$organizer) {
+                $organizer = $this->createOrganizer($row[4], $row[5]);
+            }
+            $organizer->member_amount = $organizer->member_amount + 1;
             $organizer->save();
 
             $employee = new Employee();
             $employee->p_id = $row[0];
             $employee->title = $row[1];
             $employee->name = $row[2] . " " . $row[3];
-            $employee->organizer_id = Organizer::where('fac_id', $row[4])->first()->id;
+            $employee->organizer_id = $organizer->id;
             $employee->save();
 
-
+            $bar->advance();
         }
+        $bar->finish();
+        $this->line("Imported Success.");
         return Command::SUCCESS;
     }
 
@@ -63,5 +72,6 @@ class EmployeeImporter extends Command
         $organizer->fac_id = $fac_id;
         $organizer->name = $name;
         $organizer->save();
+        return $organizer;
     }
 }
