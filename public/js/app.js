@@ -17892,7 +17892,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(_this.url + '/api/register/store', _this.data);
               case 5:
                 response = _context.sent;
-                _this.alert();
+                if (_this.data.answer === "yes") _this.alert('QR Code จะแสดงในอีก <b></b> วินาที');else _this.alert();
                 _context.next = 12;
                 break;
               case 9:
@@ -17911,9 +17911,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     alert: function alert() {
       var _this2 = this;
+      var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+      var timerInterval;
       Swal.fire({
         title: 'ดำเนินการสำเร็จ',
-        html: 'QR Code จะแสดงในอีก <b></b> วินาที',
+        html: text,
         icon: 'success',
         showConfirmButton: false,
         timer: 3000,

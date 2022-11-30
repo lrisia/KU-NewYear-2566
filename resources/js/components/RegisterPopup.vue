@@ -160,7 +160,9 @@ export default {
             this.error = null;
             try {
                 const response = await axios.post(this.url + '/api/register/store', this.data)
-                this.alert();
+                if (this.data.answer === "yes")
+                    this.alert('QR Code จะแสดงในอีก <b></b> วินาที');
+                else this.alert();
             } catch (e) {
                 if (this.data.answer === '')
                     this.error = "answer"
@@ -171,13 +173,15 @@ export default {
             }
             this.waiting = false;
         },
-        alert() {
+        alert(text="") {
+            let timerInterval;
             Swal.fire({
                 title: 'ดำเนินการสำเร็จ',
-                html: 'QR Code จะแสดงในอีก <b></b> วินาที',
+                html: text,
                 icon: 'success',
                 showConfirmButton: false,
-                timer: 3000,                timerProgressBar: true,
+                timer: 3000,
+                timerProgressBar: true,
                 didOpen: () => {
                     timerInterval = setInterval(() => {
                         Swal.getHtmlContainer().querySelector('b')
