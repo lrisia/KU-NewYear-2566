@@ -21,7 +21,7 @@ Route::get('/', function () {
         return redirect()->route('employees.registered');
     }
     return redirect()->route('register.index');
-});
+})->name('/');
 
 Route::group(['prefix' => 'register'], function() {
     Route::get('', [EmployeeController::class, 'index'])->name('register.index');
