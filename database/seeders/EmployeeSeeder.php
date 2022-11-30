@@ -21,6 +21,8 @@ class EmployeeSeeder extends Seeder
             $member_amount = $organizer->member_amount;
             for ($i = 0; $i < $member_amount; $i++) {
                 $employee = new Employee();
+                $employee->p_id = fake()->numberBetween(100000, 999999);
+                $employee->title = fake()->title();
                 $employee->name = fake()->name();
                 $employee->organizer_id = $organizer->id;
                 $employee->save();

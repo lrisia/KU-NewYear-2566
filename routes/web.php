@@ -16,7 +16,9 @@ use App\Http\Controllers\EmployeeController;
 */
 
 Route::get('/', function () {
-//    if \Illuminate\Support\Facades\Auth::user()
+    if (\Illuminate\Support\Facades\Auth::user()) {
+        return redirect()->route('employees.registered');
+    }
     return redirect()->route('register.index');
 });
 
