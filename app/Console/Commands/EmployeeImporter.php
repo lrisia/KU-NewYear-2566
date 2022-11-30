@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Employee;
 use App\Models\Organizer;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,34 +37,44 @@ class EmployeeImporter extends Command
         $skipped_header = false;
         $csv_data = explode("\n", $csv);
 
-        $bar = $this->output->createProgressBar(count($csv_data) - 1);
+        DB::beginTransaction();
+        try {
+            $bar = $this->output->createProgressBar(count($csv_data) - 1);
 
-        $bar->start();
+            $bar->start();
 
-        foreach ($csv_data as $line) {
-            if (!$skipped_header) {
-                $skipped_header = true;
-                continue;
+            foreach ($csv_data as $line) {
+                if (!$skipped_header) {
+                    $skipped_header = true;
+                    continue;
+                }
+                $row = explode(",", $line);
+                $organizer = Organizer::where('fac_id', $row[4])->first();
+                if (!$organizer) {
+                    $organizer = $this->createOrganizer($row[4], $row[5]);
+                }
+
+                $employee = Employee::where('p_id', $row[0])->first();
+                if (!$employee) {
+                    $employee = new Employee();
+                    $employee->p_id = $row[0];
+                    $employee->title = $row[1];
+                    $employee->name = $row[2] . " " . $row[3];
+                    $employee->organizer_id = $organizer->id;
+                    $employee->save();
+                    $organizer->member_amount = $organizer->member_amount + 1;
+                    $organizer->save();
+                }
+
+                $bar->advance();
             }
-            $row = explode(",", $line);
-            $organizer = Organizer::where('fac_id', $row[4])->first();
-            if (!$organizer) {
-                $organizer = $this->createOrganizer($row[4], $row[5]);
-            }
-            $organizer->member_amount = $organizer->member_amount + 1;
-            $organizer->save();
-
-            $employee = new Employee();
-            $employee->p_id = $row[0];
-            $employee->title = $row[1];
-            $employee->name = $row[2] . " " . $row[3];
-            $employee->organizer_id = $organizer->id;
-            $employee->save();
-
-            $bar->advance();
+            DB::commit();
+            $bar->finish();
+            $this->line("Imported Success.");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $this->error("Something went wrong...");
         }
-        $bar->finish();
-        $this->line("Imported Success.");
         return Command::SUCCESS;
     }
 
