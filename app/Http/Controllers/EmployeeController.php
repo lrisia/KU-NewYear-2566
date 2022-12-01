@@ -58,13 +58,4 @@ class EmployeeController extends Controller
         return view('employees.registered', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
-    public function searchRegistrant(Request $request)
-    {
-        if (!Auth::user()->isStaff()) return redirect()->route('/');
-
-        $keyword = $request->input('keyword');
-        $employees = Employee::searchName($keyword)->whereNotNull('register_at')->orderBy('name', 'asc')->get();
-        return view('employees.search-registrant', ['employees' => $employees, 'keyword' => $keyword]);
-    }
-
 }
