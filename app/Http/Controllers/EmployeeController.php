@@ -42,12 +42,20 @@ class EmployeeController extends Controller
         return view('employees.search', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
-    public function registered()
+    public function registered(Request $request)
     {
         if (!Auth::user()->isStaff()) return redirect()->route('/');
 
-        $employees = Employee::whereNotNull('register_at')->orderBy('name', 'asc')->get();
-        return view('employees.registered', ['employees' => $employees]);
+        $keyword = $request->query('keyword') ?? null;
+
+        $query = Employee::query();
+        if (!is_null($keyword)) {
+            $query = $query->searchName($keyword);
+        }
+
+        $employees = $query->whereNotNull('register_at')->latest('register_at')->paginate(200);
+
+        return view('employees.registered', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
     public function searchRegistrant(Request $request)

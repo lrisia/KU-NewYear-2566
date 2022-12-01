@@ -30,7 +30,6 @@ Route::group(['prefix' => 'register'], function() {
 
 Route::group(['prefix' => 'registered'], function() {
     Route::get('', [EmployeeController::class, 'registered'])->name('employees.registered');
-    Route::get('search', [EmployeeController::class, 'searchRegistrant'])->name('employees.search-registrant');
 });
 
 Route::resource('/organizers', OrganizerController::class);
