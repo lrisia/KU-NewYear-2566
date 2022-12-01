@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @section('content')
-<section>
-  <div class="mx-10 justify-center">
+<section class=" @if ($employees->count() <= 3) min-h-screen @endif">
+  <div class="mx-10 justify-center" >
     <form action="{{ route('employees.registered') }}" method="get" class="my-10">
         <label for="search" class="md:text-lg">ค้นหาชื่อผู้ลงทะเบียน</label>
         <div class="relative">
@@ -20,7 +20,7 @@
           <div class="grid grid-cols-3 gap-4 content-start">
               <p class="my-2 ml-4">{{ $employee->name }}</p>
               <p class="my-2">{{ $employee->organizer->name }}</p>
-              <p class="my-2">{{ $employee->register_at->format('d M H:i:s') }}</p>
+              <p class="my-2">{{ $employee->timeFormat($employee->register_at) }}</p>
           </div>
       </div>
     @endforeach
