@@ -2,7 +2,7 @@
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
 # Versions
-* 0.0.2
+* 0.0.3
   * First Deploy
 
 # Development setup
