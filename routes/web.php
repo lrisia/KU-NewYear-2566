@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\OrganizerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +17,22 @@ use App\Http\Controllers\EmployeeController;
 */
 
 Route::get('/', function () {
-//    if \Illuminate\Support\Facades\Auth::user()
+    if (\Illuminate\Support\Facades\Auth::user()) {
+        return redirect()->route('employees.registered');
+    }
     return redirect()->route('register.index');
-});
+})->name('/');
 
 Route::group(['prefix' => 'register'], function() {
     Route::get('', [EmployeeController::class, 'index'])->name('register.index');
     Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
 });
+
+Route::group(['prefix' => 'registered'], function() {
+    Route::get('', [EmployeeController::class, 'registered'])->name('employees.registered');
+});
+
+Route::resource('/organizers', OrganizerController::class);
 
 Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');
 
