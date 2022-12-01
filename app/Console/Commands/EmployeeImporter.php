@@ -70,10 +70,10 @@ class EmployeeImporter extends Command
             }
             DB::commit();
             $bar->finish();
-            $this->line("Imported Success.");
+            $this->line(" Imported Success.");
         } catch (\Exception $e) {
             DB::rollBack();
-            $this->error("Something went wrong...");
+            $this->error(" Something went wrong...");
         }
         return Command::SUCCESS;
     }

@@ -37,7 +37,7 @@ export default {
     data () {
         return {
             now: Math.trunc((new Date()).getTime() / 1000),
-            event: new Date('2022-12-31T00:00:00'),
+            event: new Date('2022-12-26T00:00:00'),
             finish: false
         }
     },
