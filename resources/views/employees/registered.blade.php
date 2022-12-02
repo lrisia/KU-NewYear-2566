@@ -17,9 +17,10 @@
     <h1 class="md:text-lg">รายชื่อผู้ที่ลงทะเบียนแล้วมีจำนวน {{$employees->count()}} คน</h1>
     @foreach($employees as $employee)
       <div class="block w-full p-3 py-4 my-4 text-sm text-gray-700 shadow border border-[#e5e5e5] rounded-lg bg-white md:text-base md:p-3 md:py-6" >
-          <div class="grid grid-cols-3 gap-4 content-start">
+          <div class="grid grid-cols-4 gap-4 content-start">
               <p class="my-2 ml-4">{{ $employee->name }}</p>
               <p class="my-2">{{ $employee->organizer->name }}</p>
+              <p class="my-2">{{ $employee->email }}</p>
               <p class="my-2">{{ $employee->timeFormat($employee->register_at) }}</p>
           </div>
       </div>
