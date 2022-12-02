@@ -1,27 +1,30 @@
 <template>
-    <div class="max-w-7xl mx-auto mt-8 p-8 rounded-lg bg-[#D9D9D9]">
-        <div class="text-center text-xl md:text-2xl">เหลือเวลาลงทะเบียนอีก</div>
-        <div class="lg:mx-auto xl:mx-52">
-            <div class="mt-6 md:mt-10 grid grid-cols-4 gap-3 justify-center">
-                <div class="flex items-center flex-col flex-nowrap">
-            <span class="w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl"
-                  id="days">{{ days }}</span>
-                    <span class="title md:text-lg">วัน</span>
-                </div>
-                <div class="flex items-center flex-col flex-nowrap">
-            <span class="w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl"
-                  id="hours">{{ hours }}</span>
-                    <span class="title md:text-lg">ชั่วโมง</span>
-                </div>
-                <div class="flex items-center flex-col flex-nowrap">
-            <span class="w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl"
-                  id="minutes">{{ minutes }}</span>
-                    <span class="title md:text-lg">นาที</span>
-                </div>
-                <div class="flex items-center flex-col flex-nowrap">
-            <span class="w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl"
-                  id="seconds">{{ seconds }}</span>
-                    <span class="title md:text-lg">วินาที</span>
+    <div class="relative max-w-full mt-10">
+        <img src="/image/2565.png" style="width:100%;">
+        <div class="absolute top-1/2 bottom-1/2 max-w-7xl" style="width:100%;">
+            <div class="text-center text-xs mobile:text-xs sm:text-xl md:text-2xl">เหลือเวลาลงทะเบียนอีก</div>
+            <div class="lg:mx-auto xl:mx-52">
+                <div class="mt-2 mobile:mt-1 sm:mt-2 md:mt-4 lg:mt-10 grid grid-cols-4 gap-1 items-center justify-center px-10 mobile:px-10 sm:px-12 lg:px-20" style="width:100%;">
+                    <div class="flex items-center flex-col flex-nowrap">
+                        <span class="w-8 h-8 mobile:w-8 mobile:h-8 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-32 lg:h-32 mobile:text-xl sm:text-2xl md:text-4xl lg:text-6xl bg-white shadow-xl flex items-center justify-center rounded-lg"
+                        id="days">{{ days }}</span>
+                        <span class="text-xs mt-1 mobile:mt-1 sm:mt-2 md:mt-3 lg:mt-5 mobile:text-xs sm:text-lg md:text-xl lg:text-2xl">วัน</span>
+                    </div>
+                    <div class="flex items-center flex-col flex-nowrap">
+                        <span class="w-8 h-8 mobile:w-8 mobile:h-8 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-32 lg:h-32 mobile:text-xl sm:text-2xl md:text-4xl lg:text-6xl bg-white shadow-xl flex items-center justify-center rounded-lg"
+                        id="hours">{{ hours }}</span>
+                        <span class="text-xs mt-1 mobile:mt-1 sm:mt-2 md:mt-3 lg:mt-5 mobile:text-xs sm:text-lg md:text-xl lg:text-2xl">ชั่วโมง</span>
+                    </div>
+                    <div class="flex items-center flex-col flex-nowrap">
+                        <span class="w-8 h-8 mobile:w-8 mobile:h-8 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-32 lg:h-32 mobile:text-xl sm:text-2xl md:text-4xl lg:text-6xl bg-white shadow-xl flex items-center justify-center rounded-lg"
+                        id="minutes">{{ minutes }}</span>
+                        <span class="text-xs mt-1 mobile:mt-1 sm:mt-2 md:mt-3 lg:mt-5 mobile:text-xs sm:text-lg md:text-xl lg:text-2xl">นาที</span>
+                    </div>
+                    <div class="flex items-center flex-col flex-nowrap">
+                        <span class="w-8 h-8 mobile:w-8 mobile:h-8 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-32 lg:h-32 mobile:text-xl sm:text-2xl md:text-4xl lg:text-6xl bg-white shadow-xl flex items-center justify-center rounded-lg"
+                        id="seconds">{{ seconds }}</span>
+                        <span class="text-xs mt-1 mobile:mt-1 sm:mt-2 md:mt-3 lg:mt-5 mobile:text-xs sm:text-lg md:text-xl lg:text-2xl">วินาที</span>
+                    </div>
                 </div>
             </div>
         </div>
