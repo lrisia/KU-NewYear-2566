@@ -19,7 +19,7 @@ class ClearRegister extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Unregister employee with email';
 
     /**
      * Execute the console command.
