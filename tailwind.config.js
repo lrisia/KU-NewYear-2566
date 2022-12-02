@@ -16,7 +16,7 @@ module.exports = {
             screens: {
                 print: { raw: 'print' },
                 screen: { raw: 'screen' },
-                'mobile': {'max': '393px', 'min': '330px'}
+                'mobile': {'max': '414px', 'min': '330px'}
             },
             // fontFamily: {
             //     sans: ['Nunito', ...defaultTheme.fontFamily.sans],
