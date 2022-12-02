@@ -3,7 +3,7 @@
 @section('content')
 <section class=" @if ($employees->count() <= 3) min-h-screen @endif">
   <div class="mx-10 justify-center" >
-    <form action="{{ route('employees.registered') }}" method="get" class="my-10">
+    <form action="{{ route('staff.registered') }}" method="get" class="my-10">
         <label for="search" class="md:text-lg">ค้นหาชื่อผู้ลงทะเบียน</label>
         <div class="relative">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

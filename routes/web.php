@@ -18,12 +18,12 @@ use App\Http\Controllers\OrganizerController;
 
 Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::user()) {
-        return redirect()->route('employees.registered');
+        return redirect()->route('staff.registered');
     }
     $date = new DateTime('2022-12-26T00:00:00');
     $now = new DateTime();
     if ($date > $now) { return redirect()->route('register.index'); }
-    else { return redirect()->route('employees.registered'); }
+    else { return redirect()->route('staff.registered'); }
 })->name('/');
 
 Route::group(['prefix' => 'register'], function() {
@@ -31,11 +31,11 @@ Route::group(['prefix' => 'register'], function() {
     Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
 });
 
-Route::group(['prefix' => 'registered'], function() {
-    Route::get('', [EmployeeController::class, 'registered'])->name('employees.registered');
+Route::group(['prefix' => 'staff'], function() {
+    Route::get('registered', [EmployeeController::class, 'registered'])->name('staff.registered');
+    Route::get('organizers', [OrganizerController::class, 'index'])->name('staff.organizers');
+    Route::get('organizers/{id}', [OrganizerController::class, 'show'])->name('staff.organizers.show');
 });
-
-Route::resource('/organizers', OrganizerController::class);
 
 Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');
 
