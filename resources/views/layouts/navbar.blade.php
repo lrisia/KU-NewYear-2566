@@ -9,15 +9,19 @@
             <h1 class="text-lg font-bold text-white ml-6 md:text-xl">ระบบลงทะเบียนเข้าร่วมงานขอบคุณบุคลากร ประจำปี 2565</h1>
         </a>
         @auth()
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button :href="route('logout')"
-                        onclick="event.preventDefault();
+            <div class="flex gap-4">
+                <p class="text-white md:p-0">{{ Auth::user()->name }}</p>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button :href="route('logout')"
+                            onclick="event.preventDefault();
                                                     this.closest('form').submit();"
-                        class="text-white md:p-0 hover:underline">
-                    <span class="material-symbols-outlined">ออกจากระบบ</span>
-                </button>
-            </form>
+                            class="text-white md:p-0 hover:underline">
+                        <span class="material-symbols-outlined">ออกจากระบบ</span>
+                    </button>
+                </form>
+            </div>
+
         @endauth
     </div>
 </nav>
