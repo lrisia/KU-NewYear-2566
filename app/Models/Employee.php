@@ -36,4 +36,14 @@ class Employee extends Model
     {
         return $query->whereNull('register_at');
     }
+
+    public function timeFormat($time) {
+        $month = ['Jan' => 'มกราคม', 'Feb' => 'กุมภาพันธ์', 'Mar' => 'มีนาคม',
+            'Apr' => 'เมษายน', 'May' => 'พฤษภาคม', 'Jun' => 'มิถุนายน',
+            'Jul' => 'กรกฎาคม', 'Aug' => 'สิงหาคม', 'Sep' => 'กันยายน',
+            'Oct' => 'ตุลาคม', 'Nov' => 'พฤศจิกายน', 'Dec' => 'ธันวาคม'];
+        $time_converted = $time->format('d M H:i:s');
+        $time_month = $time->format('M');
+        return str_replace($time_month, $month[$time_month], $time_converted);
+    }
 }

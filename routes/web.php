@@ -20,7 +20,10 @@ Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::user()) {
         return redirect()->route('employees.registered');
     }
-    return redirect()->route('register.index');
+    $date = new DateTime('2022-12-26T00:00:00');
+    $now = new DateTime();
+    if ($date > $now) { return redirect()->route('register.index'); }
+    else { return redirect()->route('employees.registered'); }
 })->name('/');
 
 Route::group(['prefix' => 'register'], function() {
