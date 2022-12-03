@@ -17,15 +17,19 @@ class OrganizerController extends Controller
     {
         if (!Auth::user()->isStaff()) return redirect()->route('/');
 
-        $organizers = Organizer::get();
-        return view('organizers.index', ['organizers' => $organizers]);
+        $organizers = Organizer::orderBy('fac_id')->get();
+        return view('staff.index', ['organizers' => $organizers]);
     }
 
     public function show($id)
     {
         if (!Auth::user()->isStaff()) return redirect()->route('/');
 
-        $organizer = Organizer::where('name', $id)->firstOrFail();
-        return view('organizers.show', ['organizer' => $organizer]);
+        $organizer = Organizer::where('id', $id)->firstOrFail();
+        $employees = $organizer->employees->sortByDesc('register_at');
+        return view('staff.show', [
+            'organizer' => $organizer,
+            'employees' => $employees
+        ]);
     }
 }

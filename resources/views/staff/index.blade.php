@@ -16,13 +16,13 @@
                         <th scope="col" class="py-3 px-6 text-end">จำนวนผู้ได้รับรางวัล</th>
                     </tr>
                 </thead>
-                
+
                 <tbody class="m-2">
                     @foreach($organizers as $organizer)
-                    <tr class="border-t text-gray-700 cursor-pointer hover:bg-gray-50" onclick="window.location='{{ route('organizers.show', ['organizer' => $organizer->name]) }}';">
+                    <tr class="border-t text-gray-700 cursor-pointer hover:bg-gray-50" onclick="window.location='{{ route('staff.organizers.show', ['id' => $organizer->id]) }}';">
                         <td class="px-6 py-4">{{ $organizer->fac_id }}</td>
                         <td class="px-6 py-4">{{ $organizer->name }}</td>
-                        <td class="px-6 py-4 text-end"> 
+                        <td class="px-6 py-4 text-end">
                             {{ $organizer->employees->whereNotNull('register_at')->count() }}
                         </td>
                         <td class="px-6 py-4 text-end">{{ $organizer->employees->whereNotNull('arrive_at')->count() }}</td>

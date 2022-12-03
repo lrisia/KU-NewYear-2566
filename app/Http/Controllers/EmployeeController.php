@@ -53,7 +53,7 @@ class EmployeeController extends Controller
 
         $employees = $query->whereNotNull('register_at')->latest('register_at')->paginate(200);
 
-        return view('employees.registered', ['employees' => $employees, 'keyword' => $keyword]);
+        return view('staff.registered', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
 }
