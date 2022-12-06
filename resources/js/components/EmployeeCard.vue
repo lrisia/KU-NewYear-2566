@@ -4,9 +4,12 @@
             <p class="my-2 ml-4 break-words">{{ employee.name }}</p>
             <p class="my-2 break-words">{{ organizer_name }}</p>
             <div class="relative">
-                <span class="absolute right-2">
+                <span v-if="employee.register_at === null" class="absolute right-2">
                     <register-popup :employee="employee" :organizer_name="organizer_name" :url="url">
                     </register-popup>
+                </span>
+                <span v-else class="absolute right-2">
+                    ลงทะเบียนแล้ว
                 </span>
             </div>
         </div>
