@@ -36,7 +36,7 @@ class EmployeeController extends Controller
         if (Auth::user()) return redirect()->route('/');
 
         $keyword = $request->input('keyword');
-        $employees = Employee::searchName($keyword)->whereNull('register_at')->orderBy('name', 'asc')->get();
+        $employees = Employee::searchName($keyword)->orderBy('name', 'asc')->get();
         return view('employees.search', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
