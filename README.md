@@ -2,7 +2,13 @@
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
 # Versions
-* 0.0.5
+* 0.1.1
+  * paginate data with iteration counter
+
+* 0.1.0
+  * show registered employee in search result of registration
+
+* 0.0.6
   * First Deploy
 
 # Development setup
