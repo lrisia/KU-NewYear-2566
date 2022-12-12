@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+<side-bar url="{{ url("/staff") }}"></side-bar>
 <section class=" @if ($employees->count() <= 3) min-h-screen @endif">
   <div class="mx-10 justify-center" >
     <form action="{{ route('staff.registered') }}" method="get" class="my-10">
