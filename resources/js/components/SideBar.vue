@@ -49,7 +49,10 @@ export default {
         }
     },
     props: {
-        url: String
+        url: {
+            type: String,
+            required: true
+        }
     }
 }
 </script>

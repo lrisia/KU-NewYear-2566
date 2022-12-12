@@ -17999,7 +17999,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   props: {
-    url: String
+    url: {
+      type: String,
+      required: true
+    }
   }
 });
 
