@@ -17,6 +17,9 @@
     @include('layouts.navbar')
 
     <div class="mx-auto max-w-7xl" id="app">
+        @if(Auth::user())
+            <side-bar url="{{ url("/staff") }}"></side-bar>
+        @endif
         @yield('content')
     </div>
 

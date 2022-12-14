@@ -18,7 +18,7 @@ use App\Http\Controllers\OrganizerController;
 
 Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::user()) {
-        return redirect()->route('staff.registered');
+        return redirect()->route('staff.dashboard');
     }
     $date = new DateTime('2022-12-26T00:00:00');
     $now = new DateTime();
@@ -32,6 +32,7 @@ Route::group(['prefix' => 'register'], function() {
 });
 
 Route::group(['prefix' => 'staff'], function() {
+    Route::get('', [EmployeeController::class, 'dashboard'])->name('staff.dashboard');
     Route::get('registered', [EmployeeController::class, 'registered'])->name('staff.registered');
     Route::get('organizers', [OrganizerController::class, 'index'])->name('staff.organizers');
     Route::get('organizers/{id}', [OrganizerController::class, 'show'])->name('staff.organizers.show');
