@@ -2,6 +2,9 @@
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
 # Versions
+* 0.1.2
+  * fix invalidate email format
+
 * 0.1.1
   * paginate data with iteration counter
 
