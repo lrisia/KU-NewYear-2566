@@ -76,9 +76,7 @@
                                            class="px-2 bg-gray-50 border border-gray-300 rounded-lg py-1 ml-1"
                                            placeholder="example@ku.th">
                                     <p class="text-xs text-gray-500 mt-2">(ใช้ในการส่งลิงก์ QR Code เพื่อใช้สำหรับเข้าร่วมงาน)</p>
-                                    <p v-if="this.error === 'email_1'" class="text-red-500 mt-2 text-xs md:text-sm">กรุณากรอกอีเมล</p>
-                                    <p v-if="this.error === 'email_2'" class="text-red-500 mt-2 text-xs md:text-sm">
-                                        อีเมลนี้ถูกใช้ไปแล้ว</p>
+                                    <p v-if="this.error" class="text-red-500 mt-2 text-xs md:text-sm">{{ this.error }}</p>
                                 </div>
                             </div>
                             <div class="modal-footer mb-4 px-5">
@@ -146,6 +144,13 @@ export default {
         },
     },
     methods: {
+        validateEmail(email) {
+            return String(email)
+                .toLowerCase()
+                .match(
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                );
+        },
         onToggle() {
             this.isOpen = !this.isOpen;
         },
@@ -159,17 +164,25 @@ export default {
             this.waiting = true;
             this.error = null;
             try {
-                const response = await axios.post(this.url + '/api/register/store', this.data)
-                if (this.data.answer === "yes")
-                    this.alert('QR Code จะแสดงในอีก <b></b> วินาที');
-                else this.alert();
+                if (this.data.answer === "yes") {
+                    if (this.validateEmail(this.data.email)) {
+                        const response = await axios.post(this.url + '/api/register/store', this.data)
+                        this.alert('QR Code จะแสดงในอีก <b></b> วินาที');
+                    } else {
+                        this.error = "รูปแบบอีเมลไม่ถูกต้อง"
+                    }
+                }
+                else {
+                    this.alert();
+                }
             } catch (e) {
+                console.log(e.response.data.message);
                 if (this.data.answer === '')
                     this.error = "answer"
                 else if (this.data.email === '')
-                    this.error = "email_1"
+                    this.error = "กรุณากรอกอีเมล"
                 else
-                    this.error = "email_2"
+                    this.error = "อีเมลนี้ถูกใช้ไปแล้ว"
             }
             this.waiting = false;
         },
