@@ -1,4 +1,4 @@
-<nav class="bg-[#006C67] border-gray-200 px-1 sm:px-2 py-2 sticky top-0 z-10">
+<nav class="bg-[#006C67] border-gray-200 px-1 sm:px-2 py-2 sticky top-0 z-20">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
         <a href="{{ url('/') }}" class="flex items-center">
         <span class="self-center text-xl font-semibold whitespace-nowrap font-mono text-white ml-1">

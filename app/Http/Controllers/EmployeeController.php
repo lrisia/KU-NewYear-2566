@@ -56,4 +56,7 @@ class EmployeeController extends Controller
         return view('staff.registered', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
+    public function dashboard() {
+        return view('staff.dashboard');
+    }
 }
