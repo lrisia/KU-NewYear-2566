@@ -2,6 +2,9 @@
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
 # Versions
+* 0.1.3
+  * staff view registration stats by organization
+
 * 0.1.2
   * fix invalidate email format
 
