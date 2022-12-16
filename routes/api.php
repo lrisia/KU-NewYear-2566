@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register/store', [\App\Http\Controllers\Api\RegisterApiController::class, 'store'])->name('register.store');
 Route::get('/employee/{id}', [\App\Http\Controllers\Api\RegisterApiController::class, 'getEmployee'])->name('register.getEmployee');
+Route::get('/prize/{id}/get', [\App\Http\Controllers\Api\PrizeApiController::class, 'get'])->name('prize.get');
+Route::get('/prize/{id}/draw', [\App\Http\Controllers\Api\PrizeApiController::class, 'draw'])->name('prize.draw');

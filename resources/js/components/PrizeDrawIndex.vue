@@ -1,16 +1,11 @@
 <template>
-    <div>MQTT Test Component</div>
-    <div>Connecting: {{ connecting }}</div>
-    <div>Connected: {{ client.connected }}</div>
-    <div>URL: {{ connection.protocol }}://{{ connection.host }}:{{ connection.port }}{{ connection.endpoint }}</div>
-    <div>Client ID: {{ connection.clientId }}</div>
-    <div>subscribeSuccess: {{ subscribeSuccess }}</div>
-    <div>{{ receiveNews }}</div>
-
+    <div style="width: 100%">
+        <img :src="this.url + '/image/2565.png'" alt="KU NewYear Poster">
+    </div>
 </template>
 
 <script>
-import mqtt from "mqtt"
+import mqtt from "mqtt";
 
 export default {
     data() {
@@ -38,14 +33,14 @@ export default {
             retryTimes: 0,
             connecting: false,
             subscribeSuccess: false,
-            receiveNews: []
         }
     },
-
-    mounted() {
-        this.createConnection()
+    props: {
+        url: {
+            type: String,
+            required: true,
+        },
     },
-
     methods: {
         initData() {
             this.client = {
@@ -58,7 +53,7 @@ export default {
         createConnection() {
             try {
                 this.connecting = true;
-                const { protocol, host, port, endpoint, ...options } = this.connection;
+                const {protocol, host, port, endpoint, ...options} = this.connection;
                 const connectUrl = `${protocol}://${host}:${port}${endpoint}`;
                 this.client = mqtt.connect(connectUrl, options);
                 if (this.client.on) {
@@ -72,7 +67,11 @@ export default {
                         console.log("Connection failed", error);
                     });
                     this.client.on("message", (topic, message) => {
-                        this.receiveNews.push(topic.toString() + " " + message.toString());
+                        console.log(topic.toString());
+                        // มันไม่เข้าตรงนี้ง่ะ
+                        if (topic.toString() === "kunewyear2566/draw-prize") {
+                            window.open(this.url + "/lucky-draw/draw");
+                        }
                         console.log(`Received message ${message} from topic ${topic}`);
                     });
                 }
@@ -88,23 +87,22 @@ export default {
                     this.client.end();
                     this.initData();
                     console.error("Connection maxReconnectTimes limit, stop retry");
-
                 } catch (error) {
                     console.error(error.toString());
                 }
             }
         },
         doSubscribe(subscription) {
-            const { topic, qos } = subscription
-            this.client.subscribe(topic, { qos }, (error, res) => {
+            const {topic, qos} = subscription
+            this.client.subscribe(topic, {qos}, (error, res) => {
                 if (error) {
-                    console.log('Subscribe to topics error', error)
+                    console.log('Subscribe to topics error', error);
                     return
                 }
-                this.subscribeSuccess = true
-                console.log('Subscribe to topics res', res)
+                this.subscribeSuccess = true;
+                // console.log('Subscribe to topics res', res)
             })
-        }
-    }
+        },
+    },
 }
 </script>
