@@ -8,7 +8,7 @@ import CountDown from "./components/CountDown";
 import MqttTest from "./components/MqttTest";
 import SideBar from "./components/SideBar";
 import BigRedButton from "./components/BigRedButton";
-import PrizeDrawIndex from "./components/PrizeDrawIndex";
+import PrizeDraw from "./components/PrizeDraw";
 import VueSweetalert2 from 'vue-sweetalert2';
 
 const app = createApp({})
@@ -20,7 +20,7 @@ app.component('count-down', CountDown);
 app.component('mqtt-test', MqttTest);
 app.component('side-bar', SideBar);
 app.component('big-red-button', BigRedButton);
-app.component('prize-draw-index', PrizeDrawIndex);
+app.component('prize-draw', PrizeDraw);
 
 app.use(VueSweetalert2);
 app.mount('#app')

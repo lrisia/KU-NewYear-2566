@@ -22,3 +22,4 @@ Route::post('/register/store', [\App\Http\Controllers\Api\RegisterApiController:
 Route::get('/employee/{id}', [\App\Http\Controllers\Api\RegisterApiController::class, 'getEmployee'])->name('register.getEmployee');
 Route::get('/prize/{id}/get', [\App\Http\Controllers\Api\PrizeApiController::class, 'get'])->name('prize.get');
 Route::get('/prize/{id}/draw', [\App\Http\Controllers\Api\PrizeApiController::class, 'draw'])->name('prize.draw');
+Route::get('/prize/{id}/employee', [\App\Http\Controllers\Api\PrizeApiController::class, 'getLuckyPerson'])->name('prize.lucky-person');

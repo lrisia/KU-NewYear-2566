@@ -2,6 +2,6 @@
 
 @section('content')
     <div>
-        <prize-draw-index url="{{ url('/') }}"></prize-draw-index>
+        <prize-draw url="{{ url('/') }}"></prize-draw>
     </div>
 @endsection
