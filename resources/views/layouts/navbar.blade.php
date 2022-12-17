@@ -9,8 +9,19 @@
             <h1 class="text-lg font-bold text-white ml-6 md:text-xl">ระบบลงทะเบียนเข้าร่วมงานขอบคุณบุคลากร ประจำปี 2565</h1>
         </a>
         @auth()
-            <div class="flex gap-4">
-                <p class="text-white md:p-0">{{ Auth::user()->name }}</p>
+            <div class="flex gap-4 items-center">
+                <div class="dropdown">
+                    <button class="dropbtn flex items-center mr-2 p-2 rounded-lg">
+                        <p class="mr-2">{{ Auth::user()->name }}</p>
+                        <svg class="w-5 h-5 text-white" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="dropdown-content rounded-lg text-sm">
+                        <a href="/" class="rounded-t-lg">หน้าหลัก</a>
+                        <a href="/staff/registered">รายชื่อผู้ที่ลงทะเบียนแล้ว</a>
+                        <a href="/staff/organizers">หน่วยงานทั้งหมด</a>
+                        <a href="" class="rounded-b-lg">รางวัลทั้งหมด</a>
+                    </div>
+                </div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button :href="route('logout')"
@@ -25,3 +36,46 @@
         @endauth
     </div>
 </nav>
+
+<style>
+.dropbtn {
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #e7e6e6
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+
+}
+</style>

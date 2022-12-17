@@ -1,11 +1,12 @@
 @extends('layouts.main')
 
 @section('content')
-    <section class="mx-8">
-        <h1 class="text-xl mt-6">
+    <section class="w-full">
+        <div class="mx-8">
+        <h1 class="md:text-xl mt-10">
             หน่วยงานทั้งหมด
         </h1>
-        <div class="my-4 overflow-x-auto relative shadow-md sm:rounded-lg">
+        <div class="my-4 overflow-x-auto relative text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
             <table class="w-full text-left text-gray-60 mr-0">
                 <thead class="bg-[#e7e6e6]">
                     <tr>
@@ -31,6 +32,7 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
         </div>
     </section>
 @endsection

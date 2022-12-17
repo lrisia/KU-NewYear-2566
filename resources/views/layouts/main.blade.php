@@ -18,9 +18,13 @@
 
     <div class="mx-auto max-w-7xl" id="app">
         @if(Auth::user())
-            <side-bar url="{{ url("/staff") }}"></side-bar>
+            <div class="flex flex-row">
+                <side-bar url="{{ url("/staff") }}"></side-bar>
+                @yield('content')
+            </div>
+        @else
+            @yield('content')
         @endif
-        @yield('content')
     </div>
 
     @include('layouts.footer')
