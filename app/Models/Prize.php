@@ -9,4 +9,8 @@ class Prize extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function employees() {
+        return $this->hasMany(Employee::class);
+    }
 }
