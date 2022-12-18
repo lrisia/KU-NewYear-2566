@@ -18263,6 +18263,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    validateEmail: function validateEmail(email) {
+      return String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    },
     onToggle: function onToggle() {
       this.isOpen = !this.isOpen;
     },
@@ -18283,25 +18286,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.waiting = true;
                 _this.error = null;
                 _context.prev = 2;
-                _context.next = 5;
+                if (!(_this.data.answer === "yes")) {
+                  _context.next = 14;
+                  break;
+                }
+                if (!_this.validateEmail(_this.data.email)) {
+                  _context.next = 11;
+                  break;
+                }
+                _context.next = 7;
                 return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(_this.url + '/api/register/store', _this.data);
-              case 5:
+              case 7:
                 response = _context.sent;
-                if (_this.data.answer === "yes") _this.alert('QR Code จะแสดงในอีก <b></b> วินาที');else _this.alert();
+                _this.alert('QR Code จะแสดงในอีก <b></b> วินาที');
                 _context.next = 12;
                 break;
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](2);
-                if (_this.data.answer === '') _this.error = "answer";else if (_this.data.email === '') _this.error = "email_1";else _this.error = "email_2";
+              case 11:
+                _this.error = "รูปแบบอีเมลไม่ถูกต้อง";
               case 12:
+                _context.next = 15;
+                break;
+              case 14:
+                _this.alert();
+              case 15:
+                _context.next = 21;
+                break;
+              case 17:
+                _context.prev = 17;
+                _context.t0 = _context["catch"](2);
+                console.log(_context.t0.response.data.message);
+                if (_this.data.answer === '') _this.error = "answer";else if (_this.data.email === '') _this.error = "กรุณากรอกอีเมล";else _this.error = "อีเมลนี้ถูกใช้ไปแล้ว";
+              case 21:
                 _this.waiting = false;
-              case 13:
+              case 22:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 9]]);
+        }, _callee, null, [[2, 17]]);
       }))();
     },
     alert: function alert() {
@@ -18781,23 +18803,19 @@ var _hoisted_28 = {
   "class": "text-red-500 mt-2 text-xs md:text-sm"
 };
 var _hoisted_29 = {
-  key: 1,
-  "class": "text-red-500 mt-2 text-xs md:text-sm"
-};
-var _hoisted_30 = {
   "class": "modal-footer mb-4 px-5"
 };
-var _hoisted_31 = {
+var _hoisted_30 = {
   "class": "flex items-center justify-center space-x-2 rounded-b"
 };
-var _hoisted_32 = {
+var _hoisted_31 = {
   key: 0,
   "class": "w-5 h-5 mr-3 -ml-1 text-white animate-spin",
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
   viewBox: "0 0 24 24"
 };
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("circle", {
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("circle", {
   "class": "opacity-25",
   cx: "12",
   cy: "12",
@@ -18805,12 +18823,12 @@ var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   stroke: "currentColor",
   "stroke-width": "4"
 }, null, -1 /* HOISTED */);
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
   "class": "opacity-75",
   fill: "currentColor",
   d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 }, null, -1 /* HOISTED */);
-var _hoisted_35 = [_hoisted_33, _hoisted_34];
+var _hoisted_34 = [_hoisted_32, _hoisted_33];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal toggle "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -18867,7 +18885,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "email",
         "class": "px-2 bg-gray-50 border border-gray-300 rounded-lg py-1 ml-1",
         placeholder: "example@ku.th"
-      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.data.email]]), _hoisted_27, _this.error === 'email_1' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_28, "กรุณากรอกอีเมล")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _this.error === 'email_2' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_29, " อีเมลนี้ถูกใช้ไปแล้ว")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.data.email]]), _hoisted_27, _this.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_this.error), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         onClick: _cache[8] || (_cache[8] = function () {
           return $options.onToggle && $options.onToggle.apply($options, arguments);
         }),
@@ -18878,7 +18896,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         type: "button",
         "class": "text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2 flex"
-      }, [$data.waiting ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_32, _hoisted_35)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ตกลง ")])])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+      }, [$data.waiting ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_31, _hoisted_34)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ตกลง ")])])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1 /* STABLE */
   })])], 64 /* STABLE_FRAGMENT */);

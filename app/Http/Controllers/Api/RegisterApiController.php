@@ -15,6 +15,9 @@ class RegisterApiController extends Controller
 {
     public function store(Request $request)
     {
+        $request->validate([
+            'email' => ['email']
+        ]);
         $error = [];
         if (!$request->has('employee_id') ||
             $request->input('employee_id') == "")
