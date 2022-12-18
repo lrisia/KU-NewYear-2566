@@ -24,7 +24,7 @@ class Employee extends Model
 
     public function prize()
     {
-
+        return $this->belongsTo(Prize::class);
     }
 
     public function scopeSearchName($query, $search)
