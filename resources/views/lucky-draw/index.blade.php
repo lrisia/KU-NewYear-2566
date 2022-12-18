@@ -1,9 +1,7 @@
-@extends('layouts.main')
-
+@extends('layouts.main-borderless')
 
 @section('content')
-
     <div>
-        <mqtt-test></mqtt-test>
+        <prize-draw url="{{ url('/') }}"></prize-draw>
     </div>
 @endsection

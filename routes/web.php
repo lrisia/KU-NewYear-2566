@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OrganizerController;
+use App\Http\Controllers\PrizeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,13 +37,18 @@ Route::group(['prefix' => 'staff'], function() {
     Route::get('registered', [EmployeeController::class, 'registered'])->name('staff.registered');
     Route::get('organizers', [OrganizerController::class, 'index'])->name('staff.organizers');
     Route::get('organizers/{id}', [OrganizerController::class, 'show'])->name('staff.organizers.show');
+    Route::get('prizes', [PrizeController::class, 'indexStaff'])->name('staff.prizes.index');
+    Route::get('prizes/{id}/selected', [PrizeController::class, 'selectPrize'])->name('staff.prizes.select');
+});
+
+Route::group(['prefix' => 'lucky-draw'], function() {
+    Route::get('', [PrizeController::class, 'index'])->name('lucky-draw.index');
+    Route::get('draw', [PrizeController::class, 'draw'])->name('lucky-draw.draw');
+    Route::get('test', function () {return view('lucky-draw.test');})->name('lucky-draw.test');
+    Route::get('button', [PrizeController::class, 'drawButton'])->name('lucky-draw.button');
 });
 
 Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');
-
-Route::get('lucky-draw', function () {
-    return view('lucky-draw.index');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

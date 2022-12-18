@@ -32,8 +32,4 @@ class OrganizerController extends Controller
             'employees' => $employees
         ]);
     }
-
-    public function test() {
-        return view('staff.test');
-    }
 }
