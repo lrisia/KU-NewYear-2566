@@ -1,11 +1,20 @@
 <template>
-    <div style="width: 100%">
-        <img :src="this.url + '/image/2565.png'" alt="KU NewYear Poster">
+    <div v-if="!this.drawing" style="width: 100%" class="relative">
+        <img class="absolute top-0 left-0" id="cover" :src="this.url + '/image/2565.png'" alt="KU NewYear Poster">
+        <video class="absolute top-0 left-0" id="video-draw" muted hidden>
+            <source :src="this.url + '/video/lucky-draw-chest.mp4'" type="video/mp4" >
+        </video>
+    </div>
+    <div v-else>
+        <div v-for="person in lucky_person">
+            <p>{{ person.name }}</p>
+        </div>
     </div>
 </template>
 
 <script>
 import mqtt from "mqtt";
+import axios from 'axios';
 
 export default {
     data() {
@@ -33,6 +42,8 @@ export default {
             retryTimes: 0,
             connecting: false,
             subscribeSuccess: false,
+            drawing: false,
+            lucky_person: null,
         }
     },
     props: {
@@ -40,6 +51,9 @@ export default {
             type: String,
             required: true,
         },
+    },
+    mounted() {
+        this.createConnection()
     },
     methods: {
         initData() {
@@ -59,7 +73,7 @@ export default {
                 if (this.client.on) {
                     this.client.on("connect", () => {
                         this.connecting = false;
-                        console.log("Connection succeeded!");
+                        // console.log("Connection succeeded!");
                         this.doSubscribe({topic: "kunewyear2566/#", qos: 0})
                     });
                     this.client.on("reconnect", this.handleOnReConnect);
@@ -67,12 +81,10 @@ export default {
                         console.log("Connection failed", error);
                     });
                     this.client.on("message", (topic, message) => {
-                        console.log(topic.toString());
-                        // มันไม่เข้าตรงนี้ง่ะ
                         if (topic.toString() === "kunewyear2566/draw-prize") {
-                            window.open(this.url + "/lucky-draw/draw");
+                            this.transitionHandle(message);
                         }
-                        console.log(`Received message ${message} from topic ${topic}`);
+                        // console.log(`Received message ${message} from topic ${topic}`);
                     });
                 }
             } catch (error) {
@@ -103,6 +115,23 @@ export default {
                 // console.log('Subscribe to topics res', res)
             })
         },
+        transitionHandle(prize_id) {
+            var cover = document.getElementById("cover");
+            var video = document.getElementById("video-draw");
+            cover.hidden = true;
+            video.hidden = false;
+            video.play()
+            setTimeout(() => this.getLuckyPerson(prize_id), 8000); // ms
+        },
+        async getLuckyPerson(prize_id) {
+            try {
+                const response = await axios.get(this.url + `/api/prize/${prize_id}/employee`);
+                this.lucky_person = response.data;
+                this.drawing = true;
+            } catch (e) {
+                console.log(e);
+            }
+        }
     },
 }
 </script>

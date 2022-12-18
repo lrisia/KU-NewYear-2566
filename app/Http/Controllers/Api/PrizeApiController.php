@@ -33,4 +33,9 @@ class PrizeApiController extends Controller
         Artisan::call('mqtt:publish kunewyear2566/draw-prize ' . $id);
         return response('', Response::HTTP_OK);
     }
+
+    public function getLuckyPerson($id) {
+        $lucky_person = Employee::where('prize_id', $id)->get();
+        return response()->json(EmployeeResource::collection($lucky_person), Response::HTTP_OK);
+    }
 }
