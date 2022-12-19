@@ -14,12 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet"/>
 </head>
 <body>
-    @include('layouts.navbar')
-
-    <div class="mx-auto max-w-7xl" id="app">
-        @yield('content')
-    </div>
-
-    @include('layouts.footer')
+<div id="app">
+    @yield('content')
+</div>
 </body>
 </html>

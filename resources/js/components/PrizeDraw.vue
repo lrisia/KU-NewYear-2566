@@ -1,16 +1,20 @@
 <template>
-    <div>MQTT Test Component</div>
-    <div>Connecting: {{ connecting }}</div>
-    <div>Connected: {{ client.connected }}</div>
-    <div>URL: {{ connection.protocol }}://{{ connection.host }}:{{ connection.port }}{{ connection.endpoint }}</div>
-    <div>Client ID: {{ connection.clientId }}</div>
-    <div>subscribeSuccess: {{ subscribeSuccess }}</div>
-    <div>{{ receiveNews }}</div>
-
+    <div v-if="!this.drawing" style="width: 100%" class="relative">
+        <img class="absolute top-0 left-0" id="cover" :src="this.url + '/image/2565.png'" alt="KU NewYear Poster">
+        <video class="absolute top-0 left-0" id="video-draw" muted hidden>
+            <source :src="this.url + '/video/lucky-draw-chest.mp4'" type="video/mp4" >
+        </video>
+    </div>
+    <div v-else>
+        <div v-for="person in lucky_person">
+            <p>{{ person.name }}</p>
+        </div>
+    </div>
 </template>
 
 <script>
-import mqtt from "mqtt"
+import mqtt from "mqtt";
+import axios from 'axios';
 
 export default {
     data() {
@@ -38,14 +42,19 @@ export default {
             retryTimes: 0,
             connecting: false,
             subscribeSuccess: false,
-            receiveNews: []
+            drawing: false,
+            lucky_person: null,
         }
     },
-
+    props: {
+        url: {
+            type: String,
+            required: true,
+        },
+    },
     mounted() {
         this.createConnection()
     },
-
     methods: {
         initData() {
             this.client = {
@@ -58,13 +67,13 @@ export default {
         createConnection() {
             try {
                 this.connecting = true;
-                const { protocol, host, port, endpoint, ...options } = this.connection;
+                const {protocol, host, port, endpoint, ...options} = this.connection;
                 const connectUrl = `${protocol}://${host}:${port}${endpoint}`;
                 this.client = mqtt.connect(connectUrl, options);
                 if (this.client.on) {
                     this.client.on("connect", () => {
                         this.connecting = false;
-                        console.log("Connection succeeded!");
+                        // console.log("Connection succeeded!");
                         this.doSubscribe({topic: "kunewyear2566/#", qos: 0})
                     });
                     this.client.on("reconnect", this.handleOnReConnect);
@@ -72,8 +81,10 @@ export default {
                         console.log("Connection failed", error);
                     });
                     this.client.on("message", (topic, message) => {
-                        this.receiveNews.push(topic.toString() + " " + message.toString());
-                        console.log(`Received message ${message} from topic ${topic}`);
+                        if (topic.toString() === "kunewyear2566/draw-prize") {
+                            this.transitionHandle(message);
+                        }
+                        // console.log(`Received message ${message} from topic ${topic}`);
                     });
                 }
             } catch (error) {
@@ -88,23 +99,39 @@ export default {
                     this.client.end();
                     this.initData();
                     console.error("Connection maxReconnectTimes limit, stop retry");
-
                 } catch (error) {
                     console.error(error.toString());
                 }
             }
         },
         doSubscribe(subscription) {
-            const { topic, qos } = subscription
-            this.client.subscribe(topic, { qos }, (error, res) => {
+            const {topic, qos} = subscription
+            this.client.subscribe(topic, {qos}, (error, res) => {
                 if (error) {
-                    console.log('Subscribe to topics error', error)
+                    console.log('Subscribe to topics error', error);
                     return
                 }
-                this.subscribeSuccess = true
-                console.log('Subscribe to topics res', res)
+                this.subscribeSuccess = true;
+                // console.log('Subscribe to topics res', res)
             })
+        },
+        transitionHandle(prize_id) {
+            var cover = document.getElementById("cover");
+            var video = document.getElementById("video-draw");
+            cover.hidden = true;
+            video.hidden = false;
+            video.play()
+            setTimeout(() => this.getLuckyPerson(prize_id), 8000); // ms
+        },
+        async getLuckyPerson(prize_id) {
+            try {
+                const response = await axios.get(this.url + `/api/prize/${prize_id}/employee`);
+                this.lucky_person = response.data;
+                this.drawing = true;
+            } catch (e) {
+                console.log(e);
+            }
         }
-    }
+    },
 }
 </script>
