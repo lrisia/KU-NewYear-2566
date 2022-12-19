@@ -32,7 +32,7 @@ class PrizeController extends Controller
         $video_number = rand(0, 1);
         $filename = "lucky-draw-chest.mp4";
         if ($video_number == 1) $filename = "lucky-draw-dropbox.mp4";
-        return view('lucky-draw.draw', ['filename' => $filename]);
+        return view('lucky-draw.index', ['filename' => $filename]);
     }
 
     public function show($id)
