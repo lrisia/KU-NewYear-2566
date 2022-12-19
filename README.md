@@ -2,6 +2,9 @@
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
 # Versions
+* 0.1.4
+  * import extra employee
+
 * 0.1.3
   * staff view registration stats by organization
 
