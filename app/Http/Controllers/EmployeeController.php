@@ -56,6 +56,40 @@ class EmployeeController extends Controller
         return view('staff.registered', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
+    public function attended(Request $request)
+    {
+        if (!Auth::user()->isStaff()) return redirect()->route('/');
+
+        $keyword = $request->query('keyword') ?? null;
+
+        $query = Employee::query();
+        if (!is_null($keyword)) {
+            $query = $query->searchName($keyword);
+        }
+
+        $employees = $query->whereNotNull('arrive_at')->latest('arrive_at')->paginate(200);
+
+        return view('staff.employees.attended', ['employees' => $employees, 'keyword' => $keyword]);
+    }
+
+    public function allEmployees(Request $request)
+    {
+        if (!Auth::user()->isStaff()) return redirect()->route('/');
+
+        $keyword = $request->query('keyword') ?? null;
+
+        $query = Employee::query();
+        if (!is_null($keyword)) {
+            $query = $query->searchName($keyword);
+            $employees = $query->latest('register_at')->paginate(200);
+            return view('staff.employees.all-employees', ['employees' => $employees, 'keyword' => $keyword]);
+        }    
+
+        $employees = Employee::latest('register_at')->paginate(200);
+
+        return view('staff.employees.all-employees', ['employees' => $employees, 'keyword' => $keyword]);
+    }
+
     public function dashboard() {
         return view('staff.dashboard');
     }

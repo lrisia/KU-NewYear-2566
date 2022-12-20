@@ -35,6 +35,8 @@ Route::group(['prefix' => 'register'], function() {
 Route::group(['prefix' => 'staff'], function() {
     Route::get('', [EmployeeController::class, 'dashboard'])->name('staff.dashboard');
     Route::get('registered', [EmployeeController::class, 'registered'])->name('staff.registered');
+    Route::get('all-employees', [EmployeeController::class, 'allEmployees'])->name('staff.all-employees');
+    Route::get('attended', [EmployeeController::class, 'attended'])->name('staff.attended');
     Route::get('organizers', [OrganizerController::class, 'index'])->name('staff.organizers');
     Route::get('organizers/{id}', [OrganizerController::class, 'show'])->name('staff.organizers.show');
     Route::get('prizes/search', [PrizeController::class, 'search'])->name('staff.prizes.search');
