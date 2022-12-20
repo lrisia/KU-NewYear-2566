@@ -28,7 +28,7 @@ Route::get('/', function () {
 })->name('/');
 
 Route::group(['prefix' => 'register'], function() {
-    Route::get('', [EmployeeController::class, 'index'])->name('register.index');
+    // Route::get('', [EmployeeController::class, 'index'])->name('register.index');
     Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
 });
 
