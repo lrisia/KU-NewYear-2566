@@ -9,14 +9,50 @@
             <h1 class="text-lg font-bold text-white ml-6 md:text-xl">ระบบลงทะเบียนเข้าร่วมงานขอบคุณบุคลากร ประจำปี 2565</h1>
         </a>
         @auth()
-            <div class="flex gap-4">
-                <p class="text-white md:p-0">{{ Auth::user()->name }}</p>
+            <div class="flex gap-4 items-center">
+                <button id="multiLevelDropdownButton" data-dropdown-toggle="dropdown" class="text-white hover:bg-[#0f5653] rounded-lg px-3 py-2.5 text-center inline-flex items-center" type="button">
+                  <p class="mr-2">{{ Auth::user()->name }}</p>
+                  <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdown" class="hidden z-10 w-40 bg-white rounded-lg divide-y divide-gray-100 shadow">
+                    <ul class="text-sm" aria-labelledby="multiLevelDropdownButton">
+                      <li>
+                        <a href="/" class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]">หน้าหลัก</a>
+                      </li>
+                      <li>
+                        <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" class="flex justify-between items-center p-2.5 w-full hover:bg-[#e7e6e6]">รางวัล<svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button>
+                          <div id="doubleDropdown" class="hidden z-10 w-40 bg-white rounded-lg divide-y divide-gray-100 shadow">
+                            <ul class="text-sm" aria-labelledby="doubleDropdownButton">
+                              <li>
+                                <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]" href="/staff/prizes">รางวัลทั้งหมด</a>
+                              </li>
+                              <li>
+                                <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/staff/prizes/search">ค้นหาชื่อผู้ได้รับรางวัล</a>
+                              </li>
+                              <li>
+                                <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/lucky-draw/button">ปุ่มจับรางวัล</a>
+                              </li>
+                              <li>
+                                <a class="block rounded-b-lg p-2.5 hover:bg-[#e7e6e6]" href="/lucky-draw/draw">ชื่อผู้ได้รับรางวัล</a>
+                              </li>
+                            </ul>
+                        </div>
+                      </li>
+                      <li>
+                        <a href="/staff/registered" class="block p-2.5 hover:bg-[#e7e6e6]">รายชื่อผู้ที่ลงทะเบียนแล้ว</a>
+                      </li>
+                      <li>
+                        <a href="/staff/organizers" class="block p-2.5 hover:bg-[#e7e6e6] rounded-b-lg">หน่วยงานทั้งหมด</a>
+                      </li>
+                    </ul>
+                </div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button :href="route('logout')"
                             onclick="event.preventDefault();
                                                     this.closest('form').submit();"
-                            class="text-white md:p-0 hover:underline">
+                            class="text-white hover:underline  hover:bg-[#0f5653] rounded-lg px-4 py-2.5">
                         <span class="material-symbols-outlined">ออกจากระบบ</span>
                     </button>
                 </form>

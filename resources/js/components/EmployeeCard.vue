@@ -8,7 +8,7 @@
                     <register-popup :employee="employee" :organizer_name="organizer_name" :url="url">
                     </register-popup>
                 </span>
-                <span v-else class="absolute right-2">
+                <span v-else class="absolute top-2 right-2">
                     ลงทะเบียนแล้ว
                 </span>
             </div>

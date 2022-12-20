@@ -6,8 +6,8 @@ import RegisterPopup from "./components/RegisterPopup";
 import EmployeeCard from "./components/EmployeeCard";
 import CountDown from "./components/CountDown";
 import MqttTest from "./components/MqttTest";
-import SideBar from "./components/SideBar";
 import BigRedButton from "./components/BigRedButton";
+import PrizePopup from "./components/PrizePopup";
 import PrizeDraw from "./components/PrizeDraw";
 import ScanQrcode from "./components/ScanQrcode";
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -20,8 +20,8 @@ app.component('register-popup', RegisterPopup);
 app.component('employee-card', EmployeeCard)
 app.component('count-down', CountDown);
 app.component('mqtt-test', MqttTest);
-app.component('side-bar', SideBar);
 app.component('big-red-button', BigRedButton);
+app.component('prize-popup', PrizePopup);
 app.component('prize-draw', PrizeDraw);
 app.component('scan-qr-code', ScanQrcode);
 
