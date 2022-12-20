@@ -49,6 +49,9 @@ Route::group(['prefix' => 'lucky-draw'], function() {
 });
 
 Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');
+Route::get('staff/qr-code/scan', function() {
+    return view('staff.qr-code.index');
+})->name('qr-code.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
