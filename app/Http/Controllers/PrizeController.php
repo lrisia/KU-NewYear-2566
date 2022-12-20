@@ -38,7 +38,7 @@ class PrizeController extends Controller
     public function show($id)
     {
         $prize = Prize::where('id', $id)->firstOrFail();
-        $employees = $prize->employees->sortByDesc('got_register_at');
+        $employees = $prize->employees->sortBy('name');
         return view('staff.lucky-draw.show', ['prize' => $prize, 'employees' => $employees]);
     }
 

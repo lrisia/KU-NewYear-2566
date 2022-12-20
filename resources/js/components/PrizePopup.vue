@@ -47,7 +47,7 @@
                                             class="text-gray-500 mr-2 bg-gray-50 hover:bg-gray-200 shadow rounded-lg border border-[#DADADA] px-6 py-2">
                                         ยกเลิก
                                     </button>
-                                    <button type="button"
+                                    <button @click="submitForm" type="button"
                                             class="text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2 flex">
                                         <svg v-if="waiting" class="w-5 h-5 mr-3 -ml-1 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
                                              viewBox="0 0 24 24">
@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
@@ -114,6 +116,37 @@ export default {
     methods: {
         onToggle() {
             this.isOpen = !this.isOpen;
+        },
+        async submitForm() {
+            this.waiting = true;
+            this.error = null;
+            try {
+                const response = await axios.post(this.url + '/api/prize/took-prize', this.data)
+                this.alert();
+            } catch (e) {
+                console.log(e);
+            }
+            this.waiting = false;
+        },
+        alert(text="") {
+            let timerInterval;
+            Swal.fire({
+                title: 'ดำเนินการสำเร็จ',
+                html: text,
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    timerInterval = setInterval(() => {
+                        Swal.getHtmlContainer().querySelector('b')
+                            .textContent = (Swal.getTimerLeft() / 1000)
+                            .toFixed(0)
+                    }, 100)
+                }
+            }).then(async () => {
+                window.open(`/staff/prizes/${this.employee.prize_id}`, '_self');
+            });
         }
     }
 }

@@ -38,4 +38,12 @@ class PrizeApiController extends Controller
         $lucky_person = Employee::where('prize_id', $id)->get();
         return response()->json(EmployeeResource::collection($lucky_person), Response::HTTP_OK);
     }
+
+    public function tookPrize(Request $request) {
+        $lucky_person = $request->input('employee_id');
+        $employee = Employee::where('id', $lucky_person)->first();
+        $employee->took_prize = 1;
+        $employee->save();
+        return response('', Response::HTTP_OK);
+    }
 }
