@@ -15,7 +15,7 @@ class OrganizerController extends Controller
 
     public function index()
     {
-        if (!Auth::user()->isStaff()) return redirect()->route('/');
+        if (!Auth::user()->isStaff()) return redirect()->back();
 
         $organizers = Organizer::orderBy('fac_id')->get();
         return view('staff.organizers.index', ['organizers' => $organizers]);

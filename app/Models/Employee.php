@@ -32,6 +32,15 @@ class Employee extends Model
         return $query->where('name', 'LIKE', "%{$search}%");
     }
 
+    public function scopeSearchAllColumn($query, $search)
+    {
+        return $query->join('organizers', 'organizers.id', '=', 'employees.organizer_id')
+            ->select('employees.*', 'organizers.name as organizer_name')
+            ->where('employees.name', 'LIKE', "%{$search}%")
+            ->orWhere('employees.email', 'LIKE', "%{$search}%")
+            ->orWhere('organizers.name', 'LIKE', "%{$search}%");
+    }
+
     public function scopeNotRegister($query)
     {
         return $query->whereNull('register_at');

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!this.drawing" style="width: 100%" class="relative">
+    <div v-if="this.drawing" style="width: 100%" class="relative">
         <img class="absolute top-0 left-0" id="cover" src="/image/2565.png" alt="KU NewYear Poster">
         <video class="absolute top-0 left-0" id="video-draw" muted hidden>
             <source src="/video/lucky-draw-chest.mp4" type="video/mp4" >
@@ -8,6 +8,9 @@
     <div v-else>
         <div v-for="person in lucky_person">
             <p>{{ person.name }}</p>
+        </div>
+        <div>
+            <mini-count-down></mini-count-down>
         </div>
     </div>
 </template>

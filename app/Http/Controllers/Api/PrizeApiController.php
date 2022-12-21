@@ -23,7 +23,7 @@ class PrizeApiController extends Controller
     public function draw($id) {
         $prize = Prize::find($id);
         $amount = $prize->total_amount;
-//        $lucky_person = Employee::whereNotNull('arrive_at')->whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
+//        $lucky_person = Employee::whereNotNull('register_at')->whereNotNull('arrive_at')->whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
         $lucky_person = Employee::whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
         foreach ($lucky_person as $person) {
             $person->prize_id = $prize->id;

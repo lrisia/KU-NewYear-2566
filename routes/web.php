@@ -32,34 +32,47 @@ Route::group(['prefix' => 'register'], function() {
     Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
 });
 
+Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');
+
 Route::group(['prefix' => 'staff'], function() {
     Route::get('', [EmployeeController::class, 'dashboard'])->name('staff.dashboard');
-    Route::get('registered', [EmployeeController::class, 'registered'])->name('staff.registered');
-    Route::get('all-employees', [EmployeeController::class, 'allEmployees'])->name('staff.all-employees');
-    Route::get('attended', [EmployeeController::class, 'attended'])->name('staff.attended');
-    Route::get('organizers', [OrganizerController::class, 'index'])->name('staff.organizers');
-    Route::get('organizers/{id}', [OrganizerController::class, 'show'])->name('staff.organizers.show');
+
+    Route::group(['prefix' => 'employees'], function() {
+        Route::get('', [EmployeeController::class, 'all'])->name('staff.employees');
+        Route::get('registered', [EmployeeController::class, 'registered'])->name('staff.employees.registered');
+        Route::get('attended', [EmployeeController::class, 'attended'])->name('staff.employees.attended');
+    });
+
+    Route::group(['prefix' => 'organizers'], function() {
+        Route::get('', [OrganizerController::class, 'index'])->name('staff.organizers');
+        Route::get('{id}', [OrganizerController::class, 'show'])->name('staff.organizers.show');
+    });
+
+    Route::group(['prefix' => 'prizes'], function() {
+        Route::get('', [PrizeController::class, 'index'])->name('staff.prizes');
+    });
+
     Route::get('prizes/search', [PrizeController::class, 'search'])->name('staff.prizes.search');
-    Route::get('prizes', [PrizeController::class, 'indexStaff'])->name('staff.prizes.index');
-    Route::get('prizes/{id}/selected', [PrizeController::class, 'selectPrize'])->name('staff.prizes.select');
+    Route::post('prizes/select', [PrizeController::class, 'selectPrize'])->name('staff.prizes.select');
     Route::get('prizes/{id}', [PrizeController::class, 'show'])->name('staff.prizes.show');
 });
 
 Route::group(['prefix' => 'lucky-draw'], function() {
-    Route::get('', [PrizeController::class, 'index'])->name('lucky-draw.index');
+    Route::get('', [PrizeController::class, function() {
+        view('lucky-draw.index');
+    }])->name('lucky-draw.index');
     Route::get('draw', [PrizeController::class, 'draw'])->name('lucky-draw.draw');
     Route::get('test', function () {return view('lucky-draw.test');})->name('lucky-draw.test');
     Route::get('button', [PrizeController::class, 'drawButton'])->name('lucky-draw.button');
 });
 
-Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');
 Route::get('staff/qr-code/scan', function() {
     return view('staff.qr-code.index');
 })->name('qr-code.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

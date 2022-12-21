@@ -10,22 +10,29 @@ use Illuminate\Support\Facades\Auth;
 
 class PrizeController extends Controller
 {
-    public function indexStaff() {
-        $prizes = Prize::orderBy('type')->orderBy('prize_no','asc')->get();
-        return view('staff.lucky-draw.index', ['prizes' => $prizes]);
-    }
-
-    public function index()
+    public function __construct()
     {
-        return view('lucky-draw.index');
+        $this->middleware('auth');
     }
 
-    public function selectPrize($id) {
+    public function index() {
+        if (!Auth::user()->isStaff()) return redirect()->back();
+
+        $prizes = Prize::orderBy('type')->orderBy('prize_no','asc')->get();
+        return view('staff.prizes.index', ['prizes' => $prizes]);
+    }
+
+    public function selectPrize(Request $request) {
+        $id = $request->input('id');
         Artisan::call('mqtt:publish kunewyear2566/enable-prize ' . $id);
+//        $prize = Prize::find($id);
+//        $prize->enable = false;
+//        $prize->save();
+        return redirect()->back();
     }
 
     public function drawButton() {
-        return view('staff.lucky-draw.big-button');
+        return view('staff.prizes.big-button');
     }
 
     public function draw() {
@@ -39,18 +46,20 @@ class PrizeController extends Controller
     {
         $prize = Prize::where('id', $id)->firstOrFail();
         $employees = $prize->employees->sortBy('name');
-        return view('staff.lucky-draw.show', ['prize' => $prize, 'employees' => $employees]);
+        return view('staff.prizes.show', ['prize' => $prize, 'employees' => $employees]);
     }
 
     public function search(Request $request)
-    {        
+    {
+        if (!Auth::user()->isStaff()) return redirect()->route('/');
+
         $keyword = $request->query('keyword') ?? null;
         $query = Employee::query();
         if (!is_null($keyword)) {
             $query = $query->searchName($keyword);
         }
         $employees = $query->whereNotNull('got_prize_at')->latest('got_prize_at')->get();
-        return view('staff.lucky-draw.search', ['employees' => $employees, 'keyword' => $keyword]);
+        return view('staff.prizes.search', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
 }
