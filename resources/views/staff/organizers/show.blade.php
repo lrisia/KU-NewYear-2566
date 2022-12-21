@@ -22,9 +22,9 @@
                         <td class="px-6 py-4">{{ $employee->name }}</td>
                         <td class="px-6 py-4 text-center">
                             @if($employee->register_at != null)
-                                <p class="text-[#818c2b] my-2 ml-4">ลงทะเบียนแล้ว</p>
+                                <p class="text-green-700 my-2">ลงทะเบียนแล้ว</p>
                             @else
-                                <p class="text-red-400 my-2 ml-4">ไม่ได้ลงทะเบียน</p>
+                                <p class="text-red-500 my-2">ไม่ได้ลงทะเบียน</p>
                             @endif
                         </td>
                     </tr>

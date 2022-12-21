@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PrizeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['search']);
+    }
+
     public function indexStaff() {
         $prizes = Prize::orderBy('type')->orderBy('prize_no','asc')->get();
         return view('staff.lucky-draw.index', ['prizes' => $prizes]);
@@ -32,13 +37,13 @@ class PrizeController extends Controller
         $video_number = rand(0, 1);
         $filename = "lucky-draw-chest.mp4";
         if ($video_number == 1) $filename = "lucky-draw-dropbox.mp4";
-        return view('lucky-draw.draw', ['filename' => $filename]);
+        return view('lucky-draw.index', ['filename' => $filename]);
     }
 
     public function show($id)
     {
         $prize = Prize::where('id', $id)->firstOrFail();
-        $employees = $prize->employees->sortByDesc('got_register_at');
+        $employees = $prize->employees->sortBy('name');
         return view('staff.lucky-draw.show', ['prize' => $prize, 'employees' => $employees]);
     }
 

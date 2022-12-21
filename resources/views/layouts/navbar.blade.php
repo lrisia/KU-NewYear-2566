@@ -10,24 +10,65 @@
         </a>
         @auth()
             <div class="flex gap-4 items-center">
-                <div class="dropdown">
-                    <button class="dropbtn flex items-center mr-2 p-2 rounded-lg">
-                        <p class="mr-2">{{ Auth::user()->name }}</p>
-                        <svg class="w-5 h-5 text-white" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div class="dropdown-content rounded-lg text-sm">
-                        <a href="/" class="rounded-t-lg">หน้าหลัก</a>
-                        <a href="/staff/registered">รายชื่อผู้ที่ลงทะเบียนแล้ว</a>
-                        <a href="/staff/organizers">หน่วยงานทั้งหมด</a>
-                        <a href="" class="rounded-b-lg">รางวัลทั้งหมด</a>
-                    </div>
+                <button id="multiLevelDropdownButton" data-dropdown-toggle="dropdown" class="text-white hover:bg-[#0f5653] rounded-lg px-3 py-2.5 text-center inline-flex items-center" type="button">
+                  <p class="mr-2">{{ Auth::user()->name }}</p>
+                  <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdown" class="hidden z-10 w-40 bg-white rounded-lg divide-y divide-gray-100 shadow">
+                    <ul class="text-sm" aria-labelledby="multiLevelDropdownButton">
+                      <li>
+                        <a href="/" class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]">หน้าหลัก</a>
+                      </li>
+                      <li>
+                        <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" class="flex justify-between items-center p-2.5 w-full hover:bg-[#e7e6e6]">รางวัล<svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button>
+                          <div id="doubleDropdown" class="hidden z-10 w-40 bg-white rounded-lg divide-y divide-gray-100 shadow">
+                            <ul class="text-sm" aria-labelledby="doubleDropdownButton">
+                              <li>
+                                <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]" href="/staff/prizes">รางวัลทั้งหมด</a>
+                              </li>
+                              <li>
+                                <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/staff/prizes/search">ค้นหาชื่อผู้ได้รับรางวัล</a>
+                              </li>
+                              <li>
+                                <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/lucky-draw/button">ปุ่มจับรางวัล</a>
+                              </li>
+                              <li>
+                                <a class="block rounded-b-lg p-2.5 hover:bg-[#e7e6e6]" href="/lucky-draw/draw">ชื่อผู้ได้รับรางวัล</a>
+                              </li>
+                            </ul>
+                        </div>
+                      </li>
+                      <li>
+                        <button id="doubleDropdownButton2" data-dropdown-toggle="doubleDropdown2" data-dropdown-placement="right-start" type="button" class="flex justify-between items-center p-2.5 w-full hover:bg-[#e7e6e6]">รายชื่อบุคลากร<svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button>
+                          <div id="doubleDropdown2" class="hidden z-10 w-40 bg-white rounded-lg divide-y divide-gray-100 shadow">
+                            <ul class="text-sm" aria-labelledby="doubleDropdownButton2">
+                              <li>
+                                <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]" href="/staff/all-employees">รายชื่อบุคลากรทั้งหมด</a>
+                              </li>
+                              <li>
+                                <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/staff/registered">รายชื่อผู้ที่ลงทะเบียนแล้ว</a>
+                              </li>
+                              <li>
+                                <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/staff/attended">รายชื่อผู้เข้าร่วมงาน</a>
+                              </li>
+                            </ul>
+                        </div>
+                      </li>
+                      <li>
+                        <a href="/staff/qr-code/scan" class="block p-2.5 hover:bg-[#e7e6e6]">สแกน QR Code</a>
+                      </li>
+                      <li>
+                        <a href="/staff/organizers" class="block p-2.5 hover:bg-[#e7e6e6] rounded-b-lg">หน่วยงานทั้งหมด</a>
+                      </li>
+                    </ul>
                 </div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button :href="route('logout')"
                             onclick="event.preventDefault();
                                                     this.closest('form').submit();"
-                            class="text-white md:p-0 hover:underline">
+                            class="text-white hover:underline  hover:bg-[#0f5653] rounded-lg px-4 py-2.5">
                         <span class="material-symbols-outlined">ออกจากระบบ</span>
                     </button>
                 </form>
@@ -36,46 +77,3 @@
         @endauth
     </div>
 </nav>
-
-<style>
-.dropbtn {
-  color: white;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 10px 10px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {
-  background-color: #e7e6e6
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown:hover .dropbtn {
-
-}
-</style>

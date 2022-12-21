@@ -208,7 +208,7 @@ export default {
                 else {
                     let qr_code = null;
                     try {
-                        const response = await axios.get(this.url + `/api/employee/${this.employee.id}`);
+                        const response = await axios.get(this.url + `/api/employee/get?id=${this.employee.id}`);
                         qr_code = response.data.employee.qr_code;
                         window.open(`/qr-code/${qr_code}`, '_self');
                     } catch (e) {
