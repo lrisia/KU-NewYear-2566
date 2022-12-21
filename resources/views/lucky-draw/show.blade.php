@@ -2,12 +2,7 @@
 
 @section('content')
     <div class="w-full">
-        <div class="relative flex items-end justify-end mx-8 mt-4">
-            <button class="absolute top-3 px-6 py-2 text-white mobile:text-sm  shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534]" onclick="printDiv('printThis')">
-                พิมพ์รายชื่อ
-            </button>
-        </div>
-        <form action="{{ route('staff.prizes.show', ['id' => $prize->id])  }}" method="get" class="my-10 mx-8">
+        <form action="{{ route('lucky-draw.show', ['id' => $prize->id])  }}" method="get" class="my-10 mx-8">
             <label for="search" class="md:text-lg">ค้นหาชื่อผู้ได้รับรางวัล</label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -30,42 +25,26 @@
                 <div class="my-4 overflow-auto text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
                     <table class="w-full text-left mr-0">
                         <thead class="bg-[#e7e6e6] border-2 text-sm mobile:text-xs sm:text-base">
-                            <tr>
-                                <th scope="col" class="py-3 pl-10 pr-4">ลำดับ</th>
-                                <th scope="col" class="py-3 px-6">ชื่อ-นามสกุล</th>
-                                <th scope="col" class="py-3 px-6">หน่วยงาน</th>
-                                <th scope="col" class="print:py-3 ptint:px-10"></th>
-                            </tr>
+                        <tr>
+                            <th scope="col" class="py-3 pl-10 pr-4">ลำดับ</th>
+                            <th scope="col" class="py-3 px-6">ชื่อ-นามสกุล</th>
+                            <th scope="col" class="py-3 px-6">หน่วยงาน</th>
+                            <th scope="col" class="print:py-3 ptint:px-10"></th>
+                        </tr>
                         </thead>
                         <tbody class="m-2">
-                            @foreach($employees as $employee)
+                        @foreach($employees as $employee)
                             <tr class="border text-gray-700 text-sm mobile:text-xs sm:text-base">
                                 <td class="px-10 py-4">{{ $loop->iteration }}</td>
                                 <td class="px-6 py-4">{{ $employee->name }}</td>
                                 <td class="px-6 py-4">{{ $employee->organizer->name }}</td>
                                 <td class="print:px-14 print:py-4"></td>
                             </tr>
-                            @endforeach
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
-        <div class="relative">
-            <a href="{{ route('staff.prizes.close') }}" class="absolute right-8 px-6 py-2 text-white mobile:text-sm shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534]">
-                ปิดการรับรางวัล
-            </a>
-        </div>
     </div>
-    <mqtt-refresh timeout="850"></mqtt-refresh>
 @endsection
-
-<script>
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
-    }
-</script>

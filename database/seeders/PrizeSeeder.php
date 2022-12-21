@@ -20,7 +20,7 @@ class PrizeSeeder extends Seeder
         for ($i = 0; $i < count($amount); $i++) {
             $prize = new Prize();
             $prize->type = "เงิน";
-            $prize->description = "รางวัลที่ " . $i + 1 . " มูลค่า " . $money[$i] . " จำนวน " . $amount[$i] . " รางวัล";
+            $prize->description = "เงินรางวัลมูลค่า " . $money[$i] . " บาท";
             $prize->prize_no = $i + 1;
             $prize->total_amount = $amount[$i];
             $prize->left_amount = $amount[$i];

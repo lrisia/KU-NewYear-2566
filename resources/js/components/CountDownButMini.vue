@@ -1,6 +1,6 @@
 <template>
     <div class="relative max-w-full mt-10">
-        <div class="absolute top-1/2 bottom-1/2 max-w-7xl " style="width:100%;">
+        <div class="absolute top-1/2 bottom-1/2 max-w-7xl" style="width:100%;">
             <div class="text-center text-xs mobile:text-xs sm:text-xl md:text-2xl">เหลือเวลารับรางวัลอีก</div>
             <div class="lg:mx-auto xl:mx-52">
                 <div class="mt-2 mobile:mt-1 sm:mt-2 md:mt-4 lg:mt-10 grid grid-cols-4 gap-1 items-center justify-center px-10 mobile:px-10 sm:px-12 lg:px-20" style="width:100%;">

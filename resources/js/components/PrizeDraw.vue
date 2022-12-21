@@ -1,5 +1,5 @@
 <template>
-    <div v-if="this.drawing" style="width: 100%" class="relative">
+    <div v-if="!this.drawing" style="width: 100%" class="relative">
         <img class="absolute top-0 left-0" id="cover" src="/image/2565.png" alt="KU NewYear Poster">
         <video class="absolute top-0 left-0" id="video-draw" muted hidden>
             <source src="/video/lucky-draw-chest.mp4" type="video/mp4" >
@@ -12,11 +12,15 @@
         <div>
             <mini-count-down></mini-count-down>
         </div>
+        <div>
+            <qrcode-vue :value="this.qrcode_url"/>
+        </div>
     </div>
 </template>
 
 <script>
 import mqtt from "mqtt";
+import QrcodeVue from 'qrcode.vue'
 import axios from 'axios';
 
 export default {
@@ -47,10 +51,16 @@ export default {
             subscribeSuccess: false,
             drawing: false,
             lucky_person: null,
+            qrcode_url: "",
         }
     },
+    components: { QrcodeVue, },
     props: {
         url: {
+            type: String,
+            required: true,
+        },
+        url_for_qrcode: {
             type: String,
             required: true,
         },
@@ -85,7 +95,10 @@ export default {
                     });
                     this.client.on("message", (topic, message) => {
                         if (topic.toString() === "kunewyear2566/draw-prize") {
+                            this.qrcode_url = this.url_for_qrcode + '/' + message.toString();
                             this.transitionHandle(message);
+                        } else if (topic.toString() === "kunewyear2566/close-prize") {
+                            location.reload();
                         }
                         // console.log(`Received message ${message} from topic ${topic}`);
                     });

@@ -7,6 +7,7 @@ import EmployeeCard from "./components/EmployeeCard";
 import CountDown from "./components/CountDown";
 import CountDownButMini from "./components/CountDownButMini";
 import MqttTest from "./components/MqttTest";
+import MqttForRefresh from "./components/MqttForRefresh";
 import BigRedButton from "./components/BigRedButton";
 import PrizePopup from "./components/PrizePopup";
 import PrizeDraw from "./components/PrizeDraw";
@@ -23,6 +24,7 @@ app.component('employee-card', EmployeeCard)
 app.component('count-down', CountDown);
 app.component('mini-count-down', CountDownButMini);
 app.component('mqtt-test', MqttTest);
+app.component('mqtt-refresh', MqttForRefresh);
 app.component('big-red-button', BigRedButton);
 app.component('prize-popup', PrizePopup);
 app.component('prize-draw', PrizeDraw);

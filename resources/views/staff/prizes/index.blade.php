@@ -29,9 +29,8 @@
                             <td class="px-6 py-4 text-end">{{ $prize->left_amount }}</td>
                             <td class="flex flex-row items-center justify-center py-3">
                                 @if($prize->enable)
-                                    <p
-                                        class="bg-[#B0C03B] m-2 text-white text-sm py-2 px-3 rounded-lg shadow-lg hover:bg-[#9ebf3b]"
-                                        onclick="popupToggle({{ $prize }})">จับรางวัล</p>
+                                    <p class="bg-[#B0C03B] m-2 text-white text-sm py-2 px-3 rounded-lg shadow-lg hover:bg-[#98a534]"
+                                       onclick="popupToggle({{ $prize }})">จับรางวัล</p>
                                 @else
                                     <a href="{{ route('staff.prizes.show', ['id' => $prize->id]) }}"
                                        class="bg-[#D9D9D9] m-2 py-2 px-4 text-sm rounded-lg shadow-lg hover:bg-[#C9C9C9]">รายชื่อผู้โชคดี</a>
@@ -115,7 +114,6 @@
             document.getElementById('description').textContent = prize.description;
             document.getElementById('amount').textContent = prize.total_amount;
             document.getElementById('id').value = prize.id;
-
         }
     }
 </script>

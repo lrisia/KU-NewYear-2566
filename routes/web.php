@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\PrizeController;
+use App\Http\Controllers\LuckyDrawController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ Route::get('/', function () {
     $date = new DateTime('2022-12-16T00:00:00');
     $now = new DateTime();
     if ($date > $now) { return redirect()->route('register.index'); }
-    else { return redirect()->route('staff.registered'); }
+    else { return redirect()->route('staff.employees.registered'); }
 })->name('/');
 
 Route::group(['prefix' => 'register'], function() {
@@ -50,6 +51,7 @@ Route::group(['prefix' => 'staff'], function() {
 
     Route::group(['prefix' => 'prizes'], function() {
         Route::get('', [PrizeController::class, 'index'])->name('staff.prizes');
+        Route::get('close', [PrizeController::class, 'close'])->name('staff.prizes.close');
     });
 
     Route::get('prizes/search', [PrizeController::class, 'search'])->name('staff.prizes.search');
@@ -65,6 +67,9 @@ Route::group(['prefix' => 'lucky-draw'], function() {
     Route::get('test', function () {return view('lucky-draw.test');})->name('lucky-draw.test');
     Route::get('button', [PrizeController::class, 'drawButton'])->name('lucky-draw.button');
 });
+
+Route::get('lucky-person/{id}', [LuckyDrawController::class, 'show'])->name('lucky-draw.show');
+Route::get('lucky-person', function() {})->name('lucky-draw.show.no-id');
 
 Route::get('staff/qr-code/scan', function() {
     return view('staff.qr-code.index');

@@ -12,7 +12,7 @@ class PrizeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['search']);
+        $this->middleware('auth');
     }
 
     public function indexStaff() {
@@ -30,10 +30,7 @@ class PrizeController extends Controller
     public function selectPrize(Request $request) {
         $id = $request->input('id');
         Artisan::call('mqtt:publish kunewyear2566/enable-prize ' . $id);
-//        $prize = Prize::find($id);
-//        $prize->enable = false;
-//        $prize->save();
-        return redirect()->back();
+        return redirect()->route('staff.prizes.show', ['id' => $id]);
     }
 
     public function drawButton() {
@@ -56,7 +53,7 @@ class PrizeController extends Controller
             $query = $query->searchName($keyword);
             $employees = $query->where('prize_id', $id)->whereNotNull('got_prize_at')->latest('got_prize_at')->get();
             return view('staff.prizes.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
-        } 
+        }
         $employees = $prize->employees->sortBy('name');
         return view('staff.prizes.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
     }
@@ -72,6 +69,11 @@ class PrizeController extends Controller
         }
         $employees = $query->whereNotNull('got_prize_at')->latest('got_prize_at')->get();
         return view('staff.prizes.search', ['employees' => $employees, 'keyword' => $keyword]);
+    }
+
+    public function close() {
+        Artisan::call('mqtt:publish kunewyear2566/close-prize any');
+        return redirect()->route('staff.prizes');
     }
 
 }
