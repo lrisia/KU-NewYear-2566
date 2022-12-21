@@ -2,6 +2,9 @@
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
 # Versions
+* 0.1.5
+  * stop registration before 21 Dec
+
 * 0.1.4
   * import extra employee
 

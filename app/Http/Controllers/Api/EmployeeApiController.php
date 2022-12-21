@@ -17,4 +17,12 @@ class EmployeeApiController extends Controller
         $employee->save();
         return response('', Response::HTTP_OK);
     }
+
+    public function attended(Request $request) {
+        $employee_id = $request->input('employee_id');
+        $employee = Employee::where('id', $employee_id)->first();
+        $employee->arrive_at = Carbon::now();
+        $employee->save();
+        return response('', Response::HTTP_OK);
+    }
 }

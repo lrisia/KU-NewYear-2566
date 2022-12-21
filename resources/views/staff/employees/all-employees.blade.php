@@ -45,9 +45,7 @@
                         @if($employee->arrive_at != null)
                             <p class="my-2">เข้าร่วมงานแล้ว</p>
                         @else
-                            <button class="p-2 text-white text-xs sm:text-sm text-center shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534]" @click="onToggle">
-                                กดเข้าร่วมงาน
-                            </button>
+                            <attend-popup :employee="{{ $employee->toJson() }}" organizer_name="{{ $employee->organizer->name }}" url="{{ url("/") }}"></attend-popup>
                         @endif
                     </td>
                 </tr>

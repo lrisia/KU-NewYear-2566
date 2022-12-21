@@ -21,14 +21,14 @@ Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::user()) {
         return redirect()->route('staff.dashboard');
     }
-    $date = new DateTime('2022-12-26T00:00:00');
+    $date = new DateTime('2022-12-16T00:00:00');
     $now = new DateTime();
     if ($date > $now) { return redirect()->route('register.index'); }
     else { return redirect()->route('staff.registered'); }
 })->name('/');
 
 Route::group(['prefix' => 'register'], function() {
-    Route::get('', [EmployeeController::class, 'index'])->name('register.index');
+    // Route::get('', [EmployeeController::class, 'index'])->name('register.index');
     Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
 });
 
