@@ -10,6 +10,7 @@ import BigRedButton from "./components/BigRedButton";
 import PrizePopup from "./components/PrizePopup";
 import PrizeDraw from "./components/PrizeDraw";
 import ScanQrcode from "./components/ScanQrcode";
+import AttendPopup from "./components/AttendPopup";
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueQrcodeReader from 'vue3-qrcode-reader';
 
@@ -24,6 +25,7 @@ app.component('big-red-button', BigRedButton);
 app.component('prize-popup', PrizePopup);
 app.component('prize-draw', PrizeDraw);
 app.component('scan-qr-code', ScanQrcode);
+app.component('attend-popup', AttendPopup);
 
 app.use(VueQrcodeReader);
 app.use(VueSweetalert2);
