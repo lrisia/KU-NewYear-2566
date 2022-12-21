@@ -26,7 +26,7 @@
                         <td class="px-6 py-4">{{ $prize->type }}</td>
                         <td class="px-6 py-4">{{ $prize->description }}</td>
                         <td class="px-6 py-4 text-end">{{ $prize->total_amount }}</td>
-                        <td class="px-6 py-4 text-end">{{ $prize->left_amount }}</td>
+                        <td class="px-6 py-4 text-end">{{ $prize->employees->where('took_prize', '=',  1)->count() }}</td>
                         <td class="flex flex-row items-center justify-center py-3">
                             <a href="{{ route('staff.prizes.show', ['id' => $prize->id]) }}" class="bg-[#D9D9D9] m-2 py-2 px-4 text-sm rounded-lg shadow-lg">ดูรายชื่อ</a>
                             <a href="{{ route('staff.prizes.select', ['id' => $prize->id]) }}" class="bg-[#B0C03B] m-2 text-white text-sm py-2 px-3 rounded-lg shadow-lg">เลือก</a>

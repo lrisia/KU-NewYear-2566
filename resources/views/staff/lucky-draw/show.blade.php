@@ -17,7 +17,7 @@
                     <span class="mr-2">{{ $prize->type }}</span>
                     <span class="mr-2">{{ $prize->description }}</span>
                     <span class="mr-2">จำนวน {{ $prize->total_amount }} รางวัล</span>
-                    <span class="mr-2">รับรางวัลแล้วจำนวน {{ $prize->left_amount }} คน</span>
+                    <span class="mr-2">รับรางวัลแล้วจำนวน {{ $prize->employees->where('took_prize', '=',  1)->count() }} คน</span>
                 </p>
                 <div class="my-4 overflow-auto text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
                     <table class="w-full text-left mr-0">

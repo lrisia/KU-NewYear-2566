@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PrizeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['search']);
+    }
+
     public function indexStaff() {
         $prizes = Prize::orderBy('type')->orderBy('prize_no','asc')->get();
         return view('staff.lucky-draw.index', ['prizes' => $prizes]);
