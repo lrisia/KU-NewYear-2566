@@ -27,11 +27,11 @@ Route::get('/', function () {
     $date = new DateTime('2022-12-16T00:00:00');
     $now = new DateTime();
     if ($date > $now) { return redirect()->route('register.index'); }
-    else { return redirect()->route('staff.employees.registered'); }
+    else { return redirect()->route('staff.dashboard'); }
 })->name('/');
 
 Route::group(['prefix' => 'register'], function() {
-     Route::get('', [EmployeeController::class, 'index'])->name('register.index');
+    // Route::get('', [EmployeeController::class, 'index'])->name('register.index');
     Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
 });
 
@@ -62,10 +62,7 @@ Route::group(['prefix' => 'staff'], function() {
 });
 
 Route::group(['prefix' => 'lucky-draw'], function() {
-    Route::get('', [PrizeController::class, function() {
-        view('lucky-draw.index');
-    }])->name('lucky-draw.index');
-    Route::get('draw', [PrizeController::class, 'draw'])->name('lucky-draw.draw');
+    Route::get('', [PrizeController::class, 'draw'])->name('lucky-draw.draw');
     Route::get('test', function () {return view('lucky-draw.test');})->name('lucky-draw.test');
     Route::get('button', [PrizeController::class, 'drawButton'])->name('lucky-draw.button');
 });

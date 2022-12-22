@@ -37,25 +37,29 @@ class OrganizerController extends Controller
 
     public function dashboard()
     {
+        if (!Auth::user()->isStaff()) return redirect()->back();
+
         $top_register = Employee::select(DB::raw('count(*) as employee_count, organizer_id'))
             ->whereNotNull('register_at')
             ->groupBy('organizer_id')
             ->get()
             ->sortByDesc('employee_count')
             ->skip(0)->take(10);
+
         $top_attend = Employee::select(DB::raw('count(*) as employee_count, organizer_id'))
             ->whereNotNull('arrive_at')
             ->groupBy('organizer_id')
             ->get()
             ->sortByDesc('employee_count')
             ->skip(0)->take(10);
-        $organizers = Organizer::get();
+
         $top_prize = Employee::select(DB::raw('count(*) as employee_count, organizer_id'))
             ->whereNotNull('got_prize_at')
             ->groupBy('organizer_id')
             ->get()
             ->sortByDesc('employee_count')
             ->skip(0)->take(10);
+
         $organizers = Organizer::get();
         return view('staff.dashboard', [
             'top_register' => $top_register,
