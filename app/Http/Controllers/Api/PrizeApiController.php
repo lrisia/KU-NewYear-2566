@@ -22,8 +22,10 @@ class PrizeApiController extends Controller
 
     public function draw($id) {
         $prize = Prize::find($id);
+        $prize->enable = false;
+        $prize->save();
         $amount = $prize->total_amount;
-//        $lucky_person = Employee::whereNotNull('arrive_at')->whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
+//        $lucky_person = Employee::whereNotNull('register_at')->whereNotNull('arrive_at')->whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
         $lucky_person = Employee::whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
         foreach ($lucky_person as $person) {
             $person->prize_id = $prize->id;
@@ -37,5 +39,13 @@ class PrizeApiController extends Controller
     public function getLuckyPerson($id) {
         $lucky_person = Employee::where('prize_id', $id)->get();
         return response()->json(EmployeeResource::collection($lucky_person), Response::HTTP_OK);
+    }
+
+    public function tookPrize(Request $request) {
+        $lucky_person = $request->input('employee_id');
+        $employee = Employee::where('id', $lucky_person)->first();
+        $employee->took_prize = 1;
+        $employee->save();
+        return response('', Response::HTTP_OK);
     }
 }

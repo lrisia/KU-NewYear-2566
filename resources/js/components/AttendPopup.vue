@@ -2,7 +2,7 @@
 
     <!-- Modal toggle -->
     <button class="p-2 px-3 text-white text-xs sm:text-sm text-center shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534]" @click="onToggle">
-        กดรับรางวัล
+        กดเข้าร่วมงาน
     </button>
 
     <!-- Main modal -->
@@ -16,7 +16,7 @@
                             class="modal max-w-md mx-auto xl:max-w-5xl lg:max-w-5xl md:max-w-2xl bg-white max-h-screen shadow-lg flex-row rounded relative">
                             <div class="modal-header flex p-2.5 md:p-4 rounded-t border-b border-gray-200 bg-[#F2F2F2] shadow">
                                 <h3 class="text-base md:text-lg font-semibold text-gray-900">
-                                    ยืนยันการรับรางวัล
+                                    ยืนยันการเข้าร่วมงาน
                                 </h3>
                                 <button @click="onToggle" type="button"
                                         class="text-gray-600 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
@@ -31,13 +31,10 @@
                                 </button>
                             </div>
                             <div class="modal-body p-5 w-full overflow-y-auto ">
-                                <p class="text-sm md:text-base mb-4 leading-relaxed">
-                                    รางวัลที่ <span class="text-black mr-2">{{ prize_no }}</span><span class="text-black mr-2">{{ prize_type }}</span><span class="text-black">{{ prize_description }}</span>
-                                </p>
-                                <p class="text-sm md:text-base mb-4 leading-relaxed">
+                                <p class="text-sm text-left md:text-base mb-4 leading-relaxed">
                                     ชื่อ - นามสกุล: <span class="text-black">{{ employee.name }}</span>
                                 </p>
-                                <p class="text-sm md:text-base leading-relaxed">
+                                <p class="text-sm text-left md:text-base leading-relaxed">
                                     หน่วยงาน: <span class="text-black">{{ organizer_name }}</span>
                                 </p>
                             </div>
@@ -96,18 +93,6 @@ export default {
             type: String,
             required: true,
         },
-        prize_no: {
-            type: String,
-            required: true,
-        },
-        prize_type: {
-            type: String,
-            required: true,
-        },
-        prize_description: {
-            type: String,
-            required: true,
-        },
         url: {
             type: String,
             required: true,
@@ -121,7 +106,7 @@ export default {
             this.waiting = true;
             this.error = null;
             try {
-                const response = await axios.post(this.url + '/api/prize/took-prize', this.data)
+                const response = await axios.post(this.url + '/api/employee/attend', this.data)
                 this.alert();
             } catch (e) {
                 console.log(e);
@@ -145,7 +130,7 @@ export default {
                     }, 100)
                 }
             }).then(async () => {
-                window.open(`/staff/prizes/${this.employee.prize_id}`, '_self');
+                window.open('/staff/employees', '_self');
             });
         }
     }

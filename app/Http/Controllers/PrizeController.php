@@ -10,47 +10,84 @@ use Illuminate\Support\Facades\Auth;
 
 class PrizeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function indexStaff() {
         $prizes = Prize::orderBy('type')->orderBy('prize_no','asc')->get();
         return view('staff.lucky-draw.index', ['prizes' => $prizes]);
     }
 
-    public function index()
-    {
-        return view('lucky-draw.index');
+    public function index() {
+        if (!Auth::user()->isStaff()) return redirect()->back();
+
+        $prizes = Prize::orderBy('type')->orderBy('prize_no','asc')->get();
+        return view('staff.prizes.index', ['prizes' => $prizes]);
     }
 
-    public function selectPrize($id) {
+    public function selectPrize(Request $request) {
+        $id = $request->input('id');
         Artisan::call('mqtt:publish kunewyear2566/enable-prize ' . $id);
+        return redirect()->route('staff.prizes.show', ['id' => $id]);
     }
 
     public function drawButton() {
-        return view('staff.lucky-draw.big-button');
+        return view('staff.prizes.big-button');
     }
 
     public function draw() {
         $video_number = rand(0, 1);
         $filename = "lucky-draw-chest.mp4";
         if ($video_number == 1) $filename = "lucky-draw-dropbox.mp4";
-        return view('lucky-draw.draw', ['filename' => $filename]);
+        return view('lucky-draw.index', ['filename' => $filename]);
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $prize = Prize::where('id', $id)->firstOrFail();
-        $employees = $prize->employees->sortByDesc('got_register_at');
-        return view('staff.lucky-draw.show', ['prize' => $prize, 'employees' => $employees]);
+        $keyword = $request->query('keyword') ?? null;
+        $query = Employee::query();
+        if (!is_null($keyword)) {
+            $query = $query->searchName($keyword);
+            $employees = $query->where('prize_id', $id)->whereNotNull('got_prize_at')->latest('got_prize_at')->get();
+            return view('staff.prizes.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
+        }
+        $employees = $prize->employees->sortBy('name');
+        return view('staff.prizes.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
     }
 
     public function search(Request $request)
-    {        
+    {
+        if (!Auth::user()->isStaff()) return redirect()->route('/');
+
         $keyword = $request->query('keyword') ?? null;
         $query = Employee::query();
         if (!is_null($keyword)) {
             $query = $query->searchName($keyword);
         }
         $employees = $query->whereNotNull('got_prize_at')->latest('got_prize_at')->get();
-        return view('staff.lucky-draw.search', ['employees' => $employees, 'keyword' => $keyword]);
+        return view('staff.prizes.search', ['employees' => $employees, 'keyword' => $keyword]);
+    }
+
+    public function close(Request $request) {
+        $id = $request->query('id');
+        $amount = $request->query('amount');
+
+        $prize = Prize::find($id);
+        $prize->close = true;
+        $prize->left_amount = $amount;
+        $prize->save();
+
+        $special_prize = Prize::where('type', 'รางวัลพิเศษ')->firstOrFail();
+        $special_prize->money_amount += $amount * $prize->money_amount;
+        $special_prize->total_amount = (int) ($special_prize->money_amount / 10000);
+        $special_prize->left_amount = $special_prize->total_amount;
+        $special_prize->save();
+
+        Artisan::call('mqtt:publish kunewyear2566/close-prize ' . $id);
+        return redirect()->route('staff.prizes');
     }
 
 }

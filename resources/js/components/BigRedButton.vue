@@ -1,7 +1,8 @@
 <template>
     <div class="h-screen relative">
         <div v-if="this.enable" class="">
-            <button id="red" @click="pressButton(this.prize.id)">จับรางวัลที่ {{ this.prize.id }}</button>
+            <button id="red" style="margin-bottom: 30px" @click="pressButton(this.prize.id)">จับรางวัล</button>
+            <h1 class="text-4xl  text-center">จับ{{ this.prize.type }}<br>{{ this.prize.description}}</h1>
         </div>
         <div v-else>
             <button id="gray" disabled>จับรางวัล</button>
@@ -16,7 +17,7 @@
     color: rgba(255, 255, 255, 1);
     text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.3);
     display: block;
-    margin: 2em auto;
+    margin: 10em auto;
     padding: 23px 37px 25px 35px;
     cursor: pointer;
     background-color: rgba(46, 5, 12, 1);
@@ -41,7 +42,7 @@
     color: rgb(176, 169, 169);
     text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.3);
     display: block;
-    margin: 2em auto;
+    margin: 10em auto;
     padding: 23px 37px 25px 35px;
     cursor: pointer;
     background-color: rgb(45, 45, 45);

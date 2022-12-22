@@ -1,12 +1,4 @@
 <template>
-    <div>MQTT Test Component</div>
-    <div>Connecting: {{ connecting }}</div>
-    <div>Connected: {{ client.connected }}</div>
-    <div>URL: {{ connection.protocol }}://{{ connection.host }}:{{ connection.port }}{{ connection.endpoint }}</div>
-    <div>Client ID: {{ connection.clientId }}</div>
-    <div>subscribeSuccess: {{ subscribeSuccess }}</div>
-    <div>{{ receiveNews }}</div>
-
 </template>
 
 <script>
@@ -38,7 +30,6 @@ export default {
             retryTimes: 0,
             connecting: false,
             subscribeSuccess: false,
-            receiveNews: []
         }
     },
 
@@ -72,8 +63,8 @@ export default {
                         console.log("Connection failed", error);
                     });
                     this.client.on("message", (topic, message) => {
-                        this.receiveNews.push(topic.toString() + " " + message.toString());
-                        console.log(`Received message ${message} from topic ${topic}`);
+                        if (topic.toString() === "kunewyear2566/draw-prize")
+                            setTimeout(() => location.reload(), this.timeout);
                     });
                 }
             } catch (error) {
@@ -106,5 +97,11 @@ export default {
             })
         }
     },
+    props: {
+        timeout: {
+            type: Number,
+            required: true,
+        }
+    }
 }
 </script>

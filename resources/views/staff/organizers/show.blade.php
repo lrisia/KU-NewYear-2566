@@ -13,6 +13,7 @@
                         <th scope="col" class="py-3 pl-10 pr-4">ลำดับ</th>
                         <th scope="col" class="py-3 px-6">ชื่อ-นามสกุล</th>
                         <th scope="col" class="py-3 px-6 text-center">สถานะการลงทะเบียน</th>
+                        <th scope="col" class="py-3 px-6 text-center">สถานะการเข้าร่วมงาน</th>
                     </tr>
                 </thead>
                 <tbody class="m-2">
@@ -22,9 +23,16 @@
                         <td class="px-6 py-4">{{ $employee->name }}</td>
                         <td class="px-6 py-4 text-center">
                             @if($employee->register_at != null)
-                                <p class="text-[#818c2b] my-2 ml-4">ลงทะเบียนแล้ว</p>
+                                <p class="text-green-700 my-2">ลงทะเบียนแล้ว</p>
                             @else
-                                <p class="text-red-400 my-2 ml-4">ไม่ได้ลงทะเบียน</p>
+                                <p class="text-red-500 my-2">ไม่ได้ลงทะเบียน</p>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            @if($employee->arrived_at != null)
+                                <p class="text-green-700 my-2">เข้าร่วมงานแล้ว</p>
+                            @else
+                                <p class="text-red-500 my-2">ยังไม่ได้เข้าร่วมงาน</p>
                             @endif
                         </td>
                     </tr>

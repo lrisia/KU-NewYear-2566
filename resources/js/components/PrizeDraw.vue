@@ -1,19 +1,40 @@
 <template>
     <div v-if="!this.drawing" style="width: 100%" class="relative">
-        <img class="absolute top-0 left-0" id="cover" :src="this.url + '/image/2565.png'" alt="KU NewYear Poster">
+        <img class="absolute top-0 left-0" id="cover" src="/image/2565.png" alt="KU NewYear Poster">
         <video class="absolute top-0 left-0" id="video-draw" muted hidden>
-            <source :src="this.url + '/video/lucky-draw-chest.mp4'" type="video/mp4" >
+            <source :src="'/video/' + this.video_name" type="video/mp4" >
         </video>
     </div>
-    <div v-else>
-        <div v-for="person in lucky_person">
-            <p>{{ person.name }}</p>
+    <div v-else class="flex flex-row">
+        <div class="mx-auto">
+            <h1 v-if="prize_data" class="mt-10 sm:text-xl md:text-2xl">รายชื่อผู้ได้รับ{{ prize_data.type }} {{ prize_data.description }} จำนวน {{ prize_data.total_amount }} รางวัล</h1>
+            <div class="my-6 overflow-x-auto max-h-screen text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
+                <table class="w-full border text-left text-gray-60 mr-0">
+                    <thead class="bg-[#e7e6e6]">
+                    <tr>
+                        <th scope="col" class="py-3 px-6">ชื่อ-นามสกุล</th>
+                        <th scope="col" class="py-3 px-6">หน่วยงาน</th>
+                    </tr>
+                    </thead>
+                    <tbody class="m-2">
+                        <tr v-for="person in lucky_person" class="border-t text-gray-700 text-sm mobile:text-xs sm:text-base">
+                            <td class="px-6 py-2">{{ person.name }}</td>
+                            <td class="px-6 py-2">{{ person.organizer }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="mx-auto">
+            <qrcode-vue :value="this.qrcode_url" class="mt-8 mx-auto" size="300"/>
+            <mini-count-down></mini-count-down>
         </div>
     </div>
 </template>
 
 <script>
 import mqtt from "mqtt";
+import QrcodeVue from 'qrcode.vue'
 import axios from 'axios';
 
 export default {
@@ -44,13 +65,24 @@ export default {
             subscribeSuccess: false,
             drawing: false,
             lucky_person: null,
+            qrcode_url: "",
+            prize_data: null,
         }
     },
+    components: { QrcodeVue, },
     props: {
         url: {
             type: String,
             required: true,
         },
+        url_for_qrcode: {
+            type: String,
+            required: true,
+        },
+        video_name: {
+            type: String,
+            required: true,
+        }
     },
     mounted() {
         this.createConnection()
@@ -82,7 +114,10 @@ export default {
                     });
                     this.client.on("message", (topic, message) => {
                         if (topic.toString() === "kunewyear2566/draw-prize") {
+                            this.qrcode_url = this.url_for_qrcode + '/' + message.toString();
                             this.transitionHandle(message);
+                        } else if (topic.toString() === "kunewyear2566/close-prize") {
+                            location.reload();
                         }
                         // console.log(`Received message ${message} from topic ${topic}`);
                     });
@@ -126,7 +161,9 @@ export default {
         async getLuckyPerson(prize_id) {
             try {
                 const response = await axios.get(this.url + `/api/prize/${prize_id}/employee`);
+                const prize = await axios.get(this.url + `/api/prize/${prize_id}/get`);
                 this.lucky_person = response.data;
+                this.prize_data = prize.data;
                 this.drawing = true;
             } catch (e) {
                 console.log(e);

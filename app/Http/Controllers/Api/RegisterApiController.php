@@ -59,7 +59,15 @@ class RegisterApiController extends Controller
         ], Response::HTTP_CREATED);
     }
 
-    public function getEmployee($id) {
+    public function getEmployee(Request $request) {
+        $id = $request->query('id') ?? null;
+        $qr_code = $request->query('qr_code') ?? null;
+        if ($id) return $this->getEmployeeById($id);
+        elseif ($qr_code) return $this->getEmployeeByQrcode($qr_code);
+        return response('', Response::HTTP_BAD_REQUEST);
+    }
+
+    private function getEmployeeById($id) {
         $employee = Employee::find($id);
         if ($employee == null) {
             return response()->json([
@@ -71,6 +79,19 @@ class RegisterApiController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => "employee not register yet"
+            ], Response::HTTP_BAD_REQUEST);
+        }
+        return response()->json([
+            "employee" => new EmployeeResource($employee)
+        ], Response::HTTP_OK);
+    }
+
+    private function getEmployeeByQrcode($qr_code) {
+        $employee = Employee::where('qr_code', $qr_code)->first();
+        if ($employee == null) {
+            return response()->json([
+                'success' => false,
+                'message' => ["qr_code" => "qr_code not found"]
             ], Response::HTTP_BAD_REQUEST);
         }
         return response()->json([

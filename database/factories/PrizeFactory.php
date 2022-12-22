@@ -16,10 +16,10 @@ class PrizeFactory extends Factory
      */
     public function definition()
     {
-        $type = array('money', 'object');
+        $type = array('เงิน', 'สิ่งของ', 'รางวัลพิเศษ');
         $type = $type[array_rand($type)];
-        $max = 100;
-        if ($type === 'object') $max = 5;
+        $max = 20;
+        if ($type === 'สิ่งของ') $max = 5;
         $total_amount = fake()->numberBetween(1, $max);
         return [
             'type' => $type,
