@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class LuckyDrawController extends Controller
 {
+    public function index() {
+
+    }
+
     public function show(Request $request, $id)
     {
         $prize = Prize::where('id', $id)->firstOrFail();
