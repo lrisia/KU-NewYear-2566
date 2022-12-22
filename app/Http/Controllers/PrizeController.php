@@ -71,8 +71,14 @@ class PrizeController extends Controller
         return view('staff.prizes.search', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
-    public function close() {
-        Artisan::call('mqtt:publish kunewyear2566/close-prize any');
+    public function close(Request $request) {
+        $id = $request->query('id');
+        $amount = $request->query('amount');
+        $prize = Prize::find($id);
+        $prize->close = true;
+        $prize->left_amount = $amount;
+        $prize->save();
+        Artisan::call('mqtt:publish kunewyear2566/close-prize ' . $id);
         return redirect()->route('staff.prizes');
     }
 

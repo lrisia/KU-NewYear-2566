@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::table('prizes', function (Blueprint $table) {
             $table->boolean('enable')->default(true);
             $table->integer('money_amount')->nullable();
+            $table->boolean('close')->default(false);
         });
     }
 
@@ -28,6 +29,8 @@ return new class extends Migration
     {
         Schema::table('prizes', function (Blueprint $table) {
             $table->dropColumn('enable');
+            $table->dropColumn('money_amount');
+            $table->dropColumn('close');
         });
     }
 };

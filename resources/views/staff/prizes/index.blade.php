@@ -12,9 +12,7 @@
                     <tr>
                         <th scope="col" class="py-3 px-6">ชื่อรางวัล</th>
                         <th scope="col" class="py-3 px-6">ประเภท</th>
-                        <th scope="col" class="py-3 px-6"></th>
                         <th scope="col" class="py-3 px-6 text-end">จำนวนรางวัล</th>
-                        <th scope="col" class="py-3 px-6 text-end">จำนวนผู้มารับรางวัล</th>
                         <th scope="col" class="py-3 px-6"></th>
                     </tr>
                     </thead>
@@ -23,10 +21,8 @@
                     @foreach($prizes as $prize)
                         <tr class="border-t text-gray-700 text-sm mobile:text-xs sm:text-base cursor-pointer hover:bg-gray-50">
                             <td class="px-6 py-4">รางวัลที่ {{ $prize->prize_no }}</td>
-                            <td class="px-6 py-4">{{ $prize->type }}</td>
                             <td class="px-6 py-4">{{ $prize->description }}</td>
                             <td class="px-6 py-4 text-end">{{ $prize->total_amount }}</td>
-                            <td class="px-6 py-4 text-end">{{ $prize->left_amount }}</td>
                             <td class="flex flex-row items-center justify-center py-3">
                                 @if($prize->enable)
                                     <p class="bg-[#B0C03B] m-2 text-white text-sm py-2 px-3 rounded-lg shadow-lg hover:bg-[#98a534]"
@@ -90,7 +86,7 @@
                                     <form class="m-0" action="{{ route('staff.prizes.select') }}" method="POST">
                                         @csrf
                                         <input type="text" id="id" class="hidden" name="id">
-                                        <input class="text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2 flex" type="submit" value="ตกลง" />
+                                        <input class="text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2 flex cursor-pointer" type="submit" value="ตกลง" />
                                     </form>
                                 </div>
                             </div>
@@ -110,7 +106,6 @@
         } else {
             modal.style.display = 'block';
             document.getElementById('name').textContent = "รางวัลที่ " + prize.prize_no;
-            document.getElementById('type').textContent = prize.type;
             document.getElementById('description').textContent = prize.description;
             document.getElementById('amount').textContent = prize.total_amount;
             document.getElementById('id').value = prize.id;
