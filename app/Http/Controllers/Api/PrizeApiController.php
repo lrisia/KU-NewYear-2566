@@ -25,8 +25,8 @@ class PrizeApiController extends Controller
         $prize->enable = false;
         $prize->save();
         $amount = $prize->total_amount;
-//        $lucky_person = Employee::whereNotNull('register_at')->whereNotNull('arrive_at')->whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
-        $lucky_person = Employee::whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
+        $lucky_person = Employee::whereNotNull('register_at')->whereNotNull('arrive_at')->whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
+        // $lucky_person = Employee::whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
         foreach ($lucky_person as $person) {
             $person->prize_id = $prize->id;
             $person->got_prize_at = Carbon::now();
