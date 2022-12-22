@@ -18,7 +18,7 @@
                     รายชื่อผู้ได้รับรางวัล
                 </h1>
                 <p class="mobile:text-sm sm:text-base lg:text-lg mt-4">
-                    <span class="mr-2">รางวัลที่ {{ $prize->prize_no }}</span>
+                    <span class="mr-2">{{ $prize->type }}</span>
                     <span class="mr-2">{{ $prize->description }}</span>
                     <span class="mr-2">จำนวน {{ $prize->total_amount }} รางวัล</span>
                 </p>
@@ -29,7 +29,6 @@
                             <th scope="col" class="py-3 pl-10 pr-4">ลำดับ</th>
                             <th scope="col" class="py-3 px-6">ชื่อ-นามสกุล</th>
                             <th scope="col" class="py-3 px-6">หน่วยงาน</th>
-                            <th scope="col" class="print:py-3 ptint:px-10"></th>
                         </tr>
                         </thead>
                         <tbody class="m-2">
@@ -38,7 +37,6 @@
                                 <td class="px-10 py-4">{{ $loop->iteration }}</td>
                                 <td class="px-6 py-4">{{ $employee->name }}</td>
                                 <td class="px-6 py-4">{{ $employee->organizer->name }}</td>
-                                <td class="print:px-14 print:py-4"></td>
                             </tr>
                         @endforeach
                         </tbody>

@@ -130,7 +130,7 @@ export default {
                     }, 100)
                 }
             }).then(async () => {
-                window.open('/staff/all-employees', '_self');
+                window.open('/staff/employees', '_self');
             });
         }
     }

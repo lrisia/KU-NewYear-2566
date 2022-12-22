@@ -19,8 +19,8 @@ class PrizeSeeder extends Seeder
         $money = [10000, 7000, 5000, 3000, 2000, 1000, 500];
         for ($i = 0; $i < count($amount); $i++) {
             $prize = new Prize();
-            $prize->type = "เงิน";
-            $prize->description = "เงินรางวัลมูลค่า " . $money[$i] . " บาท";
+            $prize->type = "รางวัลที่ " . $i + 1;
+            $prize->description = "เงินรางวัลมูลค่า " . number_format($money[$i]) . " บาท";
             $prize->prize_no = $i + 1;
             $prize->total_amount = $amount[$i];
             $prize->left_amount = $amount[$i];

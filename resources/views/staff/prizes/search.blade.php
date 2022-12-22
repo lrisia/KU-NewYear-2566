@@ -18,35 +18,18 @@
                 <thead class="bg-[#e7e6e6]">
                     <tr>
                         <th scope="col" class="py-3 px-6">ชื่อรางวัล</th>
-                        <th scope="col" class="py-3 px-6">ประเภท</th>
                         <th scope="col" class="py-3 px-6"></th>
                         <th scope="col" class="py-3 px-6">ชื่อผู้ได้รับรางวัล</th>
                         <th scope="col">หน่วยงาน</th>
-                        <th scope="col"></th>
                     </tr>
                 </thead>
                     <tbody class="m-2">
                         @foreach($employees as $employee)
                         <tr class="border-t text-gray-700 text-sm mobile:text-xs sm:text-base">
-                            <td class="px-6 py-4">รางวัลที่ {{ $employee->prize->prize_no }}</td>
                             <td class="px-6 py-4">{{ $employee->prize->type }}</td>
-                            <td class="pr-6 pl-2 py-4">{{ $employee->prize->description }}</td>
+                            <td class="pr-6 pl-2 py-4">{{ $employee->prize->description }} จำนวน {{ $employee->prize->total_amount }} รางวัล</td>
                             <td class="px-6 py-4">{{ $employee->name }}</td>
                             <td class="py-4">{{ $employee->organizer->name }}</td>
-                            <td class="px-6 py-4">
-                                @if($employee->took_prize != null)
-                                    @if(Auth::user())
-                                        <div class="flex justify-start">
-                                            <p class="p-2 text-xs sm:text-sm border border-[#DADADA] text-center text-gray-500 shadow rounded-lg bg-gray-100">รับรางวัลแล้ว</p>    
-                                        </div>
-                                    @endif
-                                @else
-                                    @if(Auth::user())
-                                        <prize-popup :employee="{{ $employee->toJson() }}" organizer_name="{{ $employee->organizer->name }}" prize_no="{{ $employee->prize->prize_no }}" prize_type="{{ $employee->prize->type }}" prize_description="{{ $employee->prize->description }}" url="{{ url("/") }}">
-                                        </prize-popup>
-                                    @endif
-                                @endif
-                            </td>
                         </tr>
                         @endforeach
                     </tbody>
