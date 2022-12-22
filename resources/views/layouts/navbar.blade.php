@@ -87,7 +87,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="{{ route('qr-code.show') }}" class="block p-2.5 rounded-b-lg hover:bg-[#e7e6e6]">สแกน QR Code</a>
+                                <a href="{{ route('qr-code.scan') }}" class="block p-2.5 rounded-b-lg hover:bg-[#e7e6e6]">สแกน QR Code</a>
                             </li>
                             <li>
                                 <a href="{{ route('staff.organizers') }}" class="block p-2.5 hover:bg-[#e7e6e6]">หน่วยงานทั้งหมด</a>
@@ -127,7 +127,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="{{ route('qr-code.show') }}" class="block p-2.5 rounded-b-lg hover:bg-[#e7e6e6]">สแกน QR Code</a>
+                                <a href="{{ route('qr-code.scan') }}" class="block p-2.5 rounded-b-lg hover:bg-[#e7e6e6]">สแกน QR Code</a>
                             </li>
                         </ul>
                     </div>

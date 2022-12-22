@@ -75,4 +75,8 @@ class EmployeeController extends Controller
         $employees = $query->whereNotNull('arrive_at')->latest('arrive_at')->paginate(200);
         return view('staff.employees.attended', ['employees' => $employees, 'keyword' => $keyword]);
     }
+
+    public function scan(){
+        return view('staff.qr-code.index');
+    }
 }
