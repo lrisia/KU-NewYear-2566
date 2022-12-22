@@ -29,14 +29,14 @@ Route::get('/', function () {
 })->name('/');
 
 Route::group(['prefix' => 'register'], function() {
-    // Route::get('', [EmployeeController::class, 'index'])->name('register.index');
+     Route::get('', [EmployeeController::class, 'index'])->name('register.index');
     Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
 });
 
 Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');
 
 Route::group(['prefix' => 'staff'], function() {
-    Route::get('', [EmployeeController::class, 'dashboard'])->name('staff.dashboard');
+    Route::get('', [OrganizerController::class, 'dashboard'])->name('staff.dashboard');
 
     Route::group(['prefix' => 'employees'], function() {
         Route::get('', [EmployeeController::class, 'all'])->name('staff.employees');

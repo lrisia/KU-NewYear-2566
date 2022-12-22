@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\Organizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrganizerController extends Controller
 {
@@ -30,6 +32,22 @@ class OrganizerController extends Controller
         return view('staff.organizers.show', [
             'organizer' => $organizer,
             'employees' => $employees
+        ]);
+    }
+
+    public function dashboard()
+    {
+        $top_register = Employee::select(DB::raw('count(*) as employee_count, organizer_id'))
+            ->whereNotNull('register_at')
+            ->groupBy('organizer_id')
+            ->get()
+            ->sortByDesc('employee_count')
+            ->skip(0)->take(10);
+        $organizers = Organizer::get();
+//        dd($top_register);
+        return view('staff.dashboard', [
+            'top_register' => $top_register,
+            'organizers' => $organizers
         ]);
     }
 }
