@@ -27,7 +27,7 @@ Route::get('/', function () {
     $date = new DateTime('2022-12-16T00:00:00');
     $now = new DateTime();
     if ($date > $now) { return redirect()->route('register.index'); }
-    else { return redirect()->route('/'); }
+    else { return redirect()->route('staff.employees.registered'); }
 })->name('/');
 
 Route::group(['prefix' => 'register'], function() {

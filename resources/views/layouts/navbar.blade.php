@@ -42,17 +42,17 @@
                                      class="hidden z-10 w-40 bg-white rounded-lg divide-y divide-gray-100 shadow">
                                     <ul class="text-sm" aria-labelledby="doubleDropdownButton">
                                         <li>
-                                            <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]" href="/staff/prizes">รางวัลทั้งหมด</a>
+                                            <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]" href="{{ route('staff.prizes') }}">รางวัลทั้งหมด</a>
                                         </li>
                                         <li>
-                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/staff/prizes/search">ค้นหาชื่อผู้ได้รับรางวัล</a>
+                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('staff.prizes.search') }}">ค้นหาชื่อผู้ได้รับรางวัล</a>
                                         </li>
                                         <li>
-                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/lucky-draw/button">ปุ่มจับรางวัล</a>
+                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('lucky-draw.button') }}">ปุ่มจับรางวัล</a>
                                         </li>
                                         <li>
                                             <a class="block rounded-b-lg p-2.5 hover:bg-[#e7e6e6]"
-                                               href="/lucky-draw/draw">ชื่อผู้ได้รับรางวัล</a>
+                                               href="{{ route('lucky-draw.draw') }}">ชื่อผู้ได้รับรางวัล</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -74,23 +74,23 @@
                                     <ul class="text-sm" aria-labelledby="doubleDropdownButton2">
                                         <li>
                                             <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]"
-                                               href="/staff/employees">รายชื่อบุคลากรทั้งหมด</a>
+                                               href="{{ route('staff.employees') }}">รายชื่อบุคลากรทั้งหมด</a>
                                         </li>
                                         <li>
                                             <a class="block p-2.5 hover:bg-[#e7e6e6]"
-                                               href="/staff/employees/registered">รายชื่อผู้ที่ลงทะเบียนแล้ว</a>
+                                               href="{{ route('staff.employees.registered') }}">รายชื่อผู้ที่ลงทะเบียนแล้ว</a>
                                         </li>
                                         <li>
-                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/staff/employees/attended">รายชื่อผู้เข้าร่วมงาน</a>
+                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('staff.employees.attended') }}">รายชื่อผู้เข้าร่วมงาน</a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li>
-                                <a href="/staff/qr-code/scan" class="block p-2.5 hover:bg-[#e7e6e6]">สแกน QR Code</a>
+                                <a href="{{ route('qr-code.show') }}" class="block p-2.5 rounded-b-lg hover:bg-[#e7e6e6]">สแกน QR Code</a>
                             </li>
                             <li>
-                                <a href="/staff/organizers" class="block p-2.5 hover:bg-[#e7e6e6] rounded-b-lg">หน่วยงานทั้งหมด</a>
+                                <a href="{{ route('staff.organizers') }}" class="block p-2.5 hover:bg-[#e7e6e6]">หน่วยงานทั้งหมด</a>
                             </li>
                         </ul>
                     </div>
@@ -114,20 +114,20 @@
                                     <ul class="text-sm" aria-labelledby="doubleDropdownButton2">
                                         <li>
                                             <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]"
-                                               href="/staff/employees">รายชื่อบุคลากรทั้งหมด</a>
+                                               href="{{ route('staff.employees') }}">รายชื่อบุคลากรทั้งหมด</a>
                                         </li>
                                         <li>
                                             <a class="block p-2.5 hover:bg-[#e7e6e6]"
-                                               href="/staff/employees/registered">รายชื่อผู้ที่ลงทะเบียนแล้ว</a>
+                                               href="{{ route('staff.employees.registered') }}">รายชื่อผู้ที่ลงทะเบียนแล้ว</a>
                                         </li>
                                         <li>
-                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/staff/employees/attended">รายชื่อผู้เข้าร่วมงาน</a>
+                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('staff.employees.attended') }}">รายชื่อผู้เข้าร่วมงาน</a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li>
-                                <a href="/staff/qr-code/scan" class="block p-2.5 rounded-b-lg hover:bg-[#e7e6e6]">สแกน QR Code</a>
+                                <a href="{{ route('qr-code.show') }}" class="block p-2.5 rounded-b-lg hover:bg-[#e7e6e6]">สแกน QR Code</a>
                             </li>
                         </ul>
                     </div>
