@@ -68,9 +68,6 @@
                                     ชื่อรางวัล: <span class="text-black" id="name"></span>
                                 </p>
                                 <p class="text-sm md:text-base mb-4 leading-relaxed text-gray-500 dark:text-gray-400">
-                                    ประเภท: <span class="text-black" id="type"></span>
-                                </p>
-                                <p class="text-sm md:text-base mb-4 leading-relaxed text-gray-500 dark:text-gray-400">
                                     รายละเอียด: <span class="text-black" id="description"></span>
                                 </p>
                                 <p class="text-sm md:text-base mb-4 leading-relaxed text-gray-500 dark:text-gray-400">
@@ -105,7 +102,7 @@
             modal.style.display = 'none';
         } else {
             modal.style.display = 'block';
-            document.getElementById('name').textContent = "รางวัลที่ " + prize.prize_no;
+            document.getElementById('name').textContent = prize.type;
             document.getElementById('description').textContent = prize.description;
             document.getElementById('amount').textContent = prize.total_amount;
             document.getElementById('id').value = prize.id;

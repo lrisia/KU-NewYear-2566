@@ -43,8 +43,6 @@ class EmployeeController extends Controller
     # ---------------- Staff zone ----------------
     public function all(Request $request)
     {
-        if (!Auth::user()->isStaff()) return redirect()->route('/');
-
         $keyword = $request->query('keyword') ?? null;
         $query = Employee::query();
         if (!is_null($keyword)) {
@@ -58,8 +56,6 @@ class EmployeeController extends Controller
 
     public function registered(Request $request)
     {
-        if (!Auth::user()->isStaff()) return redirect()->back();
-
         $keyword = $request->query('keyword') ?? null;
         $query = Employee::query();
         if (!is_null($keyword)) {
@@ -71,8 +67,6 @@ class EmployeeController extends Controller
 
     public function attended(Request $request)
     {
-        if (!Auth::user()->isStaff()) return redirect()->back();
-
         $keyword = $request->query('keyword') ?? '';
         $query = Employee::query();
         if (!is_null($keyword)) {

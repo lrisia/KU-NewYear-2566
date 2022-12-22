@@ -18425,6 +18425,10 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
     url_for_qrcode: {
       type: String,
       required: true
+    },
+    video_name: {
+      type: String,
+      required: true
     }
   },
   mounted: function mounted() {
@@ -19158,21 +19162,28 @@ var _hoisted_2 = {
   "class": ""
 };
 var _hoisted_3 = {
+  "class": "text-4xl text-center"
+};
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1 /* HOISTED */);
+var _hoisted_5 = {
   key: 1
 };
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   id: "gray",
   disabled: ""
 }, "จับรางวัล", -1 /* HOISTED */);
-var _hoisted_5 = [_hoisted_4];
+var _hoisted_7 = [_hoisted_6];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [this.enable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     id: "red",
+    style: {
+      "margin-bottom": "30px"
+    },
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.pressButton(_this.prize.id);
     })
-  }, "จับรางวัลที่ " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.prize.id), 1 /* TEXT */)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, _hoisted_5))]);
+  }, "จับรางวัล"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("จับ" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.prize.type), 1 /* TEXT */), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.prize.description), 1 /* TEXT */)])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, _hoisted_7))]);
 }
 
 /***/ }),
@@ -19446,16 +19457,13 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   src: "/image/2565.png",
   alt: "KU NewYear Poster"
 }, null, -1 /* HOISTED */);
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("video", {
+var _hoisted_3 = {
   "class": "absolute top-0 left-0",
   id: "video-draw",
   muted: "",
   hidden: ""
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("source", {
-  src: "/video/lucky-draw-chest.mp4",
-  type: "video/mp4"
-})], -1 /* HOISTED */);
-var _hoisted_4 = [_hoisted_2, _hoisted_3];
+};
+var _hoisted_4 = ["src"];
 var _hoisted_5 = {
   key: 1,
   "class": "flex flex-row"
@@ -19500,7 +19508,10 @@ var _hoisted_15 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_qrcode_vue = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("qrcode-vue");
   var _component_mini_count_down = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("mini-count-down");
-  return !this.drawing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_4)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$data.prize_data ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_7, "รายชื่อผู้ได้รับ" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.prize_data.type) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.prize_data.description) + " จำนวน " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.prize_data.total_amount) + " รางวัล", 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.lucky_person, function (person) {
+  return !this.drawing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("video", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("source", {
+    src: '/video/' + this.video_name,
+    type: "video/mp4"
+  }, null, 8 /* PROPS */, _hoisted_4)])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$data.prize_data ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_7, "รายชื่อผู้ได้รับ" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.prize_data.type) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.prize_data.description) + " จำนวน " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.prize_data.total_amount) + " รางวัล", 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.lucky_person, function (person) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(person.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(person.organizer), 1 /* TEXT */)]);
   }), 256 /* UNKEYED_FRAGMENT */))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_qrcode_vue, {
     value: this.qrcode_url,
@@ -22574,7 +22585,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#red {\n    outline: none;\n    font-size: 2em;\n    color: rgba(255, 255, 255, 1);\n    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.3);\n    display: block;\n    margin: 2em auto;\n    padding: 23px 37px 25px 35px;\n    cursor: pointer;\n    background-color: rgba(46, 5, 12, 1);\n    background-image: linear-gradient(273deg, rgba(235, 71, 99, 1) 30%, rgba(230, 26, 60, 1) 40%);\n    border: none;\n    border-radius: 16px;\n    box-shadow: inset 0px 0px 1px 1px rgba(138, 15, 36, 0.9), inset 0px 0px 2px 3px rgba(230, 26, 60, 0.9), inset 1px 1px 1px 4px rgba(255, 255, 255, 0.8), inset 0px 0px 2px 7px rgba(235, 71, 99, 0.8), inset 0px 0px 4px 10px rgba(230, 26, 60, 0.9), 8px 10px 2px 6px rgba(92, 10, 24, 0.55), 0px 0px 3px 2px rgba(184, 20, 48, 0.9), 0px 0px 2px 6px rgba(230, 26, 60, 0.9), -1px -1px 1px 6px rgba(255, 255, 255, 0.9), 0px 0px 2px 11px rgba(230, 26, 60, 0.9), 0px 0px 1px 12px rgba(184, 20, 48, 0.9), 1px 3px 14px 14px rgba(0, 0, 0, 0.4);\n}\n#red:active {\n    color: rgba(217, 217, 217, 1);\n    padding: 26px 34px 22px 38px;\n    background-image: linear-gradient(273deg, rgba(230, 26, 60, 1) 50%, rgba(232, 48, 79, 1) 60%);\n    box-shadow: inset 3px 4px 3px 2px rgba(92, 10, 24, 0.55), inset 0px 0px 1px 1px rgba(138, 15, 36, 0.9), inset -1px -1px 2px 3px rgba(230, 26, 60, 0.9), inset -2px -2px 1px 3px rgba(255, 255, 255, 0.8), inset 0px 0px 2px 7px rgba(235, 71, 99, 0.8), inset 0px 0px 3px 10px rgba(230, 26, 60, 0.9), 0px 0px 3px 2px rgba(184, 20, 48, 0.9), 0px 0px 2px 6px rgba(230, 26, 60, 0.9), -1px -1px 1px 6px rgba(255, 255, 255, 0.9), 0px 0px 2px 11px rgba(230, 26, 60, 0.9), 0px 0px 1px 12px rgba(184, 20, 48, 0.9), 1px 3px 14px 14px rgba(0, 0, 0, 0.4);\n    /*0px 0px 2px 3px hsla(350,80%,60%,0.9),*/\n    /*0px 0px 2px 8px hsla(350,80%,60%,0.9),*/\n}\n#gray {\n    outline: none;\n    font-size: 2em;\n    color: rgb(176, 169, 169);\n    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.3);\n    display: block;\n    margin: 2em auto;\n    padding: 23px 37px 25px 35px;\n    cursor: pointer;\n    background-color: rgb(45, 45, 45);\n    background-image: linear-gradient(273deg, rgb(66, 66, 66) 30%, rgb(72, 72, 72) 40%);\n    border: none;\n    border-radius: 16px;\n    box-shadow: inset 0px 0px 1px 1px rgb(136, 135, 135), inset 0px 0px 2px 3px rgba(28, 22, 23, 0.9), inset 1px 1px 1px 4px rgba(255, 255, 255, 0.8), inset 0px 0px 2px 7px rgba(150, 150, 150, 0.8), inset 0px 0px 4px 10px rgba(216, 216, 216, 0.9), 8px 10px 2px 6px rgba(92, 92, 92, 0.55), 0px 0px 3px 2px rgba(184, 184, 184, 0.9), 0px 0px 2px 6px rgba(230, 230, 230, 0.9), -1px -1px 1px 6px rgba(215, 215, 215, 0.9), 0px 0px 2px 11px rgba(230, 230, 230, 0.9), 0px 0px 1px 12px rgba(184, 184, 184, 0.9), 1px 3px 14px 14px rgba(0, 0, 0, 0.4);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#red {\n    outline: none;\n    font-size: 2em;\n    color: rgba(255, 255, 255, 1);\n    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.3);\n    display: block;\n    margin: 10em auto;\n    padding: 23px 37px 25px 35px;\n    cursor: pointer;\n    background-color: rgba(46, 5, 12, 1);\n    background-image: linear-gradient(273deg, rgba(235, 71, 99, 1) 30%, rgba(230, 26, 60, 1) 40%);\n    border: none;\n    border-radius: 16px;\n    box-shadow: inset 0px 0px 1px 1px rgba(138, 15, 36, 0.9), inset 0px 0px 2px 3px rgba(230, 26, 60, 0.9), inset 1px 1px 1px 4px rgba(255, 255, 255, 0.8), inset 0px 0px 2px 7px rgba(235, 71, 99, 0.8), inset 0px 0px 4px 10px rgba(230, 26, 60, 0.9), 8px 10px 2px 6px rgba(92, 10, 24, 0.55), 0px 0px 3px 2px rgba(184, 20, 48, 0.9), 0px 0px 2px 6px rgba(230, 26, 60, 0.9), -1px -1px 1px 6px rgba(255, 255, 255, 0.9), 0px 0px 2px 11px rgba(230, 26, 60, 0.9), 0px 0px 1px 12px rgba(184, 20, 48, 0.9), 1px 3px 14px 14px rgba(0, 0, 0, 0.4);\n}\n#red:active {\n    color: rgba(217, 217, 217, 1);\n    padding: 26px 34px 22px 38px;\n    background-image: linear-gradient(273deg, rgba(230, 26, 60, 1) 50%, rgba(232, 48, 79, 1) 60%);\n    box-shadow: inset 3px 4px 3px 2px rgba(92, 10, 24, 0.55), inset 0px 0px 1px 1px rgba(138, 15, 36, 0.9), inset -1px -1px 2px 3px rgba(230, 26, 60, 0.9), inset -2px -2px 1px 3px rgba(255, 255, 255, 0.8), inset 0px 0px 2px 7px rgba(235, 71, 99, 0.8), inset 0px 0px 3px 10px rgba(230, 26, 60, 0.9), 0px 0px 3px 2px rgba(184, 20, 48, 0.9), 0px 0px 2px 6px rgba(230, 26, 60, 0.9), -1px -1px 1px 6px rgba(255, 255, 255, 0.9), 0px 0px 2px 11px rgba(230, 26, 60, 0.9), 0px 0px 1px 12px rgba(184, 20, 48, 0.9), 1px 3px 14px 14px rgba(0, 0, 0, 0.4);\n    /*0px 0px 2px 3px hsla(350,80%,60%,0.9),*/\n    /*0px 0px 2px 8px hsla(350,80%,60%,0.9),*/\n}\n#gray {\n    outline: none;\n    font-size: 2em;\n    color: rgb(176, 169, 169);\n    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.3);\n    display: block;\n    margin: 10em auto;\n    padding: 23px 37px 25px 35px;\n    cursor: pointer;\n    background-color: rgb(45, 45, 45);\n    background-image: linear-gradient(273deg, rgb(66, 66, 66) 30%, rgb(72, 72, 72) 40%);\n    border: none;\n    border-radius: 16px;\n    box-shadow: inset 0px 0px 1px 1px rgb(136, 135, 135), inset 0px 0px 2px 3px rgba(28, 22, 23, 0.9), inset 1px 1px 1px 4px rgba(255, 255, 255, 0.8), inset 0px 0px 2px 7px rgba(150, 150, 150, 0.8), inset 0px 0px 4px 10px rgba(216, 216, 216, 0.9), 8px 10px 2px 6px rgba(92, 92, 92, 0.55), 0px 0px 3px 2px rgba(184, 184, 184, 0.9), 0px 0px 2px 6px rgba(230, 230, 230, 0.9), -1px -1px 1px 6px rgba(215, 215, 215, 0.9), 0px 0px 2px 11px rgba(230, 230, 230, 0.9), 0px 0px 1px 12px rgba(184, 184, 184, 0.9), 1px 3px 14px 14px rgba(0, 0, 0, 0.4);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

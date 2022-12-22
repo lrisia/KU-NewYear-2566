@@ -74,10 +74,18 @@ class PrizeController extends Controller
     public function close(Request $request) {
         $id = $request->query('id');
         $amount = $request->query('amount');
+
         $prize = Prize::find($id);
         $prize->close = true;
         $prize->left_amount = $amount;
         $prize->save();
+
+        $special_prize = Prize::where('type', 'รางวัลพิเศษ')->firstOrFail();
+        $special_prize->money_amount += $amount * $prize->money_amount;
+        $special_prize->total_amount = (int) ($special_prize->money_amount / 10000);
+        $special_prize->left_amount = $special_prize->total_amount;
+        $special_prize->save();
+
         Artisan::call('mqtt:publish kunewyear2566/close-prize ' . $id);
         return redirect()->route('staff.prizes');
     }

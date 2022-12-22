@@ -2,7 +2,7 @@
     <div v-if="!this.drawing" style="width: 100%" class="relative">
         <img class="absolute top-0 left-0" id="cover" src="/image/2565.png" alt="KU NewYear Poster">
         <video class="absolute top-0 left-0" id="video-draw" muted hidden>
-            <source src="/video/lucky-draw-chest.mp4" type="video/mp4" >
+            <source :src="'/video/' + this.video_name" type="video/mp4" >
         </video>
     </div>
     <div v-else class="flex flex-row">
@@ -66,7 +66,7 @@ export default {
             drawing: false,
             lucky_person: null,
             qrcode_url: "",
-            prize_data: null
+            prize_data: null,
         }
     },
     components: { QrcodeVue, },
@@ -79,6 +79,10 @@ export default {
             type: String,
             required: true,
         },
+        video_name: {
+            type: String,
+            required: true,
+        }
     },
     mounted() {
         this.createConnection()

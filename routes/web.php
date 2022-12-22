@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\LuckyDrawController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +20,14 @@ use App\Http\Controllers\LuckyDrawController;
 */
 
 Route::get('/', function () {
-    if (\Illuminate\Support\Facades\Auth::user()) {
-        return redirect()->route('staff.dashboard');
+    if (Auth::user()) {
+        if (Auth::user()->isStaff()) return redirect()->route('staff.dashboard');
+        else if (Auth::user()->isRegister()) return redirect()->route('staff.employees');
     }
     $date = new DateTime('2022-12-16T00:00:00');
     $now = new DateTime();
     if ($date > $now) { return redirect()->route('register.index'); }
-    else { return redirect()->route('staff.employees.registered'); }
+    else { return redirect()->route('/'); }
 })->name('/');
 
 Route::group(['prefix' => 'register'], function() {
