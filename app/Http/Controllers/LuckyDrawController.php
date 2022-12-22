@@ -16,7 +16,7 @@ class LuckyDrawController extends Controller
         if (!is_null($keyword)) {
             $query = $query->searchName($keyword);
             $employees = $query->where('prize_id', $id)->whereNotNull('got_prize_at')->latest('got_prize_at')->get();
-            return view('staff.prizes.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
+            return view('lucky-draw.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
         }
         $employees = $prize->employees->sortBy('name');
         return view('lucky-draw.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);

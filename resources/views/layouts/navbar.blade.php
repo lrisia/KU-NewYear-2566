@@ -44,13 +44,13 @@
                           <div id="doubleDropdown2" class="hidden z-10 w-40 bg-white rounded-lg divide-y divide-gray-100 shadow">
                             <ul class="text-sm" aria-labelledby="doubleDropdownButton2">
                               <li>
-                                <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]" href="/staff/all-employees">รายชื่อบุคลากรทั้งหมด</a>
+                                <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]" href="/staff/employees">รายชื่อบุคลากรทั้งหมด</a>
                               </li>
                               <li>
-                                <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/staff/registered">รายชื่อผู้ที่ลงทะเบียนแล้ว</a>
+                                <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/staff/employees/registered">รายชื่อผู้ที่ลงทะเบียนแล้ว</a>
                               </li>
                               <li>
-                                <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/staff/attended">รายชื่อผู้เข้าร่วมงาน</a>
+                                <a class="block p-2.5 hover:bg-[#e7e6e6]" href="/staff/employees/attended">รายชื่อผู้เข้าร่วมงาน</a>
                               </li>
                             </ul>
                         </div>

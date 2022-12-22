@@ -23,7 +23,7 @@
                     รายชื่อผู้ได้รับรางวัล
                 </h1>
                 <p class="mobile:text-sm sm:text-base lg:text-lg mt-4">
-                    <span class="mr-2">รางวัลที่ {{ $prize->prize_no }}</span>
+                    <span class="mr-2">{{ $prize->type }}</span>
                     <span class="mr-2">{{ $prize->description }}</span>
                     <span class="mr-2">จำนวน {{ $prize->total_amount }} รางวัล</span>
                 </p>
@@ -31,19 +31,19 @@
                     <table class="w-full text-left mr-0">
                         <thead class="bg-[#e7e6e6] border-2 text-sm mobile:text-xs sm:text-base">
                             <tr>
-                                <th scope="col" class="py-3 pl-10 pr-4">ลำดับ</th>
-                                <th scope="col" class="py-3 px-6">ชื่อ-นามสกุล</th>
-                                <th scope="col" class="py-3 px-6">หน่วยงาน</th>
-                                <th scope="col" class="print:py-3 ptint:px-10"></th>
+                                <th scope="col" class="py-2 px-6 pr-4 print:border-r">ลำดับ</th>
+                                <th scope="col" class="py-2 px-2 print:border-r">ชื่อ-นามสกุล</th>
+                                <th scope="col" class="py-2 pl-2 print:border-r">หน่วยงาน</th>
+                                <th scope="col" class="print:py-3 print:px-10"><p class="invisible print:visible text-center">เซ็นชื่อ</p></th>
                             </tr>
                         </thead>
                         <tbody class="m-2">
                             @foreach($employees as $employee)
-                            <tr class="border text-gray-700 text-sm mobile:text-xs sm:text-base">
-                                <td class="px-10 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $employee->name }}</td>
-                                <td class="px-6 py-4">{{ $employee->organizer->name }}</td>
-                                <td class="print:px-14 print:py-4"></td>
+                            <tr class="border border-r-2 text-gray-700 text-sm mobile:text-xs sm:text-base">
+                                <td class="px-6 py-4 print:border-r">{{ $loop->iteration }}</td>
+                                <td class="px-2 py-4 print:border-r">{{ $employee->name }}</td>
+                                <td class="pl-2 py-2 print:border-r">{{ $employee->organizer->name }}</td>
+                                <td class="invisible print:px-24 print:py-4"></td>
                             </tr>
                             @endforeach
                         </tbody>
