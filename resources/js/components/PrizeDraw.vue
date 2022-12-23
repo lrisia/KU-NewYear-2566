@@ -5,29 +5,35 @@
             <source :src="'/video/' + this.video_name" type="video/mp4" >
         </video>
     </div>
-    <div v-else class="flex flex-row">
-        <div class="mx-auto">
-            <h1 v-if="prize_data" class="mt-10 sm:text-xl md:text-2xl">รายชื่อผู้ได้รับ{{ prize_data.type }} {{ prize_data.description }} จำนวน {{ prize_data.total_amount }} รางวัล</h1>
-            <div class="my-6 overflow-x-auto max-h-screen text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
-                <table class="w-full border text-left text-gray-60 mr-0">
-                    <thead class="bg-[#e7e6e6]">
+    <div v-else class="flex flex-row h-screen">
+        <div class="mx-auto flex flex-col items-center justify-center">
+            <h1 v-if="prize_data" class="mt-10 mx-10 sm:text-xl md:text-3xl 2k:text-4xl">รายชื่อผู้ได้รับ <span class="2k:text-6xl text-4xl">{{ prize_data.type }} </span> {{ prize_data.description }} จำนวน {{ prize_data.total_amount }} รางวัล</h1>
+            <div class="mt-10 my-6 mx-10 table-auto overflow-x-auto max-h-screen sm:text-xl lg:text-2xl 2k:text-4xl shadow-md rounded-xl">
+                <table class="w-full text-left text-gray-60 mr-0">
+                    <thead class="bg-[#006B67] text-white sticky top-0">
                     <tr>
+                        <th scope="col" class="py-3 px-6 text-center">ลำดับ</th>
                         <th scope="col" class="py-3 px-6">ชื่อ-นามสกุล</th>
-                        <th scope="col" class="py-3 px-6">หน่วยงาน</th>
+                        <th scope="col" class="py-3 pl-2">หน่วยงาน</th>
                     </tr>
                     </thead>
-                    <tbody class="m-2">
-                        <tr v-for="person in lucky_person" class="border-t text-gray-700 text-sm mobile:text-xs sm:text-base">
-                            <td class="px-6 py-2">{{ person.name }}</td>
-                            <td class="px-6 py-2">{{ person.organizer }}</td>
+                    <tbody class="m-2 overflow-y-auto bg-[#CFE4E0]">
+                        <tr v-for="(person, index) in lucky_person" class="border-t border-white  text-gray-700 sm:text-xl lg:text-2xl 2k:text-4xl">
+                            <td class="px-6 py-3 text-center">{{ index + 1 }}</td>
+                            <td class="px-6 py-3">{{ person.name }}</td>
+                            <td class="py-3 pl-2 pr-4">{{ person.organizer }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="mx-auto">
-            <qrcode-vue :value="this.qrcode_url" class="mt-8 mx-auto" size="300"/>
-            <mini-count-down></mini-count-down>
+        <div class="ml-6 my-10 mr-24 w-1/4 flex flex-col items-center justify-center">
+            <div class="mt-16">
+                <qrcode-vue :value="this.qrcode_url" class="mx-auto" size="400" />
+            </div>
+            <div class="mt-8 mb-16">
+                <mini-count-down></mini-count-down>
+            </div>
         </div>
     </div>
 </template>
