@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl mx-auto mt-8 px-6 p-7 rounded-lg bg-[#C2C84C]">
+    <div class="max-w-7xl mx-auto 2k:mt-8 px-6 p-6 rounded-lg bg-[#C2C84C]">
     <div class="mx-12">
         <div class="mt-8 text-center sm:text-2xl lg:text-3xl 2k:text-4xl">เหลือเวลารับรางวัลอีก</div>
         <div class="my-6 md:mt-10 flex gap-5 justify-center">
