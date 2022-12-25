@@ -98,7 +98,6 @@
                             </button>
                         </div>
                         <form class="m-0" action="{{ route('staff.prizes.close') }}" method="GET">
-                            @csrf
                             <div class="modal-body px-5 pt-5 w-full overflow-y-auto ">
                                 <p class="text-sm md:text-base mb-4 leading-relaxed text-gray-500 dark:text-gray-400">
                                     รายละเอียด: <span class="text-black" id="description"></span>

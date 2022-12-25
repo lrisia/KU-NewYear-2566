@@ -30,7 +30,7 @@ class PrizeSeeder extends Seeder
 
         $prize = new Prize();
         $prize->type = "รางวัลพิเศษ";
-        $prize->description = "รางวัลพิเศษ เพิ่มขึ้นตามรางวัลที่ไม่ถูกรับ";
+        $prize->description = "รางวัลพิเศษ เพิ่มขึ้นตามรางวัลที่ไม่มีผู้รับ";
         $prize->prize_no = 0;
         $prize->total_amount = 1;
         $prize->left_amount = 1;

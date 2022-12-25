@@ -25,7 +25,7 @@ class OrganizerController extends Controller
 
     public function show($id)
     {
-        if (!Auth::user()->isStaff()) return redirect()->route('/');
+        if (!Auth::user()->isStaff()) return redirect()->back();
 
         $organizer = Organizer::where('fac_id', $id)->firstOrFail();
         $employees = $organizer->employees->sortByDesc('register_at');

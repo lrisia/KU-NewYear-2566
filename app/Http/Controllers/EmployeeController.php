@@ -40,7 +40,7 @@ class EmployeeController extends Controller
         return view('employees.search', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
-    # ---------------- Staff zone ----------------
+    # ---------------- Staff and Register zone ----------------
     public function all(Request $request)
     {
         $keyword = $request->query('keyword') ?? null;
