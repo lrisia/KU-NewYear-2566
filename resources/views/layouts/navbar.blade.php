@@ -45,17 +45,17 @@
                                      class="hidden z-10 w-40 bg-white rounded-lg divide-y divide-gray-100 shadow">
                                     <ul class="text-sm" aria-labelledby="doubleDropdownButton">
                                         <li>
-                                            <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]"
-                                               href="{{ route('lucky-draw.draw') }}">แสดงผลการจับรางวัล</a>
-                                        </li>
-                                        <li>
-                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('staff.prizes') }}">รางวัลทั้งหมด</a>
+                                            <a class="block p-2.5 rounded-t-lg hover:bg-[#e7e6e6]" href="{{ route('staff.prizes') }}">รางวัลทั้งหมด</a>
                                         </li>
                                         <li>
                                             <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('staff.prizes.search') }}">ค้นหาชื่อผู้ได้รับรางวัล</a>
                                         </li>
                                         <li>
-                                            <a class="block p-2.5 rounded-b-lg hover:bg-[#e7e6e6]" href="{{ route('lucky-draw.button') }}">ปุ่มจับรางวัล</a>
+                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('lucky-draw.button') }}">ปุ่มจับรางวัล</a>
+                                        </li>
+                                        <li>
+                                            <a class="block rounded-b-lg p-2.5 hover:bg-[#e7e6e6]"
+                                               href="{{ route('lucky-draw.draw') }}">แสดงผลการจับรางวัล</a>
                                         </li>
                                     </ul>
                                 </div>

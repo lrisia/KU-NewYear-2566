@@ -22,12 +22,14 @@
 
 export default {
     props: {
-        date: null
+        minute: {
+            type: Number,
+        }
     },
     data () {
         return {
             now: Math.trunc((new Date()).getTime() / 1000),
-            event: new Date(new Date().getTime() + (15 * 60000)),
+            event: new Date(new Date().getTime() + (this.minute * 60000)),
             finish: false
         }
     },
@@ -38,6 +40,7 @@ export default {
             if (!this.finish && this.calculatedDate - this.now <= 0) {
                 _self.finish = true
                 _self.$emit('onFinish')
+                location.reload()
             }
         }, 1000)
     },

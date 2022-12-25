@@ -1,7 +1,7 @@
 <template>
     <div v-if="!this.drawing" style="width: 100%" class="relative">
         <img class="absolute top-0 left-0" id="cover" src="/image/2565.png" alt="KU NewYear Poster">
-        <video class="absolute top-0 left-0" id="video-draw" hidden>
+        <video class="absolute top-0 left-0 fade" id="video-draw">
             <source :src="'/video/' + this.video_name" type="video/mp4" >
         </video>
     </div>
@@ -30,10 +30,10 @@
             </div>
             <div class="mx-auto my-10 flex flex-col items-center justify-center">
                 <div class="mt-16 p-6 rounded-lg bg-white">
-                    <qrcode-vue :value="this.qrcode_url" class="mx-auto" size="400" />
+                    <qrcode-vue :value="this.qrcode_url" class="mx-auto" :size="400" />
                 </div>
                 <div class="mt-7 mb-16">
-                    <mini-count-down></mini-count-down>
+                    <mini-count-down :minute="15"></mini-count-down>
                 </div>
             </div>
         </div>
@@ -161,10 +161,15 @@ export default {
         transitionHandle(prize_id) {
             var cover = document.getElementById("cover");
             var video = document.getElementById("video-draw");
-            cover.hidden = true;
-            video.hidden = false;
-            video.play()
-            setTimeout(() => this.getLuckyPerson(prize_id), 8000); // ms
+            cover.classList.add('fade-out');
+            setTimeout(() => {
+                // cover.hidden = true;
+                // video.hidden = false;
+                video.style.opacity = "100%";
+                video.classList.add('fade-in');
+            }, 1000);
+            setTimeout(() => video.play(), 1000);
+            setTimeout(() => this.getLuckyPerson(prize_id), 17000); // ms
         },
         async getLuckyPerson(prize_id) {
             try {
@@ -180,3 +185,17 @@ export default {
     },
 }
 </script>
+
+<style>
+.fade-out {
+    opacity: 0%;
+    transition: opacity 1s;
+}
+.fade-in {
+    opacity: 100%;
+    transition: opacity 1s;
+}
+.fade {
+    opacity: 0%;
+}
+</style>

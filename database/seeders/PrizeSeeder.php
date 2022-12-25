@@ -15,6 +15,15 @@ class PrizeSeeder extends Seeder
      */
     public function run()
     {
+        $prize = new Prize();
+        $prize->type = "รางวัลพิเศษ";
+        $prize->description = "รางวัลพิเศษ เพิ่มขึ้นตามรางวัลที่ไม่มีผู้รับ";
+        $prize->prize_no = 0;
+        $prize->total_amount = 1;
+        $prize->left_amount = 1;
+        $prize->money_amount = 6000;
+        $prize->save();
+
         $amount = [5, 10, 10, 10, 20, 30, 60];
         $money = [10000, 7000, 5000, 3000, 2000, 1000, 500];
         for ($i = 0; $i < count($amount); $i++) {
@@ -27,14 +36,5 @@ class PrizeSeeder extends Seeder
             $prize->money_amount = $money[$i];
             $prize->save();
         }
-
-        $prize = new Prize();
-        $prize->type = "รางวัลพิเศษ";
-        $prize->description = "รางวัลพิเศษ เพิ่มขึ้นตามรางวัลที่ไม่มีผู้รับ";
-        $prize->prize_no = 0;
-        $prize->total_amount = 1;
-        $prize->left_amount = 1;
-        $prize->money_amount = 6000;
-        $prize->save();
     }
 }
