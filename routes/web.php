@@ -30,8 +30,8 @@ Route::get('/', function () {
     else { return redirect()->route('staff.dashboard'); }
 })->name('/');
 
-Route::group(['prefix' => 'register'], function() {
-    // Route::get('', [EmployeeController::class, 'index'])->name('register.index');
+Route::group(['prefix' => 'register-dec22'], function() {
+    Route::get('', [EmployeeController::class, 'index'])->name('register.index');
     Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
 });
 

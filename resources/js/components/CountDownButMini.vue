@@ -1,17 +1,17 @@
 <template>
-    <div class="max-w-7xl mx-auto mt-8 p-8 rounded-lg bg-[#e7e6e6]">
-    <div class="mx-20">
-        <div class="mt-6 text-center sm:text-xl md:text-2xl">เหลือเวลารับรางวัลอีก</div>
-        <div class="mt-6 md:mt-10 flex gap-5 justify-center">
+    <div class="max-w-7xl mx-auto 2k:mt-8 px-6 p-6 rounded-lg bg-[#C2C84C]">
+    <div class="mx-12">
+        <div class="mt-8 text-center sm:text-2xl lg:text-3xl 2k:text-4xl">เหลือเวลารับรางวัลอีก</div>
+        <div class="my-6 md:mt-10 flex gap-5 justify-center">
             <div class="flex items-center flex-col flex-nowrap">
-                <span class="w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl"
+                <span class="w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white bo border-[#006C67] shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-4xl md:text-7xl"
                 id="minutes">{{ minutes }}</span>
-                <span class="title md:text-lg">นาที</span>
+                <span class="title md:text-3xl 2k:text-4xl">นาที</span>
             </div>
             <div class="flex items-center flex-col flex-nowrap">
-                <span class="w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-3xl md:text-6xl"
+                <span class="w-14 h-16 sm:w-20 sm:h-20 md:w-36 md:h-32 bg-white shadow-xl mx-auto flex items-center justify-center mb-5 rounded-lg text-4xl md:text-7xl"
                 id="seconds">{{ seconds }}</span>
-                <span class="title md:text-lg">วินาที</span>
+                <span class="title md:text-3xl 2k:text-4xl">วินาที</span>
             </div>
         </div>
     </div>
