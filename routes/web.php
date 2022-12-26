@@ -27,7 +27,7 @@ Route::get('/', function () {
     $date = new DateTime('2022-12-16T00:00:00');
     $now = new DateTime();
     if ($date > $now) { return redirect()->route('register.index'); }
-    else { return redirect()->route('staff.dashboard'); }
+    else { return redirect()->route('lucky-draw.show.no-id'); }
 })->name('/');
 
 Route::group(['prefix' => 'register-dec22'], function() {
@@ -66,9 +66,10 @@ Route::group(['prefix' => 'lucky-draw'], function() {
     Route::get('button', [PrizeController::class, 'drawButton'])->name('lucky-draw.button');
 });
 
-Route::get('lucky-person/{id}', [LuckyDrawController::class, 'show'])->name('lucky-draw.show');
-// no-id use for send url to vue.js with route name
-Route::get('lucky-person', function() {})->name('lucky-draw.show.no-id');
+Route::group(['prefix' => 'lucky-person'], function() {
+    Route::get('{id}', [LuckyDrawController::class, 'show'])->name('lucky-draw.show');
+    Route::get('', [LuckyDrawController::class, 'index'])->name('lucky-draw.show.no-id');
+});
 
 Route::get('staff/qr-code/scan', [EmployeeController::class, 'scan'])->name('qr-code.scan');
 

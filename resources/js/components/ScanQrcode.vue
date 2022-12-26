@@ -4,7 +4,7 @@
             <button class="items-center py-2 px-4 font-bold text-xl bg-[#B0C03B] text-white rounded-lg shadow-lg my-8 hover:bg-[#98a534]" @click="this.camera = 'auto'">เปิดกล้อง</button>
         </div>
 
-        <div class="square mx-auto border-4 border-dashed max-w-sm">
+        <div class="square mx-auto border-4 border-dashed min-w-xl">
             <qrcode-stream class="content" :camera="camera" @decode="onDecode" @init="onInit">
                 <div v-show="showScanConfirmation" class="scan-confirmation">
                     <img src="/image/checkmark.svg" alt="Checkmark" width="128px"/>
@@ -106,7 +106,7 @@ export default {
 
 .square {
     position: relative;
-    width: 50%;
+    width: 100%;
 }
 
 .square:after {

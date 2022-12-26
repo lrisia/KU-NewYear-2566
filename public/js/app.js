@@ -19939,7 +19939,7 @@ var _hoisted_2 = {
   "class": "grid place-items-center"
 };
 var _hoisted_3 = {
-  "class": "square mx-auto border-4 border-dashed max-w-sm"
+  "class": "square mx-auto border-4 border-dashed min-w-xl"
 };
 var _hoisted_4 = {
   "class": "scan-confirmation"
@@ -22663,7 +22663,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.scan-confirmation[data-v-417d6396] {\n    position: absolute;\n    width: 100%;\n    height: 100%;\n\n    background-color: rgba(255, 255, 255, .8);\n\n    display: flex;\n    flex-flow: row nowrap;\n    justify-content: center;\n}\n.square[data-v-417d6396] {\n    position: relative;\n    width: 50%;\n}\n.square[data-v-417d6396]:after {\n    content: \"\";\n    display: block;\n    padding-bottom: 100%;\n}\n.content[data-v-417d6396] {\n    position: absolute;\n    width: 100%;\n    height: 100%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.scan-confirmation[data-v-417d6396] {\n    position: absolute;\n    width: 100%;\n    height: 100%;\n\n    background-color: rgba(255, 255, 255, .8);\n\n    display: flex;\n    flex-flow: row nowrap;\n    justify-content: center;\n}\n.square[data-v-417d6396] {\n    position: relative;\n    width: 100%;\n}\n.square[data-v-417d6396]:after {\n    content: \"\";\n    display: block;\n    padding-bottom: 100%;\n}\n.content[data-v-417d6396] {\n    position: absolute;\n    width: 100%;\n    height: 100%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
