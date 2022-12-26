@@ -30,7 +30,7 @@
         </form>
         <section class="w-full" id="printThis">
             <div class="mx-8">
-                <h1 class="text-base sm:text-lg lg:text-xl mt-6">
+                <h1 class="text-base sm:text-lg lg:text-xl mt-6 sticky top-1">
                     รายชื่อผู้ได้รับรางวัล
                 </h1>
                 <p class="mobile:text-sm sm:text-base lg:text-lg mt-4">
