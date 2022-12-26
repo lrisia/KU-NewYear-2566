@@ -98,7 +98,6 @@
                             </button>
                         </div>
                         <form class="m-0" action="{{ route('staff.prizes.close') }}" method="GET">
-                            @csrf
                             <div class="modal-body px-5 pt-5 w-full overflow-y-auto ">
                                 <p class="text-sm md:text-base mb-4 leading-relaxed text-gray-500 dark:text-gray-400">
                                     รายละเอียด: <span class="text-black" id="description"></span>
@@ -116,7 +115,7 @@
                                            class="text-gray-500 mr-2 bg-gray-50 shadow rounded-lg border border-[#DADADA] py-2 w-48"/>
                                     <input type="text" id="id" class="hidden" name="id">
                                     <input
-                                        class="text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2 flex"
+                                        class="cursor-pointer text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2 flex"
                                         type="submit" value="ตกลง"/>
                                 </div>
                             </div>

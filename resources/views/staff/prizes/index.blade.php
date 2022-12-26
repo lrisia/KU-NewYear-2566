@@ -23,15 +23,45 @@
                             <td class="pl-6 py-4">{{ $prize->type }}</td>
                             <td class="px-6 py-4">{{ $prize->description }}</td>
                             <td class="px-6 py-4 text-end">{{ $prize->total_amount }}</td>
-                            <td class="flex flex-row items-center justify-center py-3">
-                                @if($prize->enable)
-                                    <p class="bg-[#B0C03B] m-2 text-white text-center text-sm py-2 px-3 rounded-lg shadow-lg hover:bg-[#98a534]"
-                                       onclick="popupToggle({{ $prize }})">จับรางวัล</p>
-                                @else
-                                    <a href="{{ route('staff.prizes.show', ['id' => $prize->id]) }}"
-                                       class="bg-[#D9D9D9] m-2 py-2 px-4 text-sm rounded-lg shadow-lg hover:bg-[#C9C9C9]">รายชื่อผู้โชคดี</a>
+                            @if ($prize->type !== "รางวัลพิเศษ")
+                                <td class="flex flex-row items-center justify-center py-3">
+                                    @if($prize->enable)
+                                        <p class="bg-[#B0C03B] m-2 text-white text-center text-sm py-2 px-3 rounded-lg shadow-lg hover:bg-[#98a534]"
+                                           onclick="popupToggle({{ $prize }})">จับรางวัล</p>
+                                    @else
+                                        <a href="{{ route('staff.prizes.show', ['id' => $prize->id]) }}"
+                                        class="bg-[#D9D9D9] m-2 py-2 px-4 text-sm rounded-lg shadow-lg hover:bg-[#C9C9C9] flex relative">
+                                            @if (!$prize->close)
+                                            <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                                <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                                            </span>
+                                            @endif
+                                            รายชื่อผู้โชคดี
+                                        </a>
+                                    @endif
+                                </td>
+                            @else
+                                @if ($is_special_prize_available)
+                                    <td class="flex flex-row items-center justify-center py-3">
+                                        @if($prize->enable)
+                                            <p class="bg-[#B0C03B] m-2 text-white text-center text-sm py-2 px-3 rounded-lg shadow-lg hover:bg-[#98a534]"
+                                               onclick="popupToggle({{ $prize }})">จับรางวัล</p>
+                                        @else
+                                            <a href="{{ route('staff.prizes.show', ['id' => $prize->id]) }}"
+                                               class="bg-[#D9D9D9] m-2 py-2 px-4 text-sm rounded-lg shadow-lg hover:bg-[#C9C9C9]">
+                                                @if (!$prize->close)
+                                                    <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                                        <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                                                    </span>
+                                                @endif
+                                                รายชื่อผู้โชคดี
+                                            </a>
+                                        @endif
+                                    </td>
                                 @endif
-                            </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>
@@ -77,13 +107,15 @@
                             <div class="modal-footer mb-4 px-5">
                                 <div class="flex items-center justify-center space-x-2 rounded-b">
                                     <button onclick="popupToggle(null)"
-                                        class="text-gray-500 mr-2 bg-gray-50 hover:bg-gray-200 shadow rounded-lg border border-[#DADADA] px-6 py-2">
+                                            class="text-gray-500 mr-2 bg-gray-50 hover:bg-gray-200 shadow rounded-lg border border-[#DADADA] px-6 py-2">
                                         ยกเลิก
                                     </button>
                                     <form class="m-0" action="{{ route('staff.prizes.select') }}" method="POST">
                                         @csrf
                                         <input type="text" id="id" class="hidden" name="id">
-                                        <input class="text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2 flex cursor-pointer" type="submit" value="ตกลง" />
+                                        <input
+                                            class="text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2 flex cursor-pointer"
+                                            type="submit" value="ตกลง"/>
                                     </form>
                                 </div>
                             </div>

@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class LuckyDrawController extends Controller
 {
     public function index() {
-
+        $prizes = Prize::orderBy('type')->orderBy('prize_no','asc')->get();
+        return view('prizes.index', ['prizes' => $prizes]);
     }
 
     public function show(Request $request, $id)

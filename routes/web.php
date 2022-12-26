@@ -54,11 +54,10 @@ Route::group(['prefix' => 'staff'], function() {
     Route::group(['prefix' => 'prizes'], function() {
         Route::get('', [PrizeController::class, 'index'])->name('staff.prizes');
         Route::get('close', [PrizeController::class, 'close'])->name('staff.prizes.close');
+        Route::get('search', [PrizeController::class, 'search'])->name('staff.prizes.search');
+        Route::post('select', [PrizeController::class, 'selectPrize'])->name('staff.prizes.select');
+        Route::get('{id}', [PrizeController::class, 'show'])->name('staff.prizes.show');
     });
-
-    Route::get('prizes/search', [PrizeController::class, 'search'])->name('staff.prizes.search');
-    Route::post('prizes/select', [PrizeController::class, 'selectPrize'])->name('staff.prizes.select');
-    Route::get('prizes/{id}', [PrizeController::class, 'show'])->name('staff.prizes.show');
 });
 
 Route::group(['prefix' => 'lucky-draw'], function() {
@@ -67,7 +66,9 @@ Route::group(['prefix' => 'lucky-draw'], function() {
     Route::get('button', [PrizeController::class, 'drawButton'])->name('lucky-draw.button');
 });
 
+Route::get('luckyperson', [LuckyDrawController::class, 'index'])->name('lucky-draw.index');
 Route::get('lucky-person/{id}', [LuckyDrawController::class, 'show'])->name('lucky-draw.show');
+// no-id use for send url to vue.js with route name
 Route::get('lucky-person', function() {})->name('lucky-draw.show.no-id');
 
 Route::get('staff/qr-code/scan', [EmployeeController::class, 'scan'])->name('qr-code.scan');
