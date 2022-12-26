@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="mx-8 grid grid-cols-2 gap-10">
+    <div class="mx-8 grid grid-cols-2 gap-10 @if ($top_register->count() == 0 && $top_attend->count() == 0 && $top_prize->count() == 0) min-h-screen @endif">
         <div>
             <h1 class="md:text-xl mt-10">
                 10 อันดับหน่วยงานที่ลงทะเบียนสูงสุด

@@ -19,3 +19,10 @@
 </div>
 </body>
 </html>
+
+<style type="text/css">
+    @font-face {
+        font-family: OptimusPrinceps;
+        src: url('{{ public_path('fonts/angsana/ANGSA.ttf') }}');
+    }
+</style>

@@ -21,7 +21,7 @@
                     @foreach($prizes as $prize)
                         <tr class="border-t text-gray-700 text-sm mobile:text-xs sm:text-base cursor-pointer hover:bg-gray-50">
                             <td class="pl-6 py-4">{{ $prize->type }}</td>
-                            <td class="px-6 py-4">{{ $prize->description }}</td>
+                            <td class="px-6 py-4">{{ $prize->description }} @if ($prize->type == "รางวัลพิเศษ") (รวม {{ $prize->money_amount }} บาท)@endif</td>
                             <td class="px-6 py-4 text-end">{{ $prize->total_amount }}</td>
                             @if ($prize->type !== "รางวัลพิเศษ")
                                 <td class="flex flex-row items-center justify-center py-3">
