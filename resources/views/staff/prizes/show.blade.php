@@ -51,10 +51,10 @@
                         <tbody class="m-2">
                             @foreach($employees as $employee)
                             <tr class="border border-r-2 text-gray-700 text-sm mobile:text-xs sm:text-base">
-                                <td class="px-6 py-4 print:border-r">{{ $loop->iteration }}</td>
-                                <td class="px-2 py-4 print:border-r">{{ $employee->name }}</td>
-                                <td class="pl-2 py-2 print:border-r">{{ $employee->organizer->name }}</td>
-                                <td class="invisible print:px-24 print:py-4"></td>
+                                <td class="px-4 py-4 print:py-8 print:border-r">{{ $loop->iteration }}</td>
+                                <td class="px-2 py-4 print:py-8 print:border-r print:w-1/4">{{ $employee->name }}</td>
+                                <td class="pl-2 py-2 print:py-8 print:border-r print:w-1/4">{{ $employee->organizer->name }}</td>
+                                <td class="invisible print:px-24 print:py-8"></td>
                             </tr>
                         @endforeach
                         </tbody>
