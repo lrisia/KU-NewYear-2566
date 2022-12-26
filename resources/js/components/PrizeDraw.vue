@@ -10,7 +10,7 @@
     <div v-else style="background-color: #CFE4E0;">
         <div class="flex flex-row h-screen mr-10">
             <div class="mx-auto flex flex-col justify-center">
-                <h1 v-if="prize_data" class="mt-6 mx-10 sm:text-xl md:text-3xl lg:text-4xl 2k:text-5xl">รายชื่อผู้ได้รับ <span class="text-4xl lg:text-6xl 2k:text-7xl ">{{ prize_data.type }} </span> {{ prize_data.description }} จำนวน {{ prize_data.total_amount }} รางวัล</h1>
+                <h1 v-if="prize_data" class="mt-6 mx-10 sm:text-xl md:text-3xl lg:text-4xl 2k:text-5xl">รายชื่อผู้ได้รับ <span class="text-4xl lg:text-6xl 2k:text-7xl ">{{ prize_data.type }} </span> <span v-if="this.prize_data.type !== 'รางวัลพิเศษ'">{{ prize_data.description }}</span> จำนวน {{ prize_data.left_amount }} รางวัล</h1>
                 <div class="mt-10 my-6 mx-10 table-auto overflow-x-auto max-h-screen sm:text-xl lg:text-3xl 2k:text-5xl shadow-md rounded-xl">
                     <table class="w-full text-left text-gray-60 mr-0">
                         <thead class="bg-[#006B67] text-white sm:text-xl lg:text-3xl 2k:text-5xl sticky top-0">
