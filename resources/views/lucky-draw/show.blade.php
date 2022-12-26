@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="w-full">
+    <div class="w-full @if ($employees->count() == 0) min-h-screen @endif">
         <form action="{{ route('lucky-draw.show', ['id' => $prize->id])  }}" method="get" class="my-10 mx-8">
             <label for="search" class="md:text-lg">ค้นหาชื่อผู้ได้รับรางวัล</label>
             <div class="relative">
@@ -12,7 +12,7 @@
                 <button type="submit" class="absolute right-3 md:right-5 bottom-2 bg-[#D9D9D9] text-gray-700 border border-[#d5d5d5] hover:bg-[#c3c1c1] focus:ring-4 focus:outline-none focus:ring-blue-300 shadow rounded-lg text-sm px-4 py-1.5 sm:px-6 md:text-base md:mb-0.5">ค้นหา</button>
             </div>
         </form>
-        <section class="w-full" id="printThis">
+        <section class="w-full">
             <div class="mx-8">
                 <h1 class="text-base sm:text-lg lg:text-xl mt-6">
                     รายชื่อผู้ได้รับรางวัล
@@ -22,25 +22,34 @@
                     <span class="mr-2">{{ $prize->description }}</span>
                     <span class="mr-2">จำนวน {{ $prize->total_amount }} รางวัล</span>
                 </p>
-                <div class="my-4 overflow-auto text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
+                <div class="mt-4 overflow-auto text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
                     <table class="w-full text-left mr-0">
-                        <thead class="bg-[#e7e6e6] border-2 text-sm mobile:text-xs sm:text-base">
+                        <thead class="bg-[#e7e6e6] border text-sm mobile:text-xs sm:text-base">
                         <tr>
-                            <th scope="col" class="py-3 pl-10 pr-4">ลำดับ</th>
-                            <th scope="col" class="py-3 px-6">ชื่อ-นามสกุล</th>
-                            <th scope="col" class="py-3 px-6">หน่วยงาน</th>
+                            <th scope="col" class="py-3 px-4 sm:px-6">ลำดับ</th>
+                            <th scope="col" class="py-3 pl-2 sm:px-6">ชื่อ-นามสกุล</th>
+                            <th scope="col" class="py-3 px-4">หน่วยงาน</th>
                         </tr>
                         </thead>
                         <tbody class="m-2">
                         @foreach($employees as $employee)
                             <tr class="border text-gray-700 text-sm mobile:text-xs sm:text-base">
-                                <td class="px-10 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $employee->name }}</td>
-                                <td class="px-6 py-4">{{ $employee->organizer->name }}</td>
+                                <td class="px-4 py-4 sm:px-6">{{ $loop->iteration }}</td>
+                                <td class="pl-2 py-4 sm:px-6">{{ $employee->name }}</td>
+                                <td class="px-4 py-4">{{ $employee->organizer->name }}</td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+                @if ($employees->count() == 0)
+                    <div class="text-center py-4 text-gray-400 bg-gray-50 rounded-b-lg">
+                        <p>ยังไม่ได้จับรางวัลนี้</p>
+                    </div>
+                @endif
+                <div class="mb-4"></div>
+                <div class="relative">
+                    <a class="absolute left-8 cursor-pointer" href="{{ URL::previous() }}">< <u>back</u></a>
                 </div>
             </div>
         </section>

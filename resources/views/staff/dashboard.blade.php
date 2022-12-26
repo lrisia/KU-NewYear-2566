@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="grid grid-cols-2 gap-10">
+    <div class="mx-8 grid grid-cols-2 gap-10">
         <div>
             <h1 class="md:text-xl mt-10">
                 10 อันดับหน่วยงานที่ลงทะเบียนสูงสุด

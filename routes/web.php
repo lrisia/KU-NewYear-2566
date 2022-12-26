@@ -27,13 +27,13 @@ Route::get('/', function () {
     $date = new DateTime('2022-12-16T00:00:00');
     $now = new DateTime();
     if ($date > $now) { return redirect()->route('register.index'); }
-    else { return redirect()->route('staff.dashboard'); }
+    else { return redirect()->route('lucky-draw.show.no-id'); }
 })->name('/');
 
-Route::group(['prefix' => 'register-dec22'], function() {
-    Route::get('', [EmployeeController::class, 'index'])->name('register.index');
-    Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
-});
+//Route::group(['prefix' => 'register'], function() {
+//    Route::get('', [EmployeeController::class, 'index'])->name('register.index');
+//    Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
+//});
 
 Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');
 
@@ -54,11 +54,10 @@ Route::group(['prefix' => 'staff'], function() {
     Route::group(['prefix' => 'prizes'], function() {
         Route::get('', [PrizeController::class, 'index'])->name('staff.prizes');
         Route::get('close', [PrizeController::class, 'close'])->name('staff.prizes.close');
+        Route::get('search', [PrizeController::class, 'search'])->name('staff.prizes.search');
+        Route::post('select', [PrizeController::class, 'selectPrize'])->name('staff.prizes.select');
+        Route::get('{id}', [PrizeController::class, 'show'])->name('staff.prizes.show');
     });
-
-    Route::get('prizes/search', [PrizeController::class, 'search'])->name('staff.prizes.search');
-    Route::post('prizes/select', [PrizeController::class, 'selectPrize'])->name('staff.prizes.select');
-    Route::get('prizes/{id}', [PrizeController::class, 'show'])->name('staff.prizes.show');
 });
 
 Route::group(['prefix' => 'lucky-draw'], function() {
@@ -67,8 +66,10 @@ Route::group(['prefix' => 'lucky-draw'], function() {
     Route::get('button', [PrizeController::class, 'drawButton'])->name('lucky-draw.button');
 });
 
-Route::get('lucky-person/{id}', [LuckyDrawController::class, 'show'])->name('lucky-draw.show');
-Route::get('lucky-person', function() {})->name('lucky-draw.show.no-id');
+Route::group(['prefix' => 'lucky-person'], function() {
+    Route::get('{id}', [LuckyDrawController::class, 'show'])->name('lucky-draw.show');
+    Route::get('', [LuckyDrawController::class, 'index'])->name('lucky-draw.show.no-id');
+});
 
 Route::get('staff/qr-code/scan', [EmployeeController::class, 'scan'])->name('qr-code.scan');
 

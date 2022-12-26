@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Employee;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,5 +27,21 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        Artisan::call('employee:import people.csv');
+
+        // seeder register
+        $employees = Employee::inRandomOrder()->limit(150)->get();
+        foreach ($employees as $employee) {
+            $employee->register_at = fake()->dateTimeBetween('-2 week', '-1 week');
+            $employee->email = fake()->email();
+            $employee->save();
+        }
+
+        $employees = Employee::inRandomOrder()->limit(150)->get();
+        foreach ($employees as $employee) {
+            $employee->arrive_at = Carbon::now();
+            $employee->save();
+        }
+
     }
 }

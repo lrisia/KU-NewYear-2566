@@ -29,7 +29,7 @@
                             @endif
                         </td>
                         <td class="px-6 py-4 text-center">
-                            @if($employee->arrived_at != null)
+                            @if($employee->arrive_at != null)
                                 <p class="text-green-700 my-2">เข้าร่วมงานแล้ว</p>
                             @else
                                 <p class="text-red-500 my-2">ยังไม่ได้เข้าร่วมงาน</p>

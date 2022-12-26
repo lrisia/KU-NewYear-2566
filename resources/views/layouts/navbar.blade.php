@@ -28,6 +28,9 @@
                                 <a href="/" class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]">หน้าหลัก</a>
                             </li>
                             <li>
+                                <a href="{{ route('staff.organizers') }}" class="block p-2.5 hover:bg-[#e7e6e6]">หน่วยงานทั้งหมด</a>
+                            </li>
+                            <li>
                                 <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown"
                                         data-dropdown-placement="right-start" type="button"
                                         class="flex justify-between items-center p-2.5 w-full hover:bg-[#e7e6e6]">รางวัล
@@ -42,7 +45,7 @@
                                      class="hidden z-10 w-40 bg-white rounded-lg divide-y divide-gray-100 shadow">
                                     <ul class="text-sm" aria-labelledby="doubleDropdownButton">
                                         <li>
-                                            <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]" href="{{ route('staff.prizes') }}">รางวัลทั้งหมด</a>
+                                            <a class="block p-2.5 rounded-t-lg hover:bg-[#e7e6e6]" href="{{ route('staff.prizes') }}">รางวัลทั้งหมด</a>
                                         </li>
                                         <li>
                                             <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('staff.prizes.search') }}">ค้นหาชื่อผู้ได้รับรางวัล</a>
@@ -52,7 +55,7 @@
                                         </li>
                                         <li>
                                             <a class="block rounded-b-lg p-2.5 hover:bg-[#e7e6e6]"
-                                               href="{{ route('lucky-draw.draw') }}">ชื่อผู้ได้รับรางวัล</a>
+                                               href="{{ route('lucky-draw.draw') }}">แสดงผลการจับรางวัล</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -88,9 +91,6 @@
                             </li>
                             <li>
                                 <a href="{{ route('qr-code.scan') }}" class="block p-2.5 rounded-b-lg hover:bg-[#e7e6e6]">สแกน QR Code</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('staff.organizers') }}" class="block p-2.5 hover:bg-[#e7e6e6]">หน่วยงานทั้งหมด</a>
                             </li>
                         </ul>
                     </div>

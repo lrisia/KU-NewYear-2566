@@ -40,17 +40,17 @@ class EmployeeController extends Controller
         return view('employees.search', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
-    # ---------------- Staff zone ----------------
+    # ---------------- Staff and Register zone ----------------
     public function all(Request $request)
     {
         $keyword = $request->query('keyword') ?? null;
         $query = Employee::query();
         if (!is_null($keyword)) {
             $query = $query->searchAllColumn($keyword);
-            $employees = $query->latest('register_at')->paginate(200);
+            $employees = $query->oldest('arrive_at')->paginate(200);
             return view('staff.employees.all-employees', ['employees' => $employees, 'keyword' => $keyword]);
         }
-        $employees = Employee::latest('register_at')->paginate(200);
+        $employees = Employee::oldest('arrive_at')->paginate(200);
         return view('staff.employees.all-employees', ['employees' => $employees, 'keyword' => $keyword]);
     }
 

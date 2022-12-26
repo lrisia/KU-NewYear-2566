@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="w-full">
+    <div class="w-full @if ($employees->count() == 0) min-h-screen @endif">
         <div class="relative flex items-end justify-end mx-8 mt-4">
             <button
                 class="absolute top-3 px-6 py-2 text-white mobile:text-sm  shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534]"
@@ -38,7 +38,7 @@
                     <span class="mr-2">{{ $prize->description }}</span>
                     <span class="mr-2">จำนวน {{ $prize->total_amount }} รางวัล</span>
                 </p>
-                <div class="my-4 overflow-auto text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
+                <div class="mt-4 overflow-auto text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
                     <table class="w-full text-left mr-0">
                         <thead class="bg-[#e7e6e6] border-2 text-sm mobile:text-xs sm:text-base">
                             <tr>
@@ -60,18 +60,27 @@
                         </tbody>
                     </table>
                 </div>
+                @if ($employees->count() == 0)
+                    <div class="text-center py-4 text-gray-400 bg-gray-50 rounded-b-lg">
+                        <p>ยังไม่ได้จับรางวัลนี้</p>
+                    </div>
+                @endif
+                <div class="mb-4"></div>
             </div>
         </section>
+        <div class="relative">
+            <a class="absolute left-8 cursor-pointer" href="{{ route('staff.prizes') }}">< <u>back</u></a>
+        </div>
         @if (!$prize->close)
             <div class="relative">
-                <p onclick="popupToggle({{ $prize }})" href="{{ route('staff.prizes.close') }}"
+                <p onclick="popupToggle({{ $prize }})"
                    class="absolute right-8 px-6 py-2 text-white mobile:text-sm shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] cursor-pointer">
                     ปิดการรับรางวัล
                 </p>
             </div>
         @endif
     </div>
-    <mqtt-refresh timeout="850"></mqtt-refresh>
+    <mqtt-refresh timeout="1650"></mqtt-refresh>
 
     <div id="modal" class="hidden h-full w-full flex items-center justify-center">
         <div class="fixed inset-0 z-30">
@@ -98,7 +107,6 @@
                             </button>
                         </div>
                         <form class="m-0" action="{{ route('staff.prizes.close') }}" method="GET">
-                            @csrf
                             <div class="modal-body px-5 pt-5 w-full overflow-y-auto ">
                                 <p class="text-sm md:text-base mb-4 leading-relaxed text-gray-500 dark:text-gray-400">
                                     รายละเอียด: <span class="text-black" id="description"></span>
@@ -116,7 +124,7 @@
                                            class="text-gray-500 mr-2 bg-gray-50 shadow rounded-lg border border-[#DADADA] py-2 w-48"/>
                                     <input type="text" id="id" class="hidden" name="id">
                                     <input
-                                        class="text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2 flex"
+                                        class="cursor-pointer text-white shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] px-8 py-2 flex"
                                         type="submit" value="ตกลง"/>
                                 </div>
                             </div>
