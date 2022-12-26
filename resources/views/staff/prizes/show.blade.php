@@ -41,17 +41,18 @@
                 <div class="mt-4 overflow-auto text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
                     <table class="w-full text-left mr-0">
                         <thead class="bg-[#e7e6e6] border-2 text-sm mobile:text-xs sm:text-base">
-                            <tr>
-                                <th scope="col" class="py-2 px-6 pr-4 print:border-r">ลำดับ</th>
-                                <th scope="col" class="py-2 px-2 print:border-r">ชื่อ-นามสกุล</th>
-                                <th scope="col" class="py-2 pl-2 print:border-r">หน่วยงาน</th>
-                                <th scope="col" class="print:py-3 print:px-10"><p class="invisible print:visible text-center">เซ็นชื่อ</p></th>
-                            </tr>
+                        <tr>
+                            <th scope="col" class="py-2 px-6 pr-4 print:border-r">ลำดับ</th>
+                            <th scope="col" class="py-2 px-2 print:border-r">ชื่อ-นามสกุล</th>
+                            <th scope="col" class="py-2 pl-2 print:border-r">หน่วยงาน</th>
+                            <th scope="col" class="print:py-3 print:px-10"><p
+                                    class="invisible print:visible text-center">เซ็นชื่อ</p></th>
+                        </tr>
                         </thead>
                         <tbody class="m-2">
-                            @foreach($employees as $employee)
+                        @foreach($employees as $employee)
                             <tr class="border border-r-2 text-gray-700 text-sm mobile:text-xs sm:text-base">
-                                <td class="px-4 py-4 print:py-8 print:border-r">{{ $loop->iteration }}</td>
+                                <td class="sm:px-6 px-4 py-4 print:py-8 print:border-r">{{ $employee->got_prize_no }}</td>
                                 <td class="px-2 py-4 print:py-8 print:border-r print:w-1/4">{{ $employee->name }}</td>
                                 <td class="pl-2 py-2 print:py-8 print:border-r print:w-1/4">{{ $employee->organizer->name }}</td>
                                 <td class="invisible print:px-24 print:py-8"></td>
@@ -69,9 +70,9 @@
             </div>
         </section>
         <div class="relative">
-            <a class="absolute left-8 cursor-pointer" href="{{ route('staff.prizes') }}">< <u>กลับ</u></a>
+            <a class="absolute left-16 cursor-pointer" href="{{ route('staff.prizes') }}">< <u>กลับ</u></a>
         </div>
-        @if (!$prize->close)
+        @if (!$prize->close && $prize->type != "รางวัลพิเศษ")
             <div class="relative">
                 <p onclick="popupToggle({{ $prize }})"
                    class="absolute right-8 px-6 py-2 text-white mobile:text-sm shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] cursor-pointer">

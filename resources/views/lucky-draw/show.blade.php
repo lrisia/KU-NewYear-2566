@@ -34,7 +34,7 @@
                         <tbody class="m-2">
                         @foreach($employees as $employee)
                             <tr class="border text-gray-700 text-sm mobile:text-xs sm:text-base">
-                                <td class="px-4 py-4 sm:px-6">{{ $loop->iteration }}</td>
+                                <td class="px-4 py-4 sm:px-6">{{ $employee->got_prize_no }}</td>
                                 <td class="pl-2 py-4 sm:px-6">{{ $employee->name }}</td>
                                 <td class="px-4 py-4">{{ $employee->organizer->name }}</td>
                             </tr>

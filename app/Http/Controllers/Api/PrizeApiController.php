@@ -26,11 +26,14 @@ class PrizeApiController extends Controller
         $prize->save();
         $amount = $prize->left_amount;
         $lucky_person = Employee::whereNotNull('register_at')->whereNotNull('arrive_at')->whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
-//        $lucky_person = Employee::whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
+        $i = 1;
+        // $lucky_person = Employee::whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
         foreach ($lucky_person as $person) {
             $person->prize_id = $prize->id;
+            $person->got_prize_no = $i;
             $person->got_prize_at = Carbon::now();
             $person->save();
+            $i++;
         }
         Artisan::call('mqtt:publish kunewyear2566/draw-prize ' . $id);
         return response('', Response::HTTP_OK);

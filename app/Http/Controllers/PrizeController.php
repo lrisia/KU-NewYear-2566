@@ -60,10 +60,10 @@ class PrizeController extends Controller
         $query = Employee::query();
         if (!is_null($keyword)) {
             $query = $query->searchName($keyword);
-            $employees = $query->where('prize_id', $id)->whereNotNull('got_prize_at')->latest('got_prize_at')->get();
+            $employees = $query->where('prize_id', $id)->whereNotNull('got_prize_at')->latest('got_prize_no')->get();
             return view('staff.prizes.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
         }
-        $employees = $prize->employees->sortBy('got_prize_at');
+        $employees = $prize->employees->sortBy('got_prize_no');
         return view('staff.prizes.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
     }
 
