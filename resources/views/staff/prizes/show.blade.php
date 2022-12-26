@@ -30,7 +30,7 @@
         </form>
         <section class="w-full" id="printThis">
             <div class="mx-8">
-                <h1 class="text-base sm:text-lg lg:text-xl mt-6">
+                <h1 class="text-base sm:text-lg lg:text-xl mt-6 sticky top-1">
                     รายชื่อผู้ได้รับรางวัล
                 </h1>
                 <p class="mobile:text-sm sm:text-base lg:text-lg mt-4">
@@ -51,10 +51,10 @@
                         <tbody class="m-2">
                             @foreach($employees as $employee)
                             <tr class="border border-r-2 text-gray-700 text-sm mobile:text-xs sm:text-base">
-                                <td class="px-6 py-4 print:border-r">{{ $loop->iteration }}</td>
-                                <td class="px-2 py-4 print:border-r">{{ $employee->name }}</td>
-                                <td class="pl-2 py-2 print:border-r">{{ $employee->organizer->name }}</td>
-                                <td class="invisible print:px-24 print:py-4"></td>
+                                <td class="px-4 py-4 print:py-8 print:border-r">{{ $loop->iteration }}</td>
+                                <td class="px-2 py-4 print:py-8 print:border-r print:w-1/4">{{ $employee->name }}</td>
+                                <td class="pl-2 py-2 print:py-8 print:border-r print:w-1/4">{{ $employee->organizer->name }}</td>
+                                <td class="invisible print:px-24 print:py-8"></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -69,7 +69,7 @@
             </div>
         </section>
         <div class="relative">
-            <a class="absolute left-8 cursor-pointer" href="{{ route('staff.prizes') }}">< <u>back</u></a>
+            <a class="absolute left-8 cursor-pointer" href="{{ route('staff.prizes') }}">< <u>กลับ</u></a>
         </div>
         @if (!$prize->close)
             <div class="relative">

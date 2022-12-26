@@ -49,7 +49,7 @@
                 @endif
                 <div class="mb-4"></div>
                 <div class="relative">
-                    <a class="absolute left-8 cursor-pointer" href="{{ URL::previous() }}">< <u>back</u></a>
+                    <a class="absolute left-8 cursor-pointer" href="{{ URL::previous() }}">< <u>กลับ</u></a>
                 </div>
             </div>
         </section>

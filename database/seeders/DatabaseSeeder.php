@@ -27,21 +27,20 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        Artisan::call('employee:import people.csv');
+//        Artisan::call('employee:import people.csv');
 
         // seeder register
-        $employees = Employee::inRandomOrder()->limit(150)->get();
-        foreach ($employees as $employee) {
-            $employee->register_at = fake()->dateTimeBetween('-2 week', '-1 week');
-            $employee->email = fake()->email();
-            $employee->save();
-        }
-
-        $employees = Employee::inRandomOrder()->limit(150)->get();
-        foreach ($employees as $employee) {
-            $employee->arrive_at = Carbon::now();
-            $employee->save();
-        }
-
+//        $employees = Employee::inRandomOrder()->limit(150)->get();
+//        foreach ($employees as $employee) {
+//            $employee->register_at = fake()->dateTimeBetween('-2 week', '-1 week');
+//            $employee->email = fake()->email();
+//            $employee->save();
+//        }
+//
+//        $employees = Employee::inRandomOrder()->limit(150)->get();
+//        foreach ($employees as $employee) {
+//            $employee->arrive_at = Carbon::now();
+//            $employee->save();
+//        }
     }
 }
