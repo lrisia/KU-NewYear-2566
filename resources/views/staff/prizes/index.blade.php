@@ -19,14 +19,14 @@
 
                     <tbody class="m-2">
                     @foreach($prizes as $prize)
-                        <tr class="border-t text-gray-700 text-sm mobile:text-xs sm:text-base cursor-pointer hover:bg-gray-50">
+                        <tr class="border-t text-gray-700 text-sm mobile:text-xs sm:text-base hover:bg-gray-50">
                             <td class="pl-6 py-4">{{ $prize->type }}</td>
                             <td class="px-6 py-4">{{ $prize->description }} @if ($prize->type == "รางวัลพิเศษ") (รวม {{ $prize->money_amount }} บาท)@endif</td>
                             <td class="px-6 py-4 text-end">{{ $prize->total_amount }}</td>
                             @if ($prize->type !== "รางวัลพิเศษ")
                                 <td class="flex flex-row items-center justify-center py-3">
                                     @if($prize->enable)
-                                        <p class="bg-[#B0C03B] m-2 text-white text-center text-sm py-2 px-3 rounded-lg shadow-lg hover:bg-[#98a534]"
+                                        <p class="bg-[#B0C03B] m-2 text-white text-center text-sm py-2 px-3 rounded-lg shadow-lg hover:bg-[#98a534] cursor-pointer"
                                            onclick="popupToggle({{ $prize }})">จับรางวัล</p>
                                     @else
                                         <a href="{{ route('staff.prizes.show', ['id' => $prize->id]) }}"
@@ -60,6 +60,8 @@
                                             </a>
                                         @endif
                                     </td>
+                                @else
+                                    <td class="pl-6 py-4"></td>
                                 @endif
                             @endif
                         </tr>

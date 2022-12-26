@@ -69,7 +69,7 @@
             </div>
         </section>
         <div class="relative">
-            <a class="absolute left-8 cursor-pointer" href="{{ route('staff.prizes') }}">< <u>back</u></a>
+            <a class="absolute left-8 cursor-pointer" href="{{ route('staff.prizes') }}">< <u>กลับ</u></a>
         </div>
         @if (!$prize->close)
             <div class="relative">

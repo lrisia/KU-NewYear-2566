@@ -12,14 +12,14 @@ class PrizeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['draw']);
     }
 
     public function index()
     {
         if (!Auth::user()->isStaff()) return redirect()->back();
 
-        $prizes = Prize::orderBy('type')->orderBy('prize_no', 'asc')->get();
+        $prizes = Prize::orderBy('prize_no', 'desc')->get();
         $is_special_prize_available = true;
         foreach ($prizes as $prize) {
             if ($prize->type === 'รางวัลพิเศษ') continue;

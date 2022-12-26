@@ -20,19 +20,23 @@
 
                     <tbody class="m-2">
                     @foreach($prizes as $prize)
-                        <tr class="border-t text-gray-700 text-sm mobile:text-xs sm:text-base">
+                        <tr class="border-t text-gray-700 text-sm mobile:text-xs sm:text-base hover:bg-gray-50">
                             <td class="pl-2 sm:pl-6 sm:py-4">{{ $prize->type }}</td>
                             <td class="pl-4 sm:px-6 sm:py-4">{{ $prize->description }}</td>
                             <td class="pr-6 sm:px-6 sm:py-4 text-end">{{ $prize->total_amount }}</td>
                             <td class="flex flex-row items-center justify-center py-3">
-                                @if (!$prize->enable)
+                                @if (!$prize->enable && !$prize->close)
                                     <a href="{{ route('lucky-draw.show', ['id' => $prize->id]) }}"
-                                        class="bg-[#B0C03B] p-2 mr-1.5 sm:p-2 sm:text-sm sm:mr-0 text-white text-center text-xs rounded-lg shadow-lg hover:bg-[#98a534]">
+                                       class="bg-[#B0C03B] p-2 mr-1.5 sm:p-2 sm:text-sm sm:mr-0 text-white text-center text-xs rounded-lg shadow-lg hover:bg-[#98a534]">
                                         รายชื่อผู้โชคดี
                                     </a>
+                                @elseif ($prize->close)
+                                    <p class="text-gray-500 text-xs mr-1.5 py-1.5 sm:text-base sm:mr-0">
+                                        ปิดรับรางวัล
+                                    </p>
                                 @else
                                     <p class="text-gray-500 text-xs mr-1.5 py-1.5 sm:text-base sm:mr-0">
-                                       ยังไม่ได้จับรางวัล
+                                        ยังไม่ได้จับรางวัล
                                     </p>
                                 @endif
                             </td>
