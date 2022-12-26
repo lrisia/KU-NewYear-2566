@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="w-full">
-        <form action="{{ route('lucky-draw.show', ['id' => $prize->id])  }}" method="get" class="my-8 mx-8">
+    <div class="w-full @if ($employees->count() == 0) min-h-screen @endif">
+        <form action="{{ route('lucky-draw.show', ['id' => $prize->id])  }}" method="get" class="my-10 mx-8">
             <label for="search" class="md:text-lg">ค้นหาชื่อผู้ได้รับรางวัล</label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -22,7 +22,7 @@
                     <span class="mr-2">{{ $prize->description }}</span>
                     <span class="mr-2">จำนวน {{ $prize->total_amount }} รางวัล</span>
                 </p>
-                <div class="my-4 overflow-auto text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
+                <div class="mt-4 overflow-auto text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
                     <table class="w-full text-left mr-0">
                         <thead class="bg-[#e7e6e6] border text-sm mobile:text-xs sm:text-base">
                         <tr>
@@ -41,6 +41,15 @@
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+                @if ($employees->count() == 0)
+                    <div class="text-center py-4 text-gray-400 bg-gray-50 rounded-b-lg">
+                        <p>ยังไม่ได้จับรางวัลนี้</p>
+                    </div>
+                @endif
+                <div class="mb-4"></div>
+                <div class="relative">
+                    <a class="absolute left-8 cursor-pointer" href="{{ URL::previous() }}">< <u>back</u></a>
                 </div>
             </div>
         </section>

@@ -760,6 +760,9 @@ select {
 .right-4 {
   right: 1rem;
 }
+.left-8 {
+  left: 2rem;
+}
 .-top-1 {
   top: -0.25rem;
 }
@@ -1069,6 +1072,9 @@ select {
 }
 .max-w-lg {
   max-width: 32rem;
+}
+.max-w-2xl {
+  max-width: 42rem;
 }
 .flex-1 {
   flex: 1 1 0%;
