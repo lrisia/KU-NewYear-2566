@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Employee;
+use App\Models\Prize;
 use Illuminate\Console\Command;
 
 class ClearEmployeePrize extends Command
@@ -34,6 +35,19 @@ class ClearEmployeePrize extends Command
             $employee->got_prize_at = null;
             $employee->save();
         }
+
+        $prizes = Prize::get();
+        foreach ($prizes as $prize) {
+            if ($prize->type == "รางวัลพิเศษ") {
+                $prize->money_amount = 6000;
+                $prize->total_amount = 1;
+            }
+            $prize->close = false;
+            $prize->enable = true;
+            $prize->left_amount = $prize->total_amount;
+            $prize->save();
+        }
+
         return Command::SUCCESS;
     }
 }

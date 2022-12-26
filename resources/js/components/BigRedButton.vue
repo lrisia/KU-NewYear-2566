@@ -2,7 +2,7 @@
     <div class="h-screen relative">
         <div v-if="this.enable" class="">
             <button id="red" style="margin-bottom: 30px" @click="pressButton(this.prize.id)">จับรางวัล</button>
-            <h1 class="text-4xl  text-center">จับ{{ this.prize.type }}<br>{{ this.prize.description}}</h1>
+            <h1 class="text-4xl  text-center">จับ{{ this.prize.type }}<br><span v-if="this.prize.type !== 'รางวัลพิเศษ'">{{ this.prize.description}}</span></h1>
         </div>
         <div v-else>
             <button id="gray" disabled>จับรางวัล</button>
