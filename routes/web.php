@@ -66,6 +66,7 @@ Route::group(['prefix' => 'lucky-draw'], function() {
     Route::get('button', [PrizeController::class, 'drawButton'])->name('lucky-draw.button');
 });
 
+Route::get('luckyperson', [LuckyDrawController::class, 'index'])->name('lucky-draw.index');
 Route::get('lucky-person/{id}', [LuckyDrawController::class, 'show'])->name('lucky-draw.show');
 // no-id use for send url to vue.js with route name
 Route::get('lucky-person', function() {})->name('lucky-draw.show.no-id');
