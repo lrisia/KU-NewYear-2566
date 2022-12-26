@@ -42,20 +42,35 @@
                     <table class="w-full text-left mr-0">
                         <thead class="bg-[#e7e6e6] border-2 text-sm mobile:text-xs sm:text-base">
                         <tr>
-                            <th scope="col" class="py-2 px-6 pr-4 print:border-r">ลำดับ</th>
-                            <th scope="col" class="py-2 px-2 print:border-r">ชื่อ-นามสกุล</th>
+                            <th scope="col" class="py-3 p-2 sm:px-6 print:border-r">ลำดับ</th>
+                            <th scope="col" class="p-2 print:border-r">ชื่อ-นามสกุล</th>
                             <th scope="col" class="py-2 pl-2 print:border-r">หน่วยงาน</th>
-                            <th scope="col" class="print:py-3 print:px-10"><p
+                            <th scope="col" class="px-2 print:py-3 print:text-center print:border-r">เงินรางวัล</th>
+                            <th scope="col"
+                                class="hidden print:table-cell print:visible print:py-3 print:px-2 print:border-r"><p
+                                    class="invisible print:visible text-center">เลขบัตรประชาชน</p></th>
+                            <th scope="col" class="hidden print:table-cell print:visible print:py-3 print:px-2 "><p
                                     class="invisible print:visible text-center">เซ็นชื่อ</p></th>
                         </tr>
                         </thead>
                         <tbody class="m-2">
                         @foreach($employees as $employee)
                             <tr class="border border-r-2 text-gray-700 text-sm mobile:text-xs sm:text-base">
-                                <td class="sm:px-6 px-4 py-4 print:py-8 print:border-r">{{ $employee->got_prize_no }}</td>
-                                <td class="px-2 py-4 print:py-8 print:border-r print:w-1/4">{{ $employee->name }}</td>
-                                <td class="pl-2 py-2 print:py-8 print:border-r print:w-1/4">{{ $employee->organizer->name }}</td>
-                                <td class="invisible print:px-24 print:py-8"></td>
+                                <td class="p-2 sm:px-6 print:py-7 print:border-r print:w-1/12">{{ $employee->got_prize_no }}</td>
+                                <td class="px-2 py-4 print:py-7 print:border-r print:w-2/12">{{ $employee->name }}</td>
+                                <td class="pl-2 py-2 print:py-7 print:border-r print:w-2/12">{{ $employee->organizer->name }}</td>
+                                <td class="px-2 py-4 print:px-1 print:text-center print:border-r print:w-1/12">
+                                    @if($prize->type == 'รางวัลพิเศษ' && $employee->got_prize_no == $prize->left_amount)
+                                        {{ ($prize->money_amount % 10000) + 10000 }}
+                                    @elseif($prize->type == 'รางวัลพิเศษ')
+                                        {{ 10000 }}
+                                    @else
+                                        {{ $prize->money_amount }}
+                                    @endif
+                                </td>
+                                <td class="hidden print:table-cell print:visible print:px-6 print:border-r print:w-1/6"></td>
+                                <td class="hidden print:table-cell print:visible print:px-16 print:py-8 print:w-1/6"></td>
+
                             </tr>
                         @endforeach
                         </tbody>

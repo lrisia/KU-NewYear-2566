@@ -40,7 +40,7 @@ class PrizeApiController extends Controller
     }
 
     public function getLuckyPerson($id) {
-        $lucky_person = Employee::where('prize_id', $id)->get();
+        $lucky_person = Employee::where('prize_id', $id)->oldest('got_prize_no')->get();
         return response()->json(EmployeeResource::collection($lucky_person), Response::HTTP_OK);
     }
 
