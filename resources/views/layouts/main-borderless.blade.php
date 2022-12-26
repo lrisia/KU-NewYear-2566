@@ -11,7 +11,6 @@
     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet"/>
 </head>
 <body>
 <div id="app">
@@ -19,10 +18,3 @@
 </div>
 </body>
 </html>
-
-<style type="text/css">
-    @font-face {
-        font-family: OptimusPrinceps;
-        src: url('{{ public_path('fonts/angsana/ANGSA.ttf') }}');
-    }
-</style>
