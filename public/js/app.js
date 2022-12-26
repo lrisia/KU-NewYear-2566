@@ -19461,14 +19461,16 @@ var _hoisted_1 = {
   },
   "class": "relative"
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  "class": "absolute top-0 left-0",
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "flex h-screen"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  "class": "mx-auto",
   id: "cover",
-  src: "/image/2565.png",
+  src: "/image/Banner-full.png",
   alt: "KU NewYear Poster"
-}, null, -1 /* HOISTED */);
+})], -1 /* HOISTED */);
 var _hoisted_3 = {
-  "class": "absolute top-0 left-0 fade",
+  "class": "h-screen absolute top-0 left-0 fade",
   id: "video-draw"
 };
 var _hoisted_4 = ["src"];

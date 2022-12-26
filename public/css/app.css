@@ -763,6 +763,9 @@ select {
 .right-4 {
   right: 1rem;
 }
+.top-1 {
+  top: 0.25rem;
+}
 .z-0 {
   z-index: 0;
 }
@@ -2505,6 +2508,10 @@ body {
     visibility: visible;
   }
 
+  .print\:w-1\/4 {
+    width: 25%;
+  }
+
   .print\:border-r {
     border-right-width: 1px;
   }
@@ -2527,6 +2534,11 @@ body {
   .print\:py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .print\:py-8 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 }
 
