@@ -26,17 +26,19 @@
                     <table class="w-full text-left mr-0">
                         <thead class="bg-[#e7e6e6] border text-sm mobile:text-xs sm:text-base">
                         <tr>
-                            <th scope="col" class="py-3 px-4 sm:px-6">ลำดับ</th>
-                            <th scope="col" class="py-3 pl-2 sm:px-6">ชื่อ-นามสกุล</th>
-                            <th scope="col" class="py-3 px-4">หน่วยงาน</th>
+                            <th scope="col" class="py-3 p-2 sm:px-6">ลำดับ</th>
+                            <th scope="col" class="p-2">ชื่อ-นามสกุล</th>
+                            <th scope="col" class="py-2 pl-2">หน่วยงาน</th>
+                            <th scope="col" class="px-2">เงินรางวัล</th>
                         </tr>
                         </thead>
                         <tbody class="m-2">
                         @foreach($employees as $employee)
                             <tr class="border text-gray-700 text-sm mobile:text-xs sm:text-base">
-                                <td class="px-4 py-4 sm:px-6">{{ $loop->iteration }}</td>
-                                <td class="pl-2 py-4 sm:px-6">{{ $employee->name }}</td>
-                                <td class="px-4 py-4">{{ $employee->organizer->name }}</td>
+                                <td class="p-2 sm:px-6">{{ $loop->iteration }}</td>
+                                <td class="px-2 py-4">{{ $employee->name }}</td>
+                                <td class="pl-2 py-2">{{ $employee->organizer->name }}</td>
+                                <td class="px-2 py-4"></td>
                             </tr>
                         @endforeach
                         </tbody>
