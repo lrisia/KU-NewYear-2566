@@ -1,10 +1,10 @@
 <template>
     <div v-if="!this.drawing" style="width: 100%" class="relative">
         <div class="flex h-screen">
-            <img class="mx-auto" id="cover" src="/image/Banner-full.png" alt="KU NewYear Poster">
+            <img class="mx-auto" id="cover" src="https://newyearregis.ku.ac.th/image/Banner-full.png" alt="KU NewYear Poster">
         </div>
         <video class="h-screen absolute top-0 left-0 fade" id="video-draw">
-            <source :src="'/video/' + this.video_name" type="video/mp4" >
+            <source src="https://newyearregis.ku.ac.th/video/lucky-draw-boxload.mp4" type="video/mp4" >
         </video>
     </div>
     <div v-else style="background-color: #CFE4E0;">
