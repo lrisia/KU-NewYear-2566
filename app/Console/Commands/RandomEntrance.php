@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Employee;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class RandomEntrance extends Command
 {
@@ -32,11 +33,13 @@ class RandomEntrance extends Command
         $employees = Employee::whereNotNull('register_at')->whereNull('arrive_at')->whereNull('got_prize_at')->inRandomOrder()->limit($size)->get();
         $bar = $this->output->createProgressBar($employees->count());
         $bar->start();
+        DB::beginTransaction();
         foreach ($employees as $employee) {
             $employee->arrive_at = now();
             $employee->save();
             $bar->advance();
         }
+        DB::commit();
         $bar->finish();
         $this->newLine();
         return Command::SUCCESS;
