@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Log;
 
 class PrizeApiController extends Controller
 {
+    private $buffer;
+
     public function get($id)
     {
         $prize = Prize::find($id);
@@ -27,8 +29,10 @@ class PrizeApiController extends Controller
         $prize->save();
         $amount = $prize->left_amount;
         $lucky_person = Employee::whereNotNull('register_at')->whereNotNull('arrive_at')->whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
-        $i = 1;
         // $lucky_person = Employee::whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
+        $this->buffer = $lucky_person;
+        Log::info($lucky_person);
+        $i = 1;
         foreach ($lucky_person as $person) {
             $person->prize_id = $prize->id;
             $person->got_prize_no = $i;
@@ -36,10 +40,12 @@ class PrizeApiController extends Controller
             $person->save();
             $i++;
         }
+        $this->buffer = null;
         return response('', Response::HTTP_OK);
     }
 
     public function getLuckyPerson($id) {
+        if ($this->buffer) return response()->json(EmployeeResource::collection($this->buffer), Response::HTTP_OK);
         $lucky_person = Employee::where('prize_id', $id)->oldest('got_prize_no')->get();
         return response()->json(EmployeeResource::collection($lucky_person), Response::HTTP_OK);
     }
