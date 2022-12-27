@@ -4,7 +4,7 @@
             <img class="mx-auto" id="cover" src="https://newyearregis.ku.ac.th/image/Banner-full.png" alt="KU NewYear Poster">
         </div>
         <video class="h-screen absolute top-0 left-0 fade" id="video-draw">
-            <source src="https://newyearregis.ku.ac.th/video/lucky-draw-boxload.mp4" type="video/mp4" >
+            <source src="/video/Chest-720-Tran-P.mp4" type="video/mp4" >
         </video>
     </div>
     <div v-else style="background-color: #CFE4E0;">
@@ -183,7 +183,7 @@ export default {
                 video.classList.add('fade-in');
             }, 1000);
             setTimeout(() => video.play(), 1000);
-            setTimeout(() => this.getLuckyPerson(prize_id), 17000); // ms
+            setTimeout(() => this.getLuckyPerson(prize_id), 20000); // ms
         },
         async getLuckyPerson(prize_id) {
             try {
