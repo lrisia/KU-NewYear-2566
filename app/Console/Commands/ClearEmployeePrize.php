@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Employee;
 use App\Models\Prize;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class ClearEmployeePrize extends Command
 {
@@ -32,6 +33,7 @@ class ClearEmployeePrize extends Command
         $employees = Employee::whereNotNull('got_prize_at')->get();
         $bar = $this->output->createProgressBar($employees->count());
         $bar->start();
+        DB::beginTransaction();
         foreach($employees as $employee) {
             $employee->prize_id = null;
             $employee->got_prize_at = null;
@@ -39,12 +41,14 @@ class ClearEmployeePrize extends Command
             $employee->save();
             $bar->advance();
         }
+        DB::commit();
         $bar->finish();
         $this->newLine();
 
         $prizes = Prize::get();
         $bar = $this->output->createProgressBar($prizes->count());
         $bar->start();
+        DB::beginTransaction();
         foreach ($prizes as $prize) {
             if ($prize->type == "รางวัลพิเศษ") {
                 $prize->money_amount = 0;
@@ -56,6 +60,7 @@ class ClearEmployeePrize extends Command
             $prize->save();
             $bar->advance();
         }
+        DB::commit();
         $bar->finish();
         $this->newLine();
 

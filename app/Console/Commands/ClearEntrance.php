@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Employee;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class ClearEntrance extends Command
 {
@@ -31,11 +32,13 @@ class ClearEntrance extends Command
         $employees = Employee::whereNotNull('arrive_at')->get();
         $bar = $this->output->createProgressBar($employees->count());
         $bar->start();
+        DB::beginTransaction();
         foreach($employees as $employee) {
             $employee->arrive_at = null;
             $employee->save();
             $bar->advance();
         }
+        DB::commit();
         $bar->finish();
         $this->newLine();
         return Command::SUCCESS;

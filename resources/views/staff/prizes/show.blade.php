@@ -60,7 +60,7 @@
                                 <td class="px-2 py-4 print:py-7 print:border-r print:w-2/12">{{ $employee->name }}</td>
                                 <td class="pl-2 py-2 print:py-7 print:border-r print:w-2/12">{{ $employee->organizer->name }}</td>
                                 <td class="px-2 py-4 print:px-1 print:text-center print:border-r print:w-1/12">
-                                    @if($prize->type == 'รางวัลพิเศษ' && $employee->got_prize_no == $prize->left_amount)
+                                    @if($prize->type == 'รางวัลพิเศษ' && $employee->got_prize_no == $prize->total_amount)
                                         {{ ($prize->money_amount % 10000) + 10000 }}
                                     @elseif($prize->type == 'รางวัลพิเศษ')
                                         {{ 10000 }}
