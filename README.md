@@ -2,6 +2,8 @@
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
 # Versions
+* 1.0.0
+
 * 0.2.1
   * change some processes from requirement
 
