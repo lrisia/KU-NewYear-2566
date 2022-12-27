@@ -17,14 +17,26 @@
                         <tr>
                             <th scope="col" class="py-3 px-6 text-center">ลำดับ</th>
                             <th scope="col" class="py-3 px-6">ชื่อ-นามสกุล</th>
-                            <th scope="col" class="py-3 pl-2">หน่วยงาน</th>
+                            <th scope="col" class="py-3 px-2">หน่วยงาน</th>
+                            <th scope="col" class="py-3 px-2">เงินรางวัล</th>
                         </tr>
                         </thead>
                         <tbody class="m-2 overflow-y-auto bg-white">
                             <tr v-for="person in lucky_person" class="border-t text-gray-700 sm:text-xl lg:text-3xl 2k:text-5xl">
-                                <td class="px-6 py-3 text-center">{{ person.no }}</td>
-                                <td class="px-6 py-3">{{ person.name }}</td>
-                                <td class="py-3 pl-2 pr-4">{{ person.organizer }}</td>
+                                <td class="px-6 py-3 text-center w-1/6">{{ person.no }}</td>
+                                <td class="px-6 py-3 w-2/6">{{ person.name }}</td>
+                                <td class="py-3 px-2 w-2/6">{{ person.organizer }}</td>
+                                <td class="py-3 px-2 w-1/6">
+                                    <span v-if="prize_data.type === 'รางวัลพิเศษ' && person.no === prize_data.left_amount">
+                                        {{ (prize_data.money_amount % 10000) + 10000 }}
+                                    </span>
+                                    <span v-else-if="prize_data.type === 'รางวัลพิเศษ'">
+                                        10000
+                                    </span>
+                                    <span v-else>
+                                        {{ prize_data.money_amount }}
+                                    </span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

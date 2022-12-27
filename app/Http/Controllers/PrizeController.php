@@ -78,6 +78,10 @@ class PrizeController extends Controller
         $prize->close = true;
         $prize->left_amount = $amount;
         $prize->save();
+        if ($prize->type == "รางวัลพิเศษ") {
+            Artisan::call('mqtt:publish kunewyear2566/close-prize ' . $id);
+            return redirect()->route('staff.prizes');
+        }
 
         $special_prize = Prize::where('type', 'รางวัลพิเศษ')->firstOrFail();
         $special_prize->money_amount += $amount * $prize->money_amount;
