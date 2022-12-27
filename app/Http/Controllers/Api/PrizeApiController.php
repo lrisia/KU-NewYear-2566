@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class PrizeApiController extends Controller
@@ -32,6 +33,7 @@ class PrizeApiController extends Controller
         // $lucky_person = Employee::whereNull('got_prize_at')->inRandomOrder()->limit($amount)->get();
         $this->buffer = $lucky_person;
         Log::info($lucky_person);
+        DB::beginTransaction();
         $i = 1;
         foreach ($lucky_person as $person) {
             $person->prize_id = $prize->id;
@@ -40,6 +42,7 @@ class PrizeApiController extends Controller
             $person->save();
             $i++;
         }
+        DB::commit();
         $this->buffer = null;
         return response('', Response::HTTP_OK);
     }
