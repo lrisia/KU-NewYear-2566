@@ -30,10 +30,15 @@ class RandomEntrance extends Command
     {
         $size = $this->argument('size');
         $employees = Employee::whereNotNull('register_at')->whereNull('arrive_at')->whereNull('got_prize_at')->inRandomOrder()->limit($size)->get();
+        $bar = $this->output->createProgressBar($employees->count());
+        $bar->start();
         foreach ($employees as $employee) {
             $employee->arrive_at = now();
             $employee->save();
+            $bar->advance();
         }
+        $bar->finish();
+        $this->newLine();
         return Command::SUCCESS;
     }
 }

@@ -45,7 +45,7 @@
                                 @if ($is_special_prize_available)
                                     <td class="flex flex-row items-center justify-center py-3">
                                         @if($prize->enable)
-                                            <p class="bg-[#B0C03B] m-2 text-white text-center text-sm py-2 px-3 rounded-lg shadow-lg hover:bg-[#98a534]"
+                                            <p class="bg-[#B0C03B] m-2 text-white text-center text-sm py-2 px-3 rounded-lg shadow-lg hover:bg-[#98a534] cursor-pointer"
                                                onclick="popupToggle({{ $prize }})">จับรางวัล</p>
                                         @else
                                             <a href="{{ route('staff.prizes.show', ['id' => $prize->id]) }}"

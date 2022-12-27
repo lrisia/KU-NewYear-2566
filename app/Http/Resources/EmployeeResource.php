@@ -20,7 +20,8 @@ class EmployeeResource extends JsonResource
             "name" => $this->name,
             "email" => $this->email,
             "organizer" => Organizer::where('id', $this->organizer_id)->first()->name,
-            "qr_code" => $this->qr_code
+            "qr_code" => $this->qr_code,
+            "no" => $this->got_prize_no
         ];
     }
 }

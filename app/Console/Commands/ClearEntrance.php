@@ -29,10 +29,15 @@ class ClearEntrance extends Command
     public function handle()
     {
         $employees = Employee::whereNotNull('arrive_at')->get();
+        $bar = $this->output->createProgressBar($employees->count());
+        $bar->start();
         foreach($employees as $employee) {
             $employee->arrive_at = null;
             $employee->save();
+            $bar->advance();
         }
+        $bar->finish();
+        $this->newLine();
         return Command::SUCCESS;
     }
 }

@@ -18,18 +18,28 @@
                 <thead class="bg-[#e7e6e6]">
                     <tr>
                         <th scope="col" class="py-3 px-6">ชื่อรางวัล</th>
-                        <th scope="col" class="py-3 px-6"></th>
-                        <th scope="col" class="py-3 px-6">ชื่อผู้ได้รับรางวัล</th>
-                        <th scope="col">หน่วยงาน</th>
+                        <th scope="col" class="py-3 px-2"></th>
+                        <th scope="col" class="py-3 px-2">ชื่อผู้ได้รับรางวัล</th>
+                        <th scope="col" class="px-2">หน่วยงาน</th>
+                        <th scope="col" class="px-2">เงินรางวัล</th>
                     </tr>
                 </thead>
                     <tbody class="m-2">
                         @foreach($employees as $employee)
                         <tr class="border-t text-gray-700 text-sm mobile:text-xs sm:text-base">
                             <td class="px-6 py-4">{{ $employee->prize->type }}</td>
-                            <td class="pr-6 pl-2 py-4">{{ $employee->prize->description }} จำนวน {{ $employee->prize->total_amount }} รางวัล</td>
-                            <td class="px-6 py-4">{{ $employee->name }}</td>
-                            <td class="py-4">{{ $employee->organizer->name }}</td>
+                            <td class="px-2 py-4">{{ $employee->prize->description }} จำนวน {{ $employee->prize->total_amount }} รางวัล</td>
+                            <td class="px-2 py-4">{{ $employee->name }}</td>
+                            <td class="px-2 py-4">{{ $employee->organizer->name }}</td>
+                            <td class="px-2 py-4">
+                                @if($employee->prize->type == 'รางวัลพิเศษ' && $employee->got_prize_no == $employee->prize->left_amount)
+                                    {{ ($employee->prize->money_amount % 10000) + 10000 }}
+                                @elseif($employee->prize->type == 'รางวัลพิเศษ')
+                                    {{ 10000 }}
+                                @else
+                                    {{ $employee->prize->money_amount }}
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

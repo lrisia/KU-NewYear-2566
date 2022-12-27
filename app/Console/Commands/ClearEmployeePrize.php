@@ -30,13 +30,20 @@ class ClearEmployeePrize extends Command
     public function handle()
     {
         $employees = Employee::whereNotNull('got_prize_at')->get();
+        $bar = $this->output->createProgressBar($employees->count());
+        $bar->start();
         foreach($employees as $employee) {
             $employee->prize_id = null;
             $employee->got_prize_at = null;
             $employee->save();
+            $bar->advance();
         }
+        $bar->finish();
+        $this->newLine();
 
         $prizes = Prize::get();
+        $bar = $this->output->createProgressBar($prizes->count());
+        $bar->start();
         foreach ($prizes as $prize) {
             if ($prize->type == "รางวัลพิเศษ") {
                 $prize->money_amount = 6000;
@@ -46,7 +53,10 @@ class ClearEmployeePrize extends Command
             $prize->enable = true;
             $prize->left_amount = $prize->total_amount;
             $prize->save();
+            $bar->advance();
         }
+        $bar->finish();
+        $this->newLine();
 
         return Command::SUCCESS;
     }

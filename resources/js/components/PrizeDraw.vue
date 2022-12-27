@@ -21,8 +21,8 @@
                         </tr>
                         </thead>
                         <tbody class="m-2 overflow-y-auto bg-white">
-                            <tr v-for="(person, index) in lucky_person" class="border-t text-gray-700 sm:text-xl lg:text-3xl 2k:text-5xl">
-                                <td class="px-6 py-3 text-center">{{ index + 1 }}</td>
+                            <tr v-for="person in lucky_person" class="border-t text-gray-700 sm:text-xl lg:text-3xl 2k:text-5xl">
+                                <td class="px-6 py-3 text-center">{{ person.no }}</td>
                                 <td class="px-6 py-3">{{ person.name }}</td>
                                 <td class="py-3 pl-2 pr-4">{{ person.organizer }}</td>
                             </tr>
