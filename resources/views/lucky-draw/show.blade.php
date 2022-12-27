@@ -62,7 +62,7 @@
                 </div>
                 @if ($employees->count() == 0)
                     <div class="text-center py-4 text-gray-400 bg-gray-50 rounded-b-lg">
-                        <p>ยังไม่ได้จับรางวัลนี้</p>
+                        <p>ไม่พบข้อมูล</p>
                     </div>
                 @endif
                 <div class="mb-4"></div>
