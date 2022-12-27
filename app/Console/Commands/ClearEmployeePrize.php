@@ -47,8 +47,8 @@ class ClearEmployeePrize extends Command
         $bar->start();
         foreach ($prizes as $prize) {
             if ($prize->type == "รางวัลพิเศษ") {
-                $prize->money_amount = 6000;
-                $prize->total_amount = 1;
+                $prize->money_amount = 0;
+                $prize->total_amount = 0;
             }
             $prize->close = false;
             $prize->enable = true;
