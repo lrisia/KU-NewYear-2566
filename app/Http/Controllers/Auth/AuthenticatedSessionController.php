@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -39,10 +40,14 @@ class AuthenticatedSessionController extends Controller
     public function qrLogin(Request $request, $email, $token) {
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        $user = User::where('email', $email)->where('remember_token', $token)->firstOrFail();
-        $request->session()->regenerate();
-        Auth::loginUsingId($user->id);
-        return redirect()->route('qr-code.scan');
+        $user = User::where('email', $email)->firstOrFail();
+        if (Hash::check($token, $user->password)) {
+            $request->session()->regenerate();
+            Auth::loginUsingId($user->id);
+            return redirect()->route('qr-code.scan');
+        } else {
+            abort(404);
+        }
     }
 
     /**
