@@ -31,7 +31,15 @@
                             <td class="px-2 py-4">{{ $employee->prize->description }} จำนวน {{ $employee->prize->total_amount }} รางวัล</td>
                             <td class="px-2 py-4">{{ $employee->name }}</td>
                             <td class="px-2 py-4">{{ $employee->organizer->name }}</td>
-                            <td class="px-2 py-4"></td>
+                            <td class="px-2 py-4">
+                                @if($employee->prize->type == 'รางวัลพิเศษ' && $employee->got_prize_no == $employee->prize->left_amount)
+                                    {{ ($employee->prize->money_amount % 10000) + 10000 }}
+                                @elseif($employee->prize->type == 'รางวัลพิเศษ')
+                                    {{ 10000 }}
+                                @else
+                                    {{ $employee->prize->money_amount }}
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
