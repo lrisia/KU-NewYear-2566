@@ -21,6 +21,7 @@ class PrizeApiController extends Controller
     }
 
     public function draw($id) {
+        Artisan::call('mqtt:publish kunewyear2566/draw-prize ' . $id);
         $prize = Prize::find($id);
         $prize->enable = false;
         $prize->save();
@@ -35,7 +36,6 @@ class PrizeApiController extends Controller
             $person->save();
             $i++;
         }
-        Artisan::call('mqtt:publish kunewyear2566/draw-prize ' . $id);
         return response('', Response::HTTP_OK);
     }
 
