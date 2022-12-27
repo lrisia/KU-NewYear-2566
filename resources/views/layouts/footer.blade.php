@@ -5,7 +5,7 @@
     <div class="text-gray-500 text-sm">
         <h3 class="font-bold text-base">จัดทำโดย</h3>
         <p>ภาควิชาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยเกษตรศาสตร์</p>
-        <p>นางสาวพุธิตา <span class="ml-3">จองศิริกุล</span><span class="ml-3">(KU80)</span></p>
+        <p>นางสาวพุธิตา <span class="ml-3">จองศิริกุล</span><span class="ml-4">(KU80)</span></p>
         <p>นายพชร <span class="ml-10">สุวราวรนาถ (KU80)</span></p>
     </div>
 </footer>
