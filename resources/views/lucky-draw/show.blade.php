@@ -14,7 +14,7 @@
                 </div>
                 <input autocomplete="off" type="search" name="keyword" id="keyword"
                        class="block w-full p-3 px-10 mt-3 text-gray-700 shadow border border-[#e5e5e5] rounded-lg bg-[#f2f0f0] focus:ring-blue-500 focus:border-blue-500 md:py-4"
-                       placeholder="" value="{{$keyword}}" required>
+                       placeholder="" value="{{$keyword}}">
                 <button type="submit"
                         class="absolute right-3 md:right-5 bottom-2 bg-[#D9D9D9] text-gray-700 border border-[#d5d5d5] hover:bg-[#c3c1c1] focus:ring-4 focus:outline-none focus:ring-blue-300 shadow rounded-lg text-sm px-4 py-1.5 sm:px-6 md:text-base md:mb-0.5">
                     ค้นหา
@@ -44,9 +44,9 @@
                         <tbody class="m-2">
                         @foreach($employees as $employee)
                             <tr class="border text-gray-700 text-sm mobile:text-xs sm:text-base">
-                                <td class="px-2 py-2 sm:px-6">{{ $employee->got_prize_no }}</td>
-                                <td class="pl-2 py-4 sm:px-6">{{ $employee->name }}</td>
-                                <td class="px-4 py-4">{{ $employee->organizer->name }}</td>
+                                <td class="p-2 sm:px-6">{{ $employee->got_prize_no }}</td>
+                                <td class="px-2 py-4">{{ $employee->name }}</td>
+                                <td class="pl-2 py-2">{{ $employee->organizer->name }}</td>
                                 <td class="px-2 py-4">
                                     @if($prize->type == 'รางวัลพิเศษ' && $employee->got_prize_no == $prize->left_amount)
                                         {{ ($prize->money_amount % 10000) + 10000 }}

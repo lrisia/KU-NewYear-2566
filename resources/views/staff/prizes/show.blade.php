@@ -21,7 +21,7 @@
                 </div>
                 <input autocomplete="off" type="search" name="keyword" id="keyword"
                        class="block w-full p-3 px-10 mt-3 text-gray-700 shadow border border-[#e5e5e5] rounded-lg bg-[#f2f0f0] focus:ring-blue-500 focus:border-blue-500 md:py-4"
-                       placeholder="" value="{{$keyword}}" required>
+                       placeholder="" value="{{$keyword}}" >
                 <button type="submit"
                         class="absolute right-3 md:right-5 bottom-2 bg-[#D9D9D9] text-gray-700 border border-[#d5d5d5] hover:bg-[#c3c1c1] focus:ring-4 focus:outline-none focus:ring-blue-300 shadow rounded-lg text-sm px-4 py-1.5 sm:px-6 md:text-base md:mb-0.5">
                     ค้นหา
@@ -87,7 +87,7 @@
         <div class="relative">
             <a class="absolute left-16 cursor-pointer" href="{{ route('staff.prizes') }}">< <u>กลับ</u></a>
         </div>
-        @if (!$prize->close && $prize->type != "รางวัลพิเศษ")
+        @if (!$prize->enable && !$prize->close)
             <div class="relative">
                 <p onclick="popupToggle({{ $prize }})"
                    class="absolute right-8 px-6 py-2 text-white mobile:text-sm shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] cursor-pointer">

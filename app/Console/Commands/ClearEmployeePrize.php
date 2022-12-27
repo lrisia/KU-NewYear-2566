@@ -35,6 +35,7 @@ class ClearEmployeePrize extends Command
         foreach($employees as $employee) {
             $employee->prize_id = null;
             $employee->got_prize_at = null;
+            $employee->got_prize_no = null;
             $employee->save();
             $bar->advance();
         }
