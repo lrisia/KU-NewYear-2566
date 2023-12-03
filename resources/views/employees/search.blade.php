@@ -2,8 +2,8 @@
 
 @section('content')
     <section>
-        <div class="mx-10 justify-center @if ($employees->count() == 0) h-screen @endif">
-{{--            <count-down></count-down>--}}
+        <div class="mx-10 justify-center @if ($employees->count() == 0) min-h-screen @endif">
+            <count-down></count-down>
             <form action="{{ route('register.search') }}" method="get" class="mt-10">
                 <label for="search" class="md:text-lg">ค้นหาชื่อเพื่อลงทะเบียนเพิ่มเติม</label>
                 <div class="relative">

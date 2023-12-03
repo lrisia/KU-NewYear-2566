@@ -1,6 +1,6 @@
 <div class="my-28"></div>
 <footer class="p-4 bg-white rounded-lg border-t shadow-lg md:flex md:items-center md:justify-between md:p-6 mt-10 z-20">
-    <span class="text-sm text-gray-500 sm:text-center">© 2022 งานขอบคุณบุคลากร ประจำปี 2565
+    <span class="text-sm text-gray-500 sm:text-center">© 2023 งานขอบคุณบุคลากร ประจำปี 2566
     </span>
     <div class="text-gray-500 text-sm">
         <h3 class="font-bold text-base">จัดทำโดย</h3>

@@ -1,9 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-    <section class="h-screen">
+    <section class="min-h-screen">
         <div class="mx-10 justify-center">
-{{--            <count-down></count-down>--}}
+            <count-down></count-down>
             <form action="{{ route('register.search') }}" method="get" class="my-10">
                 <label for="search" class="md:text-lg">ค้นหาชื่อเพื่อลงทะเบียนเพิ่มเติม</label>
                 <div class="relative">
