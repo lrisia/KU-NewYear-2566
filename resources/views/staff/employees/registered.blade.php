@@ -24,6 +24,7 @@
                     <th scope="col" class="py-3 px-6">หน่วยงาน</th>
                     <th scope="col" class="py-3 px-6">อีเมล</th>
                     <th scope="col" class="py-3 px-6">เวลาที่ลงทะเบียน</th>
+                    <th scope="col" class="py-3 px-6 text-center">QR Code</th>
                 </tr>
             </thead>
             <tbody class="m-2">
@@ -34,6 +35,11 @@
                     <td class="px-6 py-4">{{ $employee->organizer->name }}</td>
                     <td class="px-6 py-4">{{ $employee->email }}</td>
                     <td class="px-6 py-4">{{ $employee->timeFormat($employee->register_at) }}</td>
+                    <td class="px-6 py-4">
+                        <a href="{{ route('qr-code.show', ['qr_code' => $employee->qr_code]) }}" target="_blank">
+                            <img src="data:image/svg+xml;base64,{!! base64_encode(QrCode::format('svg')->size(100)->generate($employee->qr_code)) !!} " class="mx-auto w-16">
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

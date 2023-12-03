@@ -1011,6 +1011,9 @@ select {
 .w-48 {
   width: 12rem;
 }
+.w-16 {
+  width: 4rem;
+}
 .w-40 {
   width: 10rem;
 }
