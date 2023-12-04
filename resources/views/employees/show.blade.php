@@ -19,7 +19,6 @@
 
 @endsection
 
-@section('script')
 <script>
     function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;
@@ -29,4 +28,3 @@
         document.body.innerHTML = originalContents;
     }
 </script>
-@endsection
