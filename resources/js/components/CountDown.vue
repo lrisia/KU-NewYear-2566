@@ -40,7 +40,7 @@ export default {
     data () {
         return {
             now: Math.trunc((new Date()).getTime() / 1000),
-            event: new Date('2023-12-20T00:00:00'),
+            event: new Date('2023-12-21T00:00:00'),
             finish: false
         }
     },
