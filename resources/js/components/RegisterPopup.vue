@@ -79,38 +79,29 @@
                                     <p v-if="this.error !== 'answer' && this.error !== 'islam'" class="text-red-500 mt-2 text-xs md:text-sm">{{ this.error }}</p>
                                 </div>
                                 <div id="islam_container" class="hidden mt-6">
-                                    <p class="text-sm md:text-base my-4 leading-relaxed text-gray-500 dark:text-gray-400">
-                                        เป็นอิสลาม / ไม่เป็นอิสลาม <span v-if="this.error === 'islam'"
-                                                                    class="ml-3 text-red-500 text-sm">กรุณาเลือกคำตอบ</span>
+                                    <p class="text-sm md:text-base mt-4 mb-2 leading-relaxed text-gray-500 dark:text-gray-400">
+                                        กรณีที่ท่านนับถือศาสนาอิสลาม<br>และต้องการระบุอาหารฮาลาลโปรดเลือก
                                     </p>
+                                    <p v-if="this.error === 'islam'"
+                                              class="ml-3 text-red-500 text-sm mb-4">กรุณาเลือกคำตอบ</p>
                                     <ul class="flex max-w-md">
-                                        <li class="relative mr-4">
-                                            <input class="sr-only peer" type="radio" value="yes"
-                                                name="islam" id="islam_yes" v-model="data.islam">
-                                            <label
-                                                class="py-2 px-7 flex justify-center bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent peer-checked:shadow-lg peer-checked:pr-10"
-                                                for="islam_yes">
-                                                เป็นอิสลาม
-                                            </label>
-                                            <div class="absolute hidden w-5 h-5 peer-checked:block top-2 right-4">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/390/390973.png"
-                                                    alt="check_icon">
-                                            </div>
-                                        </li>
-
-                                        <li class="relative">
-                                            <input class="sr-only peer" type="radio" value="no"
-                                                name="islam" id="islam_no" v-model="data.islam">
-                                            <label
-                                                class="py-2 px-6 flex justify-center bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-red-500 peer-checked:ring-2 peer-checked:border-transparent peer-checked:shadow-lg peer-checked:pr-10"
-                                                for="islam_no">
-                                                ไม่เป็นอิสลาม
-                                            </label>
-                                            <div class="absolute hidden w-4 h-4 peer-checked:block top-3 right-4">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/594/594864.png"
-                                                    alt="cancel_icon">
-                                            </div>
-                                        </li>
+<!--                                        <li class="relative mr-4">-->
+<!--                                            <input class="sr-only peer" type="radio" value="yes"-->
+<!--                                                name="islam" id="islam_yes" v-model="data.islam">-->
+<!--                                            <label-->
+<!--                                                class="py-2 px-7 flex justify-center bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent peer-checked:shadow-lg peer-checked:pr-10"-->
+<!--                                                for="islam_yes">-->
+<!--                                                อาหารฮาลาล-->
+<!--                                            </label>-->
+<!--                                            <div class="absolute hidden w-5 h-5 peer-checked:block top-2 right-4">-->
+<!--                                                <img src="https://cdn-icons-png.flaticon.com/512/390/390973.png"-->
+<!--                                                    alt="check_icon">-->
+<!--                                            </div>-->
+<!--                                        </li>-->
+                                        <div class="flex items-center mb-4">
+                                            <input id="islam_yes" name="islam" type="checkbox" value="yes" v-model="data.islam" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
+                                            <label for="islam_yes" class="ml-4">อาหารฮาลาล</label>
+                                        </div>
                                     </ul>
                                 </div>
                             </div>
@@ -203,6 +194,7 @@ export default {
             try {
                 if (this.data.answer === "yes") {
                     if (this.validateEmail(this.data.email)) {
+                        this.data.islam = this.data.islam ? 'yes' : 'no';
                         const response = await axios.post(this.url + '/api/register/store', this.data)
                         this.alert('QR Code จะแสดงในอีก <b></b> วินาที');
                     } else if (this.data.email === '') {
