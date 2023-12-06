@@ -25,6 +25,9 @@ class RegisterApiController extends Controller
         if (!$request->has('answer') ||
             $request->input('answer') == "")
             $error["answer"] = "answer missing";
+        if (!$request->has('islam') ||
+            $request->input('islam') == "")
+            $error["islam"] = "islam missing";
         if (!empty($error))
             return response()->json([
                 'success' => false,
@@ -37,22 +40,24 @@ class RegisterApiController extends Controller
                 'success' => false,
                 'message' => ["email" => "email missing"]
             ], Response::HTTP_BAD_REQUEST);
-        if (Employee::where('email', $request->input('email'))->count() == 1)
-            return response()->json([
-                'success' => false,
-                'message' => ["email" => "email duplicated"]
-            ], Response::HTTP_BAD_REQUEST);
         if ($answer === "yes") {
             $employee = Employee::find($request->input('employee_id'));
             $employee->email = $request->input('email');
             $employee->register_at = Carbon::now();
+            $employee->islam = $request->input("islam") === "yes";
             $qr_code = fake()->regexify('[A-Z0-9]{32}');
             while (Employee::where('qr_code', $qr_code)->first()) {
                 $qr_code = fake()->regexify('[A-Z0-9]{32}');
             }
             $employee->qr_code = $qr_code;
             $employee->save();
-            Artisan::call('email:send ' . $employee->email);
+            try {
+                Artisan::call('email:send ' . $employee->email);
+                $employee->send_email_success = true;
+            } catch (\Exception $e) {
+                $employee->send_email_success = false;
+            }
+            $employee->save();
         }
         return response()->json([
             'success' => true,

@@ -24,16 +24,16 @@ Route::get('/', function () {
         if (Auth::user()->isStaff()) return redirect()->route('staff.dashboard');
         else if (Auth::user()->isRegister()) return redirect()->route('staff.employees');
     }
-    $date = new DateTime('2022-12-16T00:00:00');
+    $date = new DateTime('2023-12-16T00:00:00');
     $now = new DateTime();
     if ($date > $now) { return redirect()->route('register.index'); }
     else { return redirect()->route('lucky-draw.show.no-id'); }
 })->name('/');
 
-//Route::group(['prefix' => 'register'], function() {
-//    Route::get('', [EmployeeController::class, 'index'])->name('register.index');
-//    Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
-//});
+Route::group(['prefix' => 'register'], function() {
+   Route::get('', [EmployeeController::class, 'index'])->name('register.index');
+   Route::get('search', [EmployeeController::class, 'search'])->name('register.search');
+});
 
 Route::get('qr-code/{qr_code}', [EmployeeController::class, 'show'])->name('qr-code.show');
 

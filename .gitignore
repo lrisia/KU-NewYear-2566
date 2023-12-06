@@ -227,3 +227,4 @@ $RECYCLE.BIN/
 composer.lock
 package-lock.json
 .idea/
+yarn.lock

@@ -7,7 +7,7 @@
                 alt="" style="width: 60px">
         </span>
             <h1 class="text-lg font-bold text-white ml-6 md:text-xl">ระบบลงทะเบียนเข้าร่วมงานขอบคุณบุคลากร ประจำปี
-                2565</h1>
+                2566</h1>
         </a>
         @auth()
             <div class="flex gap-4 items-center">

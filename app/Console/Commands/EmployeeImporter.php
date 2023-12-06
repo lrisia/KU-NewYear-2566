@@ -44,6 +44,7 @@ class EmployeeImporter extends Command
             $bar->start();
 
             foreach ($csv_data as $line) {
+                if (empty($line)) continue;
                 if (!$skipped_header) {
                     $skipped_header = true;
                     continue;
@@ -72,6 +73,7 @@ class EmployeeImporter extends Command
             $bar->finish();
             $this->line(" Imported Success.");
         } catch (\Exception $e) {
+            Log::error($e->getMessage());
             DB::rollBack();
             $this->error(" Something went wrong...");
         }

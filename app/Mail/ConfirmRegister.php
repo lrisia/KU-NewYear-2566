@@ -34,7 +34,7 @@ class ConfirmRegister extends Mailable
     {
         return new Envelope(
             from: new Address('no_reply@newyearregis.ku.ac.th', 'newyearregis.ku.ac.th'),
-            subject: 'QR code สำหรับเข้าร่วมงานขอบคุณบุคลากร ประจำปี 2565',
+            subject: 'QR code สำหรับเข้าร่วมงานขอบคุณบุคลากร ประจำปี 2566',
         );
     }
 

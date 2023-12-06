@@ -72,11 +72,46 @@
                                 </ul>
                                 <div id="email_container" class="hidden mt-6">
                                     <label for="email">อีเมล: </label>
-                                    <input v-model="data.email" type="email" name="email" id="email"
+                                    <input v-model="data.email" type="text" name="email" id="email"
                                            class="px-2 bg-gray-50 border border-gray-300 rounded-lg py-1 ml-1"
                                            placeholder="example@ku.th">
                                     <p class="text-xs text-gray-500 mt-2">(ใช้ในการส่งลิงก์ QR Code เพื่อใช้สำหรับเข้าร่วมงาน)</p>
-                                    <p v-if="this.error" class="text-red-500 mt-2 text-xs md:text-sm">{{ this.error }}</p>
+                                    <p v-if="this.error !== 'answer' && this.error !== 'islam'" class="text-red-500 mt-2 text-xs md:text-sm">{{ this.error }}</p>
+                                </div>
+                                <div id="islam_container" class="hidden mt-6">
+                                    <p class="text-sm md:text-base my-4 leading-relaxed text-gray-500 dark:text-gray-400">
+                                        เป็นอิสลาม / ไม่เป็นอิสลาม <span v-if="this.error === 'islam'"
+                                                                    class="ml-3 text-red-500 text-sm">กรุณาเลือกคำตอบ</span>
+                                    </p>
+                                    <ul class="flex max-w-md">
+                                        <li class="relative mr-4">
+                                            <input class="sr-only peer" type="radio" value="yes"
+                                                name="islam" id="islam_yes" v-model="data.islam">
+                                            <label
+                                                class="py-2 px-7 flex justify-center bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-green-500 peer-checked:ring-2 peer-checked:border-transparent peer-checked:shadow-lg peer-checked:pr-10"
+                                                for="islam_yes">
+                                                เป็นอิสลาม
+                                            </label>
+                                            <div class="absolute hidden w-5 h-5 peer-checked:block top-2 right-4">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/390/390973.png"
+                                                    alt="check_icon">
+                                            </div>
+                                        </li>
+
+                                        <li class="relative">
+                                            <input class="sr-only peer" type="radio" value="no"
+                                                name="islam" id="islam_no" v-model="data.islam">
+                                            <label
+                                                class="py-2 px-6 flex justify-center bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-red-500 peer-checked:ring-2 peer-checked:border-transparent peer-checked:shadow-lg peer-checked:pr-10"
+                                                for="islam_no">
+                                                ไม่เป็นอิสลาม
+                                            </label>
+                                            <div class="absolute hidden w-4 h-4 peer-checked:block top-3 right-4">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/594/594864.png"
+                                                    alt="cancel_icon">
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="modal-footer mb-4 px-5">
@@ -117,6 +152,7 @@ export default {
                 employee_id: parseInt(this.employee.id),
                 answer: '',
                 email: '',
+                islam: '',
             },
             error: null,
             waiting: false,
@@ -147,7 +183,7 @@ export default {
             return String(email)
                 .toLowerCase()
                 .match(
-                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                    /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
                 );
         },
         onToggle() {
@@ -155,9 +191,11 @@ export default {
         },
         showInput() {
             document.getElementById('email_container').style.display = "block";
+            document.getElementById('islam_container').style.display = "block";
         },
         hideInput() {
             document.getElementById('email_container').style.display = "none";
+            document.getElementById('islam_container').style.display = "none";
         },
         async submitForm() {
             this.waiting = true;
@@ -167,12 +205,15 @@ export default {
                     if (this.validateEmail(this.data.email)) {
                         const response = await axios.post(this.url + '/api/register/store', this.data)
                         this.alert('QR Code จะแสดงในอีก <b></b> วินาที');
+                    } else if (this.data.email === '') {
+                        this.error = "กรุณากรอกอีเมล"
                     } else {
                         this.error = "รูปแบบอีเมลไม่ถูกต้อง"
                     }
-                }
-                else {
+                } else if (this.data.answer === "no") {
                     this.alert();
+                } else {
+                    this.error = "answer"
                 }
             } catch (e) {
                 console.log(e.response.data.message);
@@ -180,8 +221,8 @@ export default {
                     this.error = "answer"
                 else if (this.data.email === '')
                     this.error = "กรุณากรอกอีเมล"
-                else
-                    this.error = "อีเมลนี้ถูกใช้ไปแล้ว"
+                else if (this.data.islam === '')
+                    this.error = "islam"
             }
             this.waiting = false;
         },
@@ -220,6 +261,7 @@ export default {
         clear() {
             this.data.answer = '';
             this.data.email = '';
+            this.data.islam = '';
             this.error = null;
         }
     },

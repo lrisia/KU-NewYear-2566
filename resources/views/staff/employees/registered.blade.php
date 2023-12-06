@@ -14,7 +14,7 @@
         </div>
     </form>
 
-    <h1 class="md:text-lg">รายชื่อผู้ที่ลงทะเบียนแล้วมีจำนวน {{ $employees->total() }} คน</h1>
+    <h1 class="md:text-lg">รายชื่อผู้ที่ลงทะเบียนแล้วมีจำนวน {{ $employees->total() }} คน เป็นอิสลามจำนวน {{ $employees->where('islam', true)->count() }} คน</h1>
     <div class="my-4 overflow-x-auto relative text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
         <table class="w-full text-left text-gray-60 mr-0">
             <thead class="bg-[#e7e6e6]">
@@ -24,16 +24,29 @@
                     <th scope="col" class="py-3 px-6">หน่วยงาน</th>
                     <th scope="col" class="py-3 px-6">อีเมล</th>
                     <th scope="col" class="py-3 px-6">เวลาที่ลงทะเบียน</th>
+                    <th scope="col" class="py-3 px-6 text-center">QR Code</th>
                 </tr>
             </thead>
             <tbody class="m-2">
                 @foreach($employees as $employee)
                 <tr class="border-t text-gray-700">
                     <td class="px-6 py-4">{{ $employees->firstItem() + $loop->index }}</td>
-                    <td class="px-6 py-4">{{ $employee->name }}</td>
+                    <td class="px-6 py-4">
+                        <div>
+                            <p>{{ $employee->name }}</p>
+                            @if ($employee->islam)
+                                <p class="text-xs sm:text-sm text-gray-500">(ศาสนาอิสลาม)</p>
+                            @endif
+                        </div>
+                    </td>
                     <td class="px-6 py-4">{{ $employee->organizer->name }}</td>
                     <td class="px-6 py-4">{{ $employee->email }}</td>
                     <td class="px-6 py-4">{{ $employee->timeFormat($employee->register_at) }}</td>
+                    <td class="px-6 py-4">
+                        <a href="{{ route('qr-code.show', ['qr_code' => $employee->qr_code]) }}" target="_blank">
+                            <img src="data:image/svg+xml;base64,{!! base64_encode(QrCode::format('svg')->size(100)->generate($employee->qr_code)) !!} " class="mx-auto w-16">
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

@@ -14,7 +14,7 @@
         </div>
     </form>
 
-    <h1 class="md:text-lg mr-6">รายชื่อผู้เข้าร่วมงานทั้งหมด {{ $employees->total() }} คน</h1>
+    <h1 class="md:text-lg mr-6">รายชื่อผู้เข้าร่วมงานทั้งหมด {{ $employees->total() }} คน เป็นอิสลามจำนวน {{ $employees->where('islam', true)->count() }} คน</h1>
     <div class="relative flex items-end justify-end ml-8 mt-2">
         <a href="{{ route('qr-code.scan') }}" class="absolute p-2 text-white text-sm mobile:text-xs shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] flex items-center">
             <span class="mr-2 mobile:hidden">SCAN</span>
@@ -36,7 +36,14 @@
                 @foreach($employees as $employee)
                 <tr class="border-t text-gray-700">
                     <td class="px-6 py-4">{{ $employees->firstItem() + $loop->index }}</td>
-                    <td class="px-6 py-4">{{ $employee->name }}</td>
+                    <td class="px-6 py-4">
+                        <div>
+                            <p>{{ $employee->name }}</p>
+                            @if ($employee->islam)
+                                <p class="text-xs sm:text-sm text-gray-500">(ศาสนาอิสลาม)</p>
+                            @endif
+                        </div>
+                    </td>
                     <td class="px-6 py-4">{{ $employee->organizer->name }}</td>
                     <td class="px-6 py-4">{{ $employee->email }}</td>
                     <td class="px-6 py-4">{{ $employee->timeFormat($employee->arrive_at) }}</td>

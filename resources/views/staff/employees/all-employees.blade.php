@@ -14,7 +14,7 @@
         </div>
     </form>
 
-    <h1 class="md:text-lg">รายชื่อบุคลากรทั้งหมด {{ $employees->total() }} คน</h1>
+    <h1 class="md:text-lg">รายชื่อบุคลากรทั้งหมด {{ $employees->total() }} คน เป็นอิสลามจำนวน {{ $employees->where('islam', true)->count() }} คน</h1>
     <div class="my-4 overflow-x-auto relative text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
         <table class="w-full text-left text-gray-60 mr-0">
             <thead class="bg-[#e7e6e6]">
@@ -31,7 +31,14 @@
                 @foreach($employees as $employee)
                 <tr class="border-t text-gray-700">
                     <td class="px-6 py-4">{{ $employees->firstItem() + $loop->index }}</td>
-                    <td class="px-6 py-4">{{ $employee->name }}</td>
+                    <td class="px-6 py-4">
+                        <div>
+                            <p>{{ $employee->name }}</p>
+                            @if ($employee->islam)
+                                <p class="text-xs sm:text-sm text-gray-500">(ศาสนาอิสลาม)</p>
+                            @endif
+                        </div>
+                    </td>
                     <td class="pr-6 py-4">{{ $employee->organizer->name }}</td>
                     <td class="px-6 py-4">{{ $employee->email }}</td>
                     <td class="px-6 py-4 text-center">

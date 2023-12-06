@@ -26,6 +26,7 @@ class PrizeApiController extends Controller
     public function draw($id) {
         Artisan::call('mqtt:publish kunewyear2566/draw-prize ' . $id);
         $prize = Prize::find($id);
+        if ($prize->enable === false) return response('Prize was already draw', Response::HTTP_BAD_REQUEST);
         $prize->enable = false;
         $prize->save();
         $amount = $prize->left_amount;
