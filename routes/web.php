@@ -24,7 +24,7 @@ Route::get('/', function () {
         if (Auth::user()->isStaff()) return redirect()->route('staff.dashboard');
         else if (Auth::user()->isRegister()) return redirect()->route('staff.employees');
     }
-    $date = new DateTime('2023-12-16T00:00:00');
+    $date = new DateTime('2023-12-20T00:00:00');
     $now = new DateTime();
     if ($date > $now) { return redirect()->route('register.index'); }
     else { return redirect()->route('lucky-draw.show.no-id'); }
