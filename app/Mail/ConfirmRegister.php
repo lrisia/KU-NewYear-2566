@@ -33,7 +33,7 @@ class ConfirmRegister extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('no_reply@newyearregis.ku.ac.th', 'newyearregis.ku.ac.th'),
+            from: new Address('newyearregis@ku.ac.th', 'newyearregis.ku.ac.th'),
             subject: 'QR code สำหรับเข้าร่วมงานขอบคุณบุคลากร ประจำปี 2566',
         );
     }
