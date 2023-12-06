@@ -1,39 +1,35 @@
 # KU New Year 2566
+
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
-# Versions
-* 1.0.0
+## Versions
 
+* 2.0.0
+  * Newyear 2023 version
+* 1.0.0
 * 0.2.1
   * change some processes from requirement
-
 * 0.1.6
   * entrance and prize
-
 * 0.1.5
   * stop registration before 21 Dec
-
 * 0.1.4
   * import extra employee
-
 * 0.1.3
   * staff view registration stats by organization
-
 * 0.1.2
   * fix invalidate email format
-
 * 0.1.1
   * paginate data with iteration counter
-
 * 0.1.0
   * show registered employee in search result of registration
-
 * 0.0.6
   * First Deploy
 
-# Development setup
+## Development setup
 
-## install composer dependencies
+### install composer dependencies
+
 ``` bash
 docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -43,42 +39,50 @@ docker run --rm \
     composer install --ignore-platform-reqs
 ```
 
-## config .env
+### config .env
+
 ```bash
 cp .env.example .env
 ```
 
-## alias sail
+### alias sail
+
 ```bash
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail' 
 ```
 
-## Build container with sail
+### Build container with sail
+
 ```bash
 sail up -d
 ```
 
-## SetUP
+### SetUP
+
 ```bash
 sail artisan key:generate
 ```
 
-## Executing Node / NPM Commands
+### Executing Node / NPM Commands
+
 ```bash
 sail npm install
 sail npm run watch-poll
 ```
 
-## Migration
+### Migration
+
 ```bash
 sail artisan migrate
 ```
-## migrate and seed
+
+### migrate and seed
+
 ```bash
 sail artisan migrate --seed
 ```
 
-# Command
+## Command
 
 * Employee Importer
   * add file `employee.csv` in storage/app/data
