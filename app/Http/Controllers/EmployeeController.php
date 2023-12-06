@@ -24,7 +24,10 @@ class EmployeeController extends Controller
     public function show($qr_code)
     {
         $employee = Employee::where('qr_code', $qr_code)->first();
-        $organizer_name = Organizer::where('id', $employee->organizer_id)->first()->name;
+        if (empty($employee)) {
+            return redirect()->to('/');
+        }
+        $organizer_name = $employee->organizer->name;
         return view('employees.show', [
             'employee' => $employee,
             'organizer_name' => $organizer_name
