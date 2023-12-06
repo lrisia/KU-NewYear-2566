@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmRegister;
 
 class RegisterApiController extends Controller
 {
@@ -52,9 +54,12 @@ class RegisterApiController extends Controller
             $employee->qr_code = $qr_code;
             $employee->save();
             try {
-                Artisan::call('email:send ' . $employee->email);
+                Mail::to($employee->email)->send(new ConfirmRegister($employee));
                 $employee->send_email_success = true;
             } catch (\Exception $e) {
+                Log::error(">>>>>> EMAIL ERROR <<<<<<");
+                Log::error($e->getMessage());
+                Log::error($e);
                 $employee->send_email_success = false;
             }
             $employee->save();

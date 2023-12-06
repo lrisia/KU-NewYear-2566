@@ -21,7 +21,7 @@ class EmailSender extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'find latest email in table employees and send email with link of QR Code';
 
     /**
      * Execute the console command.
@@ -31,7 +31,7 @@ class EmailSender extends Command
     public function handle()
     {
         $email = $this->argument("email");
-        $employee = Employee::where('email', $email)->first();
+        $employee = Employee::where('email', $email)->latest()->first();
         Mail::to($email)->send(new ConfirmRegister($employee));
         return Command::SUCCESS;
     }
