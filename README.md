@@ -3,7 +3,7 @@
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
 ## Versions
-* 2.0.4
+* 2.0.5
   * change typo of halal
 * 2.0.2
   * Newyear 2023 version
