@@ -1,7 +1,7 @@
 <template>
 
     <!-- Modal toggle -->
-    <button class="p-2 px-3 text-white text-xs sm:text-sm text-center shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534]" @click="onToggle">
+    <button class="p-2 px-3 text-white text-xs sm:text-sm text-center shadow rounded-lg" :class="{ 'bg-[#B0C03B] hover:bg-[#98a534]': !isDisabled, 'bg-gray-300': isDisabled }" @click="onToggle" :disabled="isDisabled">
         กดเข้าร่วมงาน
     </button>
 
@@ -82,6 +82,11 @@ export default {
     computed: {
         isModalVisible() {
             return this.isOpen;
+        },
+        isDisabled() {
+            const event = new Date('2023-12-27T00:00:00')
+            const now = new Date()
+            return event > now
         }
     },
     props: {
