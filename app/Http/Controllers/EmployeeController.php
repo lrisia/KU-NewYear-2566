@@ -6,7 +6,10 @@ use App\Models\Employee;
 use App\Models\Organizer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Console\Input\Input;
 
 class EmployeeController extends Controller
 {
@@ -79,7 +82,27 @@ class EmployeeController extends Controller
         return view('staff.employees.attended', ['employees' => $employees, 'keyword' => $keyword]);
     }
 
-    public function scan(){
+    public function scan()
+    {
         return view('staff.qr-code.index');
+    }
+
+    public function showUpload(Request $request)
+    {
+        $success = $request->query('success') ?? false;
+        return view('staff.employees.upload', [
+            'success' => $success
+        ]);
+    }
+
+    public function createUpload(Request $request)
+    {
+        $path = Storage::putFile('data', $request->file('upload'));
+        $filenames = explode('/', $path);
+        $filename = end($filenames);
+        Artisan::call('employee:import '.$filename);
+        return redirect()->route('staff.employees.upload.show', [
+            'success' => true
+        ]);
     }
 }

@@ -44,6 +44,8 @@ Route::group(['prefix' => 'staff'], function() {
         Route::get('', [EmployeeController::class, 'all'])->name('staff.employees');
         Route::get('registered', [EmployeeController::class, 'registered'])->name('staff.employees.registered');
         Route::get('attended', [EmployeeController::class, 'attended'])->name('staff.employees.attended');
+        Route::get('upload', [EmployeeController::class, 'showUpload'])->name('staff.employees.upload.show');
+        Route::post('upload', [EmployeeController::class, 'createUpload'])->name('staff.employees.upload.create');
     });
 
     Route::group(['prefix' => 'organizers'], function() {
