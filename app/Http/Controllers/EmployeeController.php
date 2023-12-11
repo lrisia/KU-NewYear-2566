@@ -105,4 +105,9 @@ class EmployeeController extends Controller
             'success' => true
         ]);
     }
+
+    public function create(Request $request)
+    {
+        $p_id = $request->input('');
+    }
 }

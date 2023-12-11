@@ -24,7 +24,7 @@ class PrizeSeeder extends Seeder
         $prize->money_amount = 6000;
         $prize->save();
 
-        $amount = [5, 10, 10, 10, 20, 30, 60];
+        $amount = [2, 5, 10, 10, 15, 70, 130];
         $money = [10000, 7000, 5000, 3000, 2000, 1000, 500];
         for ($i = 0; $i < count($amount); $i++) {
             $prize = new Prize();
