@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Employee;
 use App\Models\Organizer;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
