@@ -3,7 +3,7 @@
 @section('content')
     <section class="w-full">
         <div class="mx-8">
-            <img src="/image/Banner.jpg" class="my-4" style="width:100%;">
+            <img src="/image/Banner-2566.jpg" class="my-4" style="width:100%;">
             <h1 class="md:text-xl mt-2">
                 รางวัลทั้งหมด
             </h1>
