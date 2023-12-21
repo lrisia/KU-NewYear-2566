@@ -4,6 +4,9 @@ namespace App\Console\Commands;
 
 use App\Models\Employee;
 use App\Models\Organizer;
+use App\Repositories\EmailRepository;
+use App\Repositories\EmployeeRepository;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -44,6 +47,7 @@ class EmployeeImporter extends Command
 
             $bar->start();
 
+            $employeeRepository = new EmployeeRepository();
             foreach ($csv_data as $line) {
                 if (empty($line)) continue;
                 if (!$skipped_header) {
@@ -63,9 +67,29 @@ class EmployeeImporter extends Command
                     $employee->title = $row[1];
                     $employee->name = $row[2] . " " . $row[3];
                     $employee->organizer_id = $organizer->id;
+                    if (count($row) >= 7) {
+                        $employee->register_at = Carbon::now();
+                        $employee->email = $row[6];
+                        $employee->qr_code = $employeeRepository->generateCode($employee->p_id);
+                        $employee->save();
+                        $emailRepository = new EmailRepository();
+                        $emailRepository->sendUnsentEmail();
+                    }
+                    if (count($row) >= 8) {
+                        $employee->islam = $row[7] == "1";
+                        $employee->save();
+                    }
                     $employee->save();
                     $organizer->member_amount = $organizer->member_amount + 1;
                     $organizer->save();
+
+//                    if ($row[6] != null) {
+//                        $employee->register_at = Carbon::now();
+//                        $employee->qr_code = $employeeRepository->generateCode($employee->p_id);
+//                        $employee->save();
+//                        $emailRepository = new EmailRepository();
+//                        $emailRepository->sendUnsentEmail();
+//                    }
                 }
 
                 $bar->advance();
@@ -78,6 +102,7 @@ class EmployeeImporter extends Command
             DB::rollBack();
             $this->error(" Something went wrong...");
         }
+
         return Command::SUCCESS;
     }
 
