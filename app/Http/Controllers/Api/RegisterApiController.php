@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EmployeeResource;
 use App\Models\Employee;
+use App\Repositories\EmailRepository;
+use App\Repositories\EmployeeRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -43,27 +45,16 @@ class RegisterApiController extends Controller
                 'message' => ["email" => "email missing"]
             ], Response::HTTP_BAD_REQUEST);
         if ($answer === "yes") {
+            $employeeRepository = new EmployeeRepository();
             $employee = Employee::find($request->input('employee_id'));
             $employee->email = $request->input('email');
             $employee->register_at = Carbon::now();
             $employee->islam = $request->input("islam") === "yes";
-            $qr_code = fake()->regexify('[A-Z0-9]{32}');
-            while (Employee::where('qr_code', $qr_code)->first()) {
-                $qr_code = fake()->regexify('[A-Z0-9]{32}');
-            }
-            $employee->qr_code = $qr_code;
-            $employee->save();
-            try {
-                Mail::to($employee->email)->send(new ConfirmRegister($employee));
-                $employee->send_email_success = true;
-            } catch (\Exception $e) {
-                Log::error(">>>>>> EMAIL ERROR <<<<<<");
-                Log::error($e->getMessage());
-                Log::error($e);
-                $employee->send_email_success = false;
-            }
+            $employee->qr_code = $employeeRepository->generateCode($employee->p_id);
             $employee->save();
         }
+        $emailRepository = new EmailRepository();
+        $emailRepository->sendUnsentEmail();
         return response()->json([
             'success' => true,
         ], Response::HTTP_CREATED);
