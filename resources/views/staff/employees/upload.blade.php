@@ -30,11 +30,11 @@
                 @csrf
                 <div class="grid gap-6 mb-8 md:grid-cols-2">
                     <div>
-                        <label for="p_id" class="block mb-2 text-sm font-medium text-gray-900">รหัสพนักงาน</label>
+                        <label for="p_id" class="block mb-2 text-sm font-medium text-gray-900">รหัสพนักงาน<span class="text-red-500"> *</span></label>
                         <input type="text" name="p_id" id="p_id" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="[0-9]+" placeholder="เช่น 12345678" required>
                     </div>
                     <div>
-                        <label for="pre_t" class="block mb-2 text-sm font-medium text-gray-900">คำนำหน้าชื่อ</label>
+                        <label for="pre_t" class="block mb-2 text-sm font-medium text-gray-900">คำนำหน้าชื่อ<span class="text-red-500"> *</span></label>
                         <select name="pre_t" id="pre_t" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="นาย">นาย</option>
                             <option value="นาง">นาง</option>
@@ -42,20 +42,38 @@
                         </select>
                     </div>
                     <div>
-                        <label for="tname" class="block mb-2 text-sm font-medium text-gray-900">ชื่อ</label>
+                        <label for="tname" class="block mb-2 text-sm font-medium text-gray-900">ชื่อ<span class="text-red-500"> *</span></label>
                         <input type="text" name="tname" id="tname" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="กรอกชื่อ" required>
                     </div>
                     <div>
-                        <label for="tsurname" class="block mb-2 text-sm font-medium text-gray-900">นามสกุล</label>
+                        <label for="tsurname" class="block mb-2 text-sm font-medium text-gray-900">นามสกุล<span class="text-red-500"> *</span></label>
                         <input type="text" name="tsurname" id="tsurname" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="กรอกนามสกุล" required>
                     </div>
                     <div>
-                        <label for="fac" class="block mb-2 text-sm font-medium text-gray-900">รหัสหน่วยงาน</label>
+                        <label for="fac" class="block mb-2 text-sm font-medium text-gray-900">รหัสหน่วยงาน<span class="text-red-500"> *</span></label>
                         <input type="text" name="fac" id="fac" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="[A-Z][0-9]+" placeholder="เช่น B02" required>
                     </div>
+
                     <div>
-                        <label for="t_facname" class="block mb-2 text-sm font-medium text-gray-900">ชื่อหน่วยงาน</label>
+                        <label for="t_facname" class="block mb-2 text-sm font-medium text-gray-900">ชื่อหน่วยงาน<span class="text-red-500"> *</span></label>
                         <input type="text" name="t_facname" id="t_facname" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="เช่น คณะเกษตร หรือ สำนักงานมหาวิทยาลัย" required>
+                    </div>
+                </div>
+
+                <h1 class="md:text-lg mt-10">
+                    กรณีเพิ่มรายชื่อพร้อมส่ง QR Code
+                </h1>
+                <div class="grid gap-6 mb-8 md:grid-cols-2 mt-4">
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">อีเมลสำหรับรับ QR Code</label>
+                        <input type="text" name="email" id="email" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="เช่น example@ku.th">
+                    </div>
+                    <div>
+                        <p class="block mb-2 text-sm font-medium text-gray-900 mb-4">
+                            กรณีที่นับถือศาสนาอิสลามและต้องการระบุอาหารฮาลาลโปรดเลือก
+                        </p>
+                        <input id="islam_yes" name="islam" type="checkbox" value="yes" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
+                        <label for="islam_yes" class="mb-2 text-sm font-medium text-gray-900 ml-4">อาหารฮาลาล</label>
                     </div>
                 </div>
 

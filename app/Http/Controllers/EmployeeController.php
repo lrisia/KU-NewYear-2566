@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ConfirmRegister;
 use App\Models\Employee;
 use App\Models\Organizer;
+use App\Repositories\EmailRepository;
+use App\Repositories\EmployeeRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Input\Input;
 
@@ -115,12 +119,17 @@ class EmployeeController extends Controller
         $tname = $request->input('tname');
         $tsurname = $request->input('tsurname');
         $fac = $request->input('fac');
+        $email = $request->input('email') ?? null;
         $t_facname = $request->input('t_facname');
+        $islam = $request->input("islam") === "yes";
 
+        // Variable for display at front-end, Is import new employee successful?
         $success = true;
+        $employeeRepository = new EmployeeRepository();
         DB::beginTransaction();
         try {
             $organizer = Organizer::where('fac_id', $fac)->first();
+            // If organizer not exits, create new one
             if (!$organizer) {
                 $organizer = new Organizer();
                 $organizer->fac_id = $fac;
@@ -128,13 +137,26 @@ class EmployeeController extends Controller
                 $organizer->save();
             }
 
+            // Save new employee
             $employee = new Employee();
             $employee->p_id = $p_id;
             $employee->title = $pre_t;
             $employee->name = $tname . ' ' . $tsurname;
             $employee->organizer_id = $organizer->id;
+            $employee->email = $email;
+            $employee->islam = $islam;
             $employee->save();
 
+            // If add email in import form then send qr code via email
+            if ($email != null) {
+                $employee->register_at = Carbon::now();
+                $employee->qr_code = $employeeRepository->generateCode($employee->p_id);
+                $employee->save();
+                $emailRepository = new EmailRepository();
+                $emailRepository->sendUnsentEmail();
+            }
+
+            // Count new employee in organize
             $organizer->member_amount = $organizer->member_amount + 1;
             $organizer->save();
 
