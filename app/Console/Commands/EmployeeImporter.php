@@ -82,14 +82,6 @@ class EmployeeImporter extends Command
                     $employee->save();
                     $organizer->member_amount = $organizer->member_amount + 1;
                     $organizer->save();
-
-//                    if ($row[6] != null) {
-//                        $employee->register_at = Carbon::now();
-//                        $employee->qr_code = $employeeRepository->generateCode($employee->p_id);
-//                        $employee->save();
-//                        $emailRepository = new EmailRepository();
-//                        $emailRepository->sendUnsentEmail();
-//                    }
                 }
 
                 $bar->advance();
