@@ -44,9 +44,9 @@
                         <tbody class="m-2">
                         @foreach($employees as $employee)
                             <tr class="border text-gray-700 text-sm mobile:text-xs sm:text-base">
-                                <td class="p-2 sm:px-6">{{ $employee->got_prize_no }}</td>
-                                <td class="px-2 py-4">{{ $employee->name }}</td>
-                                <td class="pl-2 py-2">{{ $employee->organizer->name }}</td>
+                                <td class="p-2 sm:px-6">{{ $employee['no'] }}</td>
+                                <td class="px-2 py-4">{{ $employee['name'] }}</td>
+                                <td class="pl-2 py-2">{{ $employee['organizer_name'] }}</td>
                                 <td class="px-2 py-4">
                                     @if($prize->type == 'รางวัลพิเศษ' && $employee->got_prize_no == $prize->total_amount)
                                         {{ ($prize->money_amount % 10000) + 10000 }}

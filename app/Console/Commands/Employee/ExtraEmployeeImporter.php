@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Employee;
 
 use App\Models\Employee;
 use App\Models\Organizer;

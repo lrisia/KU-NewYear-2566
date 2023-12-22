@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Employee;
 
 use App\Models\Employee;
 use App\Models\Organizer;
 use App\Repositories\EmailRepository;
 use App\Repositories\EmployeeRepository;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;

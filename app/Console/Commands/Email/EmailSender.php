@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Email;
 
 use App\Mail\ConfirmRegister;
 use App\Models\Employee;
