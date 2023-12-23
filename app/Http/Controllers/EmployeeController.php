@@ -60,7 +60,7 @@ class EmployeeController extends Controller
         if (!is_null($keyword)) {
             $query = $query->searchAllColumn($keyword);
             $employees = $query->oldest('arrive_at')->paginate(200);
-            return view('staff.employees.all-employees', ['employees' => $employees, 'keyword' => $keyword]);
+            return view('staff.employees.all-employees', ['employees' => $employees, 'islam' => Employee::where('islam', true)->count(), 'keyword' => $keyword]);
         }
         $employees = Employee::oldest('arrive_at')->paginate(200);
         return view('staff.employees.all-employees', ['employees' => $employees, 'islam' => Employee::where('islam', true)->count(), 'keyword' => $keyword]);
