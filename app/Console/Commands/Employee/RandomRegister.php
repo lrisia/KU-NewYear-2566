@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Employee;
 
 use App\Models\Employee;
+use App\Repositories\EmployeeRepository;
 use Illuminate\Console\Command;
 
 class RandomRegister extends Command
@@ -29,9 +30,11 @@ class RandomRegister extends Command
     public function handle()
     {
         $employees = Employee::inRandomOrder()->limit(150)->get();
+        $employeeRepository = new EmployeeRepository();
         foreach ($employees as $employee) {
             $employee->register_at = fake()->dateTimeBetween('-2 week', '-1 week');
             $employee->email = fake()->email();
+            $employee->qr_code = $employeeRepository->generateCode($employee->p_id);
             $employee->save();
         }
         return Command::SUCCESS;

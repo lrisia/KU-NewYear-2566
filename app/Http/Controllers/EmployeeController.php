@@ -74,7 +74,7 @@ class EmployeeController extends Controller
             $query = $query->searchAllColumn($keyword);
         }
         $employees = $query->whereNotNull('register_at')->latest('register_at')->paginate(200);
-        return view('staff.employees.registered', ['employees' => $employees, 'keyword' => $keyword]);
+        return view('staff.employees.registered', ['employees' => $employees, 'islam' => Employee::where('islam', true)->count(), 'keyword' => $keyword]);
     }
 
     public function attended(Request $request)

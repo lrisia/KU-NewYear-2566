@@ -26,10 +26,6 @@ class LuckyDrawController extends Controller
             $employees = $employees->where('name', 'LIKE', "%{$keyword}%");
             return view('lucky-draw.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
         }
-        Log::info($employees);
-//        $employees = $prize->employees->sortBy('got_prize_no');
-        Log::info($employees);
-//        dd($employees);
         return view('lucky-draw.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
     }
 }
