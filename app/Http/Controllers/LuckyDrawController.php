@@ -7,6 +7,7 @@ use App\Models\Prize;
 use App\Repositories\EmployeeRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Crypt;
 
 class LuckyDrawController extends Controller
 {
@@ -17,6 +18,7 @@ class LuckyDrawController extends Controller
 
     public function show(Request $request, $id)
     {
+        $id = Crypt::decrypt($id);
         $employeeRepository = new EmployeeRepository();
         $prize = Prize::where('id', $id)->firstOrFail();
         $keyword = $request->query('keyword') ?? null;

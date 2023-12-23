@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="w-full @if ($employees->count() == 0) min-h-screen @endif">
-        <form action="{{ route('lucky-draw.show', ['id' => $prize->id])  }}" method="get" class="my-10 mx-8">
+        <form action="{{ route('lucky-draw.show', ['id' => Crypt::encrypt($prize->id)]) }}" method="get" class="my-10 mx-8">
             <label for="search" class="md:text-lg">ค้นหาชื่อผู้ได้รับรางวัล</label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
