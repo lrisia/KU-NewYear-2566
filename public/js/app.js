@@ -19107,7 +19107,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       isDragging: false,
-      file: null
+      file: null,
+      uploading: false
     };
   },
   methods: {
@@ -19144,30 +19145,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context.prev = _context.next) {
             case 0:
               if (!_this.file) {
-                _context.next = 15;
+                _context.next = 17;
                 break;
               }
+              _this.uploading = true;
               formData = new FormData();
               formData.append('upload', _this.file);
-              _context.prev = 3;
-              _context.next = 6;
+              _context.prev = 4;
+              _context.next = 7;
               return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/staff/employees/upload', formData);
-            case 6:
+            case 7:
               response = _context.sent;
               _this.$refs.file.value = null;
               _this.file = null;
               _this.successAlert();
-              _context.next = 15;
+              _context.next = 16;
               break;
-            case 12:
-              _context.prev = 12;
-              _context.t0 = _context["catch"](3);
+            case 13:
+              _context.prev = 13;
+              _context.t0 = _context["catch"](4);
               console.log(_context.t0);
-            case 15:
+            case 16:
+              _this.uploading = false;
+            case 17:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[3, 12]]);
+        }, _callee, null, [[4, 13]]);
       }))();
     },
     successAlert: function successAlert() {
@@ -19178,7 +19182,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         timer: 3000,
         timerProgressBar: true,
         didOpen: function didOpen() {
-          timerInterval = setInterval(function () {
+          setInterval(function () {
             Swal.getHtmlContainer().querySelector('b').textContent = (Swal.getTimerLeft() / 1000).toFixed(0);
           }, 100);
         }
@@ -20295,6 +20299,28 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 })], -1 /* HOISTED */);
 var _hoisted_9 = [_hoisted_8];
 var _hoisted_10 = ["disabled"];
+var _hoisted_11 = {
+  key: 0,
+  role: "status",
+  "class": "px-6"
+};
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "aria-hidden": "true",
+  "class": "w-5 h-5 text-gray-200 animate-spin fill-gray-500",
+  viewBox: "0 0 100 101",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  d: "M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z",
+  fill: "currentColor"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  d: "M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z",
+  fill: "currentFill"
+})], -1 /* HOISTED */);
+var _hoisted_13 = [_hoisted_12];
+var _hoisted_14 = {
+  key: 1
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "flex items-center justify-center w-full my-8",
@@ -20333,11 +20359,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.uploadFile && $options.uploadFile.apply($options, arguments);
     }),
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'bg-[#B0C03B] hover:bg-[#98a534] shadow': $data.file,
-      'bg-gray-300': !$data.file
+      'bg-[#B0C03B] hover:bg-[#98a534] shadow': $data.file && !this.uploading,
+      'bg-gray-300': !$data.file || this.uploading
     }, "p-2.5 px-4 text-white text-xs sm:text-sm text-center rounded-lg"]),
-    disabled: !$data.file
-  }, " อัปโหลดไฟล์ ", 10 /* CLASS, PROPS */, _hoisted_10)]);
+    disabled: !$data.file || this.uploading
+  }, [this.uploading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, _hoisted_13)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_14, "อัปโหลดไฟล์"))], 10 /* CLASS, PROPS */, _hoisted_10)]);
 }
 
 /***/ }),
