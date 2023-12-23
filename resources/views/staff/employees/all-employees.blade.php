@@ -14,7 +14,7 @@
         </div>
     </form>
 
-    <h1 class="md:text-lg">รายชื่อบุคลากรทั้งหมด {{ $employees->total() }} คน เป็นอิสลามจำนวน {{ $employees->where('islam', true)->count() }} คน</h1>
+    <h1 class="md:text-lg">รายชื่อบุคลากรทั้งหมด {{ $employees->total() }} คน เป็นอิสลามจำนวน {{ $islam }} คน</h1>
     <div class="my-4 overflow-x-auto relative text-sm mobile:text-xs sm:text-base shadow-md rounded-lg">
         <table class="w-full text-left text-gray-60 mr-0">
             <thead class="bg-[#e7e6e6]">

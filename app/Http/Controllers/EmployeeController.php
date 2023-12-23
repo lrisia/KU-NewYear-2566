@@ -63,7 +63,7 @@ class EmployeeController extends Controller
             return view('staff.employees.all-employees', ['employees' => $employees, 'keyword' => $keyword]);
         }
         $employees = Employee::oldest('arrive_at')->paginate(200);
-        return view('staff.employees.all-employees', ['employees' => $employees, 'keyword' => $keyword]);
+        return view('staff.employees.all-employees', ['employees' => $employees, 'islam' => Employee::where('islam', true)->count(), 'keyword' => $keyword]);
     }
 
     public function registered(Request $request)
@@ -74,7 +74,8 @@ class EmployeeController extends Controller
             $query = $query->searchAllColumn($keyword);
         }
         $employees = $query->whereNotNull('register_at')->latest('register_at')->paginate(200);
-        return view('staff.employees.registered', ['employees' => $employees, 'islam' => Employee::where('islam', true)->count(), 'keyword' => $keyword]);
+        $islam = Employee::where('islam', true)->whereNotNull('register_at')->count();
+        return view('staff.employees.registered', ['employees' => $employees, 'islam' => $islam, 'keyword' => $keyword]);
     }
 
     public function attended(Request $request)
@@ -85,7 +86,8 @@ class EmployeeController extends Controller
             $query = $query->searchAllColumn($keyword);
         }
         $employees = $query->whereNotNull('arrive_at')->latest('arrive_at')->paginate(200);
-        return view('staff.employees.attended', ['employees' => $employees, 'keyword' => $keyword]);
+        $islam = Employee::where('islam', true)->whereNotNull('arrive_at')->count();
+        return view('staff.employees.attended', ['employees' => $employees, 'islam' => $islam, 'keyword' => $keyword]);
     }
 
     public function scan()
