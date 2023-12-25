@@ -50,7 +50,7 @@ class ClearEmployeePrize extends Command
         $bar->start();
         DB::beginTransaction();
         foreach ($prizes as $prize) {
-            if ($prize->type == "รางวัลพิเศษ") {
+            if ($prize->type === "รางวัลพิเศษ") {
                 $prize->money_amount = 0;
                 $prize->total_amount = 0;
             }
