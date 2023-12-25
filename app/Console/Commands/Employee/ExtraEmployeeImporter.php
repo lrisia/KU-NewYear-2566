@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Employee;
 
 use App\Models\Employee;
 use App\Models\Organizer;
+use App\Repositories\EmailRepository;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -46,15 +47,15 @@ class ExtraEmployeeImporter extends Command
                 }
                 if ($line === '') continue;
                 $row = explode(",", $line);
-                $organizer = Organizer::where('fac_id', $row[4])->first();
+                $organizer = Organizer::where('fac_id', trim($row[4]))->first();
                 if (!$organizer) {
-                    $this->line("FAC_ID Not found: {$row[4]}");
+                    $this->line("FAC_ID Not found: {trim($row[4])}");
                 }
 
                 $employee = new Employee();
-                $employee->p_id = $row[0];
-                $employee->title = $row[1];
-                $employee->name = $row[2] . " " . $row[3];
+                $employee->p_id = trim($row[0]);
+                $employee->title = trim($row[1]);
+                $employee->name = trim($row[2]) . " " . trim($row[3]);
                 $employee->organizer_id = $organizer->id;
                 $employee->register_at = Carbon::now();
                 $qr_code = fake()->regexify('[A-Z0-9]{32}');
@@ -62,10 +63,10 @@ class ExtraEmployeeImporter extends Command
                     $qr_code = fake()->regexify('[A-Z0-9]{32}');
                 }
                 $employee->qr_code = $qr_code;
-                if (is_null($row[6]) or $row[6] === '') {
-                    $this->line("{$row[0]} has no email");
+                if (is_null($row[6]) or trim($row[6]) === '') {
+                    $this->line("{trim($row[0])} has no email");
                 }
-                else if (Employee::where('email', $row[6])->count() >= 1) {
+                else if (Employee::where('email', trim($row[6]))->count() >= 1) {
                     $this->line("{$row[0]} Email {$row[6]} has been used!");
                 }
                 else {
@@ -80,6 +81,10 @@ class ExtraEmployeeImporter extends Command
             DB::commit();
 
             $this->line(" Imported Success.");
+
+            // Send email after imported success
+            $emailRepository = new EmailRepository();
+            $emailRepository->sendUnsentEmail();
         } catch (\Exception $e) {
             DB::rollBack();
             $this->error(" Something went wrong...");

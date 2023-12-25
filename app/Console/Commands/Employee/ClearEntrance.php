@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Employee;
 
 use App\Models\Employee;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class RandomEntrance extends Command
+class ClearEntrance extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'entry:random {size}';
+    protected $signature = 'entry:clear';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Random Entry';
+    protected $description = 'Clear all entrance';
 
     /**
      * Execute the console command.
@@ -29,13 +29,12 @@ class RandomEntrance extends Command
      */
     public function handle()
     {
-        $size = $this->argument('size');
-        $employees = Employee::whereNotNull('register_at')->whereNull('arrive_at')->whereNull('got_prize_at')->inRandomOrder()->limit($size)->get();
+        $employees = Employee::whereNotNull('arrive_at')->get();
         $bar = $this->output->createProgressBar($employees->count());
         $bar->start();
         DB::beginTransaction();
-        foreach ($employees as $employee) {
-            $employee->arrive_at = now();
+        foreach($employees as $employee) {
+            $employee->arrive_at = null;
             $employee->save();
             $bar->advance();
         }

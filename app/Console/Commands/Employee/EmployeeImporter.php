@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Employee;
 
 use App\Models\Employee;
 use App\Models\Organizer;
@@ -8,6 +8,7 @@ use App\Repositories\EmailRepository;
 use App\Repositories\EmployeeRepository;
 use Carbon\Carbon;
 use Exception;
+
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -41,8 +42,9 @@ class EmployeeImporter extends Command
         $skipped_header = false;
         $csv_data = explode("\n", $csv);
 
-        DB::beginTransaction();
+
         try {
+            DB::beginTransaction();
             $bar = $this->output->createProgressBar(count($csv_data) - 1);
 
             $bar->start();
@@ -55,41 +57,32 @@ class EmployeeImporter extends Command
                     continue;
                 }
                 $row = explode(",", $line);
-                $organizer = Organizer::where('fac_id', $row[4])->first();
+                $organizer = Organizer::where('fac_id', trim($row[4]))->first();
                 if (!$organizer) {
-                    $organizer = $this->createOrganizer($row[4], $row[5]);
+                    $organizer = $this->createOrganizer(trim($row[4]), trim($row[5]));
                 }
 
-                $employee = Employee::where('p_id', $row[0])->first();
+                $employee = Employee::where('p_id', trim($row[0]))->first();
                 if (!$employee) {
                     $employee = new Employee();
-                    $employee->p_id = $row[0];
-                    $employee->title = $row[1];
-                    $employee->name = $row[2] . " " . $row[3];
+                    $employee->p_id = trim($row[0]);
+                    $employee->title = trim($row[1]);
+                    $employee->name = trim($row[2]) . " " . trim($row[3]);
                     $employee->organizer_id = $organizer->id;
                     if (count($row) >= 7) {
                         $employee->register_at = Carbon::now();
-                        $employee->email = $row[6];
+                        $employee->email = trim($row[6]);
                         $employee->qr_code = $employeeRepository->generateCode($employee->p_id);
                         $employee->save();
-                        $emailRepository = new EmailRepository();
-                        $emailRepository->sendUnsentEmail();
                     }
                     if (count($row) >= 8) {
-                        $employee->islam = $row[7] == "1";
+                        $employee->islam = trim($row[7]) === "1";
                         $employee->save();
                     }
                     $employee->save();
-                    $organizer->member_amount = $organizer->member_amount + 1;
+                    $organizer->member_amount += 1;
                     $organizer->save();
 
-//                    if ($row[6] != null) {
-//                        $employee->register_at = Carbon::now();
-//                        $employee->qr_code = $employeeRepository->generateCode($employee->p_id);
-//                        $employee->save();
-//                        $emailRepository = new EmailRepository();
-//                        $emailRepository->sendUnsentEmail();
-//                    }
                 }
 
                 $bar->advance();
@@ -97,6 +90,10 @@ class EmployeeImporter extends Command
             DB::commit();
             $bar->finish();
             $this->line(" Imported Success.");
+
+            // Send email after imported success
+            $emailRepository = new EmailRepository();
+            $emailRepository->sendUnsentEmail();
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             DB::rollBack();

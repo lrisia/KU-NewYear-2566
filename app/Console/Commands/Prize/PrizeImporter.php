@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Prize;
 
 use App\Models\Prize;
 use Illuminate\Console\Command;

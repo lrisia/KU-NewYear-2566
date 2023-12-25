@@ -38,7 +38,7 @@ class UserCreator extends Command
 
         $password = $this->ask("Enter password");
         $name = $this->ask("Enter user's name");
-        $role = $this->askWithCompletion("Role?", ['STAFF', 'ADMIN'], 'STAFF');
+        $role = $this->askWithCompletion("Role?", ['STAFF', 'ADMIN', 'REGISTER'], 'STAFF');
 
         $this->line("Create user with this data");
         $this->table([

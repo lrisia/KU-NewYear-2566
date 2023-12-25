@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="w-full @if ($employees->count() == 0) min-h-screen @endif">
-        <form action="{{ route('lucky-draw.show', ['id' => $prize->id])  }}" method="get" class="my-10 mx-8">
+        <form action="{{ route('lucky-draw.show', ['id' => Crypt::encrypt($prize->id)]) }}" method="get" class="my-10 mx-8">
             <label for="search" class="md:text-lg">ค้นหาชื่อผู้ได้รับรางวัล</label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -44,9 +44,9 @@
                         <tbody class="m-2">
                         @foreach($employees as $employee)
                             <tr class="border text-gray-700 text-sm mobile:text-xs sm:text-base">
-                                <td class="p-2 sm:px-6">{{ $employee->got_prize_no }}</td>
-                                <td class="px-2 py-4">{{ $employee->name }}</td>
-                                <td class="pl-2 py-2">{{ $employee->organizer->name }}</td>
+                                <td class="p-2 sm:px-6">{{ $employee['no'] }}</td>
+                                <td class="px-2 py-4">{{ $employee['name'] }}</td>
+                                <td class="pl-2 py-2">{{ $employee['organizer_name'] }}</td>
                                 <td class="px-2 py-4">
                                     @if($prize->type == 'รางวัลพิเศษ' && $employee->got_prize_no == $prize->total_amount)
                                         {{ ($prize->money_amount % 10000) + 10000 }}

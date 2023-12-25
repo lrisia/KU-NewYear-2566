@@ -96,3 +96,6 @@ sail artisan migrate --seed
 * MQTT Publisher
   * `sail artisan mqtt:publish <topic> <message>`
   * use `kunewyear2566` as `<topic>`
+* Draw prize
+  * `sail artisan prize:draw <prize_id>`
+  * Command will draw a prize with given id

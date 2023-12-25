@@ -3,7 +3,7 @@
 @section('content')
     <section class="w-full">
         <div class="mx-8">
-            <img src="/image/Banner.jpg" class="my-4" style="width:100%;">
+            <img src="/image/Banner-2566.jpg" class="my-4" style="width:100%;">
             <h1 class="md:text-xl mt-2">
                 รางวัลทั้งหมด
             </h1>
@@ -30,7 +30,7 @@
                                        ยังไม่จับรางวัล
                                     </p>
                                 @else
-                                    <a href="{{ route('lucky-draw.show', ['id' => $prize->id]) }}"
+                                    <a href="{{ route('lucky-draw.show', ['id' => Crypt::encrypt($prize->id)]) }}"
                                         class="bg-[#B0C03B] p-2 mr-1.5 sm:p-2 sm:text-sm sm:mr-0 text-white text-center text-xs rounded-lg shadow-lg hover:bg-[#98a534]">
                                         รายชื่อผู้โชคดี
                                     </a>

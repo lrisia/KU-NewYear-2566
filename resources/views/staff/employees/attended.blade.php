@@ -14,7 +14,7 @@
         </div>
     </form>
 
-    <h1 class="md:text-lg mr-6">รายชื่อผู้เข้าร่วมงานทั้งหมด {{ $employees->total() }} คน เป็นอิสลามจำนวน {{ $employees->where('islam', true)->count() }} คน</h1>
+    <h1 class="md:text-lg mr-6">รายชื่อผู้เข้าร่วมงานทั้งหมด {{ $employees->total() }} คน เป็นอิสลามจำนวน {{ $islam }} คน</h1>
     <div class="relative flex items-end justify-end ml-8 mt-2">
         <a href="{{ route('qr-code.scan') }}" class="absolute p-2 text-white text-sm mobile:text-xs shadow rounded-lg bg-[#B0C03B] hover:bg-[#98a534] flex items-center">
             <span class="mr-2 mobile:hidden">SCAN</span>
