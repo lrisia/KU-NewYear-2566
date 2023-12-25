@@ -82,7 +82,6 @@ class EmployeeImporter extends Command
                     $employee->save();
                     $organizer->member_amount += 1;
                     $organizer->save();
-
                 }
 
                 $bar->advance();
