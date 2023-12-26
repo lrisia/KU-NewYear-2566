@@ -50,9 +50,9 @@
                                         <li>
                                             <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('staff.prizes.search') }}">ค้นหาชื่อผู้ได้รับรางวัล</a>
                                         </li>
-                                        <li>
-                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('lucky-draw.button') }}">ปุ่มจับรางวัล</a>
-                                        </li>
+{{--                                        <li>--}}
+{{--                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('lucky-draw.button') }}">ปุ่มจับรางวัล</a>--}}
+{{--                                        </li>--}}
                                         <li>
                                             <a class="block rounded-b-lg p-2.5 hover:bg-[#e7e6e6]"
                                                href="{{ route('lucky-draw.draw') }}">แสดงผลการจับรางวัล</a>

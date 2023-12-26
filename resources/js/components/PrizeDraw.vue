@@ -1,7 +1,7 @@
 <template>
     <div v-if="!this.drawing" style="width: 100%" class="relative">
         <div class="flex h-screen">
-            <img class="mx-auto" id="cover" src="https://newyearregis.ku.ac.th/image/Banner-full.png" alt="KU NewYear Poster">
+            <img class="mx-auto" id="cover" src="https://newyearregis.ku.ac.th/image/Banner-LuckyDraw-2566.png" alt="KU NewYear Poster">
         </div>
         <video class="h-screen absolute top-0 left-0 fade" id="video-draw">
             <source :src="'/video/' + this.video_name" type="video/mp4" >
@@ -25,7 +25,7 @@
                             <tr v-for="person in lucky_person" class="border-t text-gray-700 sm:text-xl lg:text-3xl 2k:text-5xl">
                                 <td class="px-6 py-3 text-center w-1/6">{{ person.no }}</td>
                                 <td class="px-6 py-3 w-2/6">{{ person.name }}</td>
-                                <td class="py-3 px-2 w-2/6">{{ person.organizer }}</td>
+                                <td class="py-3 px-2 w-2/6">{{ person.organizer_name }}</td>
                                 <td class="py-3 px-2 w-1/6">
                                     <span v-if="prize_data.type === 'รางวัลพิเศษ' && person.no === prize_data.left_amount">
                                         {{ (prize_data.money_amount % 10000) + 10000 }}
@@ -183,13 +183,14 @@ export default {
                 video.classList.add('fade-in');
             }, 1000);
             setTimeout(() => video.play(), 1000);
-            setTimeout(() => this.getLuckyPerson(prize_id), 20000); // ms
+            setTimeout(() => this.getLuckyPerson(prize_id), 13000); // ms
         },
         async getLuckyPerson(prize_id) {
             try {
                 const response = await axios.get(this.url + `/api/prize/${prize_id}/employee`);
                 const prize = await axios.get(this.url + `/api/prize/${prize_id}/get`);
                 this.lucky_person = response.data;
+                console.log(this.lucky_person)
                 this.prize_data = prize.data;
                 this.drawing = true;
             } catch (e) {

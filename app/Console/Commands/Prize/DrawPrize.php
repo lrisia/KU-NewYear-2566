@@ -4,10 +4,14 @@ namespace App\Console\Commands\Prize;
 
 use App\Models\Employee;
 use App\Models\Prize;
+use App\Repositories\EmployeeRepository;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class DrawPrize extends Command
 {
@@ -32,10 +36,19 @@ class DrawPrize extends Command
      */
     public function handle()
     {
+        $employeeRepository = new EmployeeRepository();
         $prize_id = $this->argument('prize_id');
+        $lucky_person = $employeeRepository->getEmployeesByPrizeId($prize_id);
+        if ($lucky_person->count() !== 0) {
+            $this->error('Prize was already draw');
+            return Command::FAILURE;
+        }
         $prize = Prize::find($prize_id);
-        if ($prize->enable === false)
-            return response('Prize was already draw', Response::HTTP_BAD_REQUEST);
+        if ($prize->enable === false) {
+            $this->error('Prize was already draw');
+            return Command::FAILURE;
+        }
+        Artisan::call('mqtt:publish kunewyear2566/draw-prize ' . Crypt::encrypt($prize_id));
         $prize->enable = false;
         $prize->save();
         $amount = $prize->left_amount;

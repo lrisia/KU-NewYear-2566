@@ -24,7 +24,6 @@ class EmployeeRepository
         if (!$employees) {
             $employees = Employee::where('prize_id', $id)->whereNotNull('got_prize_at')->oldest('got_prize_no')->get();
             foreach ($employees as $employee) {
-                Log::info('prefix: ' .$prefix);
                 Redis::set($prefix . $employee->got_prize_no, $employee->title . $employee->name . ',' . $employee->organizer->name);
             }
         }
@@ -37,6 +36,7 @@ class EmployeeRepository
                     'organizer_name' => $data[1]
                 ];
             })
-            ->sortBy('no');
+            ->sortBy('no')
+            ->values();
     }
 }
