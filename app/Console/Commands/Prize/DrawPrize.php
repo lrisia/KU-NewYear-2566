@@ -58,6 +58,7 @@ class DrawPrize extends Command
         $lucky_person = Employee::whereNotNull('register_at')
                                 ->whereNotNull('arrive_at')
                                 ->whereNull('got_prize_at')
+                                ->where(DB::raw('LENGTH(p_id)'), '>=', 8)
                                 ->inRandomOrder()
                                 ->limit($amount)
                                 ->get();
