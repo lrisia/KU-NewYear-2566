@@ -8,12 +8,18 @@ use App\Repositories\EmployeeRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Redis;
 
 class LuckyDrawController extends Controller
 {
     public function index() {
-        $prizes = Prize::orderBy('prize_no', 'desc')->get();
-        return view('lucky-draw.lucky-person-index', ['prizes' => $prizes]);
+        $key = 'page:index';
+        $value = Redis::get($key);
+        if ($value === "show") {
+            $prizes = Prize::orderBy('prize_no', 'desc')->get();
+            return view('lucky-draw.lucky-person-index', ['prizes' => $prizes]);
+        }
+        return view('lucky-draw.lucky-person-index-wait');
     }
 
     public function show(Request $request, $id)
