@@ -16,7 +16,7 @@
 <body>
     @include('layouts.navbar')
 
-    <div class="mx-auto max-w-7xl" id="app">
+    <div class="mx-auto max-w-7xl min-h-screen" id="app">
         @yield('content')
     </div>
 
