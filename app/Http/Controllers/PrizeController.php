@@ -100,9 +100,10 @@ class PrizeController extends Controller
 
     public function draw()
     {
-        $video_number = rand(0, 1);
-        $filename = "box-480.mp4";
-        if ($video_number == 1) $filename = "chest-720.mp4";
+//        $video_number = rand(0, 1);
+//        $filename = "box-480.mp4";
+//        if ($video_number == 1) $filename = "chest-720.mp4";
+        $filename = 'ColorFinal.mp4';
         return view('lucky-draw.index', ['filename' => $filename]);
     }
 

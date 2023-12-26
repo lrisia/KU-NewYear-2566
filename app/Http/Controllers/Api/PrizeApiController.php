@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\EmployeeResource;
 use App\Models\Employee;
 use App\Models\Prize;
+use App\Repositories\EmployeeRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -19,7 +21,7 @@ class PrizeApiController extends Controller
 
     public function get($id)
     {
-        $prize = Prize::find($id);
+        $prize = Prize::find(Crypt::decrypt($id));
         return response()->json($prize, Response::HTTP_OK);
     }
 
@@ -49,9 +51,11 @@ class PrizeApiController extends Controller
     }
 
     public function getLuckyPerson($id) {
-        if ($this->buffer) return response()->json(EmployeeResource::collection($this->buffer), Response::HTTP_OK);
-        $lucky_person = Employee::where('prize_id', $id)->oldest('got_prize_no')->get();
-        return response()->json(EmployeeResource::collection($lucky_person), Response::HTTP_OK);
+//        if ($this->buffer) return response()->json(EmployeeResource::collection($this->buffer), Response::HTTP_OK);
+        $employeeRepository = new EmployeeRepository();
+        $id = Crypt::decrypt($id);
+        $lucky_person = collect($employeeRepository->getEmployeesByPrizeId($id));
+        return response()->json($lucky_person, Response::HTTP_OK);
     }
 
     public function tookPrize(Request $request) {
