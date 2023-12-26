@@ -25,7 +25,9 @@ class LuckyDrawController extends Controller
 
         $employees = collect($employeeRepository->getEmployeesByPrizeId($id));
         if (!is_null($keyword)) {
-            $employees = $employees->where('name', 'LIKE', "%{$keyword}%");
+            $employees = $employees->filter(function ($item, $key) use ($keyword) {
+                return str_contains($item['name'], $keyword);
+            });
             return view('lucky-draw.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
         }
         return view('lucky-draw.show', ['prize' => $prize, 'employees' => $employees, 'keyword' => $keyword]);
