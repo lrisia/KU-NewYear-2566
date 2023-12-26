@@ -3,6 +3,8 @@
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
 ## Versions
+* 2.0.8
+  * use redis as data cache 
 * 2.0.6
   * staff can add new employee
 * 2.0.5
