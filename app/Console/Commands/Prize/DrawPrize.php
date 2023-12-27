@@ -48,7 +48,7 @@ class DrawPrize extends Command
             $this->error('Prize was already draw');
             return Command::FAILURE;
         }
-        Artisan::call('mqtt:publish kunewyear2566/draw-prize ' . Crypt::encrypt($prize_id));
+        
         $prize->enable = false;
         $prize->save();
         $amount = $prize->left_amount;
