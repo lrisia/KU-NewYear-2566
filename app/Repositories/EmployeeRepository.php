@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Employee;
+
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
@@ -16,7 +17,6 @@ class EmployeeRepository
         }
         return $qr_code;
     }
-
     public function getEmployeesByPrizeId(int $id)
     {
         $prefix = 'prize' . $id . ':';
@@ -39,4 +39,5 @@ class EmployeeRepository
             ->sortBy('no')
             ->values();
     }
+
 }
