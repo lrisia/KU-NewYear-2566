@@ -3,11 +3,12 @@
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
 ## Versions
-* 2.0.12
+* 2.0.13
   * changes from last meeting
   * separate random from video
   * use redis to manage showing page
   * change video
+  * manual register via command register:manual
 * 2.0.10
   * search from redis
   * use redis as data cache 
