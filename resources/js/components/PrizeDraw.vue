@@ -1,7 +1,7 @@
 <template>
     <div v-if="!this.drawing" style="width: 100%" class="relative">
         <div class="flex h-screen">
-            <img class="mx-auto" id="cover" src="https://newyearregis.ku.ac.th/image/Size-VDO.png" alt="KU NewYear Poster">
+            <img class="mx-auto" id="cover" src="https://newyearregis.ku.ac.th/image/Size-VDO.jpg" alt="KU NewYear Poster">
         </div>
         <video class="h-screen absolute top-0 left-0 fade" id="video-draw">
             <source :src="'/video/' + this.video_name" type="video/mp4" >

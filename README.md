@@ -3,7 +3,7 @@
 > งานขอบคุณบุคลากร มหาวิทยาลัยเกษตรศาสตร์
 
 ## Versions
-* 2.0.11
+* 2.0.12
   * changes from last meeting
   * separate random from video
   * use redis to manage showing page
