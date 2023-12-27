@@ -15,7 +15,7 @@ class ClearPrize extends Command
      *
      * @var string
      */
-    protected $signature = 'prize:clear {prize_id}';
+    protected $signature = 'prize:reset {prize_id}';
 
     /**
      * The console command description.
