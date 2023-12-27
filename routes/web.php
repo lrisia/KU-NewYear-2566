@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     if (Auth::user()) {
         if (Auth::user()->isStaff()) return redirect()->route('staff.dashboard');
-        else if (Auth::user()->isRegister()) return redirect()->route('staff.employees');
+        else if (Auth::user()->isRegister()) return redirect()->route('staff.prizes');
     }
     $date = new DateTime('2023-12-21T00:00:00');
     $now = new DateTime();
@@ -73,6 +73,7 @@ Route::group(['prefix' => 'lucky-person'], function() {
     Route::get('{id}', [LuckyDrawController::class, 'show'])->name('lucky-draw.show');
     Route::get('', [LuckyDrawController::class, 'index'])->name('lucky-draw.show.no-id');
 });
+Route::get('lucky-person-qr', function () { return view('lucky-draw.qr-code'); });
 
 Route::get('staff/qr-code/scan', [EmployeeController::class, 'scan'])->name('qr-code.scan');
 

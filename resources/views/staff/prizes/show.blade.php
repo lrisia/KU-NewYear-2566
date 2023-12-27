@@ -46,9 +46,6 @@
                             <th scope="col" class="p-2 print:border-r">ชื่อ-นามสกุล</th>
                             <th scope="col" class="py-2 pl-2 print:border-r">หน่วยงาน</th>
                             <th scope="col" class="px-2 print:py-3 print:text-center print:border-r">เงินรางวัล</th>
-                            <th scope="col"
-                                class="hidden print:table-cell print:visible print:py-3 print:px-2 print:border-r"><p
-                                    class="invisible print:visible text-center">เลขบัตรประชาชน</p></th>
                             <th scope="col" class="hidden print:table-cell print:visible print:py-3 print:px-2 "><p
                                     class="invisible print:visible text-center">เซ็นชื่อ</p></th>
                         </tr>
@@ -68,7 +65,6 @@
                                         {{ $prize->money_amount }}
                                     @endif
                                 </td>
-                                <td class="hidden print:table-cell print:visible print:px-6 print:border-r print:w-1/6"></td>
                                 <td class="hidden print:table-cell print:visible print:px-16 print:py-8 print:w-1/6"></td>
 
                             </tr>
