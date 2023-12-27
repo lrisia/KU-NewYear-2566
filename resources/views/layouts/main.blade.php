@@ -16,6 +16,7 @@
 <body>
     @include('layouts.navbar')
 
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAPGgsV43rhHwjOw" data-callback="javascriptCallback"></div>
     <div class="mx-auto max-w-7xl min-h-screen" id="app">
         @yield('content')
     </div>

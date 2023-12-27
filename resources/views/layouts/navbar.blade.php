@@ -102,10 +102,9 @@
                     <div id="dropdown" class="hidden z-10 w-40 bg-white rounded-lg divide-y divide-gray-100 shadow">
                         <ul class="text-sm" aria-labelledby="multiLevelDropdownButton">
                             <li>
-                                <button id="doubleDropdownButton2" data-dropdown-toggle="doubleDropdown2"
+                                <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown"
                                         data-dropdown-placement="right-start" type="button"
-                                        class="flex justify-between items-center p-2.5 w-full rounded-t-lg hover:bg-[#e7e6e6]">
-                                    รายชื่อบุคลากร
+                                        class="flex justify-between items-center p-2.5 w-full hover:bg-[#e7e6e6] rounded-t-lg rounded-b-lg">รางวัล
                                     <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
@@ -113,25 +112,24 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </button>
-                                <div id="doubleDropdown2"
+                                <div id="doubleDropdown"
                                      class="hidden z-10 w-40 bg-white rounded-lg divide-y divide-gray-100 shadow">
-                                    <ul class="text-sm" aria-labelledby="doubleDropdownButton2">
+                                    <ul class="text-sm" aria-labelledby="doubleDropdownButton">
                                         <li>
-                                            <a class="block rounded-t-lg p-2.5 hover:bg-[#e7e6e6]"
-                                               href="{{ route('staff.employees') }}">รายชื่อบุคลากรทั้งหมด</a>
+                                            <a class="block p-2.5 rounded-t-lg rounded-b-lg hover:bg-[#e7e6e6]" href="{{ route('staff.prizes') }}">รางวัลทั้งหมด</a>
                                         </li>
-                                        <li>
-                                            <a class="block p-2.5 hover:bg-[#e7e6e6]"
-                                               href="{{ route('staff.employees.registered') }}">รายชื่อผู้ที่ลงทะเบียนแล้ว</a>
-                                        </li>
-                                        <li>
-                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('staff.employees.attended') }}">รายชื่อผู้เข้าร่วมงาน</a>
-                                        </li>
+{{--                                        <li>--}}
+{{--                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('staff.prizes.search') }}">ค้นหาชื่อผู้ได้รับรางวัล</a>--}}
+{{--                                        </li>--}}
+                                        {{--                                        <li>--}}
+                                        {{--                                            <a class="block p-2.5 hover:bg-[#e7e6e6]" href="{{ route('lucky-draw.button') }}">ปุ่มจับรางวัล</a>--}}
+                                        {{--                                        </li>--}}
+{{--                                        <li>--}}
+{{--                                            <a class="block rounded-b-lg p-2.5 hover:bg-[#e7e6e6]"--}}
+{{--                                               href="{{ route('lucky-draw.draw') }}">แสดงผลการจับรางวัล</a>--}}
+{{--                                        </li>--}}
                                     </ul>
                                 </div>
-                            </li>
-                            <li>
-                                <a href="{{ route('qr-code.scan') }}" class="block p-2.5 rounded-b-lg hover:bg-[#e7e6e6]">สแกน QR Code</a>
                             </li>
                         </ul>
                     </div>

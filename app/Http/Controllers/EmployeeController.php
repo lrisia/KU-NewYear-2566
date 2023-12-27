@@ -55,6 +55,8 @@ class EmployeeController extends Controller
     # ---------------- Staff and Register zone ----------------
     public function all(Request $request)
     {
+        if (!Auth::user()->isStaff()) return redirect()->back();
+
         $keyword = $request->query('keyword') ?? null;
         $query = Employee::query();
         if (!is_null($keyword)) {
@@ -97,6 +99,7 @@ class EmployeeController extends Controller
 
     public function showUpload(Request $request)
     {
+        if (!Auth::user()->isStaff()) return redirect()->back();
         $success = $request->query('success') ?? false;
         return view('staff.employees.upload', [
             'success' => $success

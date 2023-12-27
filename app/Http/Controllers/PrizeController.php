@@ -17,7 +17,7 @@ class PrizeController extends Controller
 
     public function index()
     {
-        if (!Auth::user()->isStaff()) return redirect()->back();
+//        if (!Auth::user()->isStaff()) return redirect()->back();
 
         $prizes = Prize::orderBy('prize_no', 'desc')->get();
         $is_special_prize_available = true;
@@ -53,8 +53,6 @@ class PrizeController extends Controller
 
     public function show(Request $request, $id)
     {
-        if (!Auth::user()->isStaff()) return redirect()->back();
-
         $prize = Prize::where('id', $id)->firstOrFail();
         $keyword = $request->query('keyword') ?? null;
         $query = Employee::query();
@@ -69,8 +67,6 @@ class PrizeController extends Controller
 
     public function close(Request $request)
     {
-        if (!Auth::user()->isStaff()) return redirect()->back();
-
         $id = $request->query('id');
         $amount = $request->query('amount');
 
@@ -78,16 +74,16 @@ class PrizeController extends Controller
         $prize->close = true;
         $prize->left_amount = $amount;
         $prize->save();
-        if ($prize->type == "รางวัลพิเศษ") {
+        if ($prize->type == "รางวัลพิิเศษ") {
             Artisan::call('mqtt:publish kunewyear2566/close-prize ' . $id);
             return redirect()->route('staff.prizes');
         }
 
-        $special_prize = Prize::where('type', 'รางวัลพิเศษ')->firstOrFail();
-        $special_prize->money_amount += $amount * $prize->money_amount;
-        $special_prize->total_amount = (int)($special_prize->money_amount / 10000);
-        $special_prize->left_amount = $special_prize->total_amount;
-        $special_prize->save();
+        if (in_array($prize->id, array(3, 4, 5, 6, 7, 8))) {
+            $special_prize = Prize::where('type', 'รางวัลพิเศษ')->firstOrFail();
+            $special_prize->money_amount += $amount * $prize->money_amount;
+            $special_prize->save();
+        }
 
         Artisan::call('mqtt:publish kunewyear2566/close-prize ' . $id);
         return redirect()->route('staff.prizes');
@@ -103,7 +99,7 @@ class PrizeController extends Controller
 //        $video_number = rand(0, 1);
 //        $filename = "box-480.mp4";
 //        if ($video_number == 1) $filename = "chest-720.mp4";
-        $filename = 'ColorFinal.mp4';
+        $filename = 'LuckyDraw2024-Merge(1080).mp4';
         return view('lucky-draw.index', ['filename' => $filename]);
     }
 

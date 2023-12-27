@@ -1,7 +1,7 @@
 <template>
     <div v-if="!this.drawing" style="width: 100%" class="relative">
         <div class="flex h-screen">
-            <img class="mx-auto" id="cover" src="https://newyearregis.ku.ac.th/image/Banner-LuckyDraw-2566.png" alt="KU NewYear Poster">
+            <img class="mx-auto" id="cover" src="https://newyearregis.ku.ac.th/image/Size-VDO.png" alt="KU NewYear Poster">
         </div>
         <video class="h-screen absolute top-0 left-0 fade" id="video-draw">
             <source :src="'/video/' + this.video_name" type="video/mp4" >
@@ -47,7 +47,7 @@
                     <qrcode-vue :value="this.qrcode_url" class="mx-auto" :size="400" />
                 </div>
                 <div class="mt-7 mb-16">
-                    <mini-count-down :minute="15"></mini-count-down>
+                    <mini-count-down :minute="10"></mini-count-down>
                 </div>
             </div>
         </div>
@@ -183,7 +183,7 @@ export default {
                 video.classList.add('fade-in');
             }, 1000);
             setTimeout(() => video.play(), 1000);
-            setTimeout(() => this.getLuckyPerson(prize_id), 13000); // ms
+            setTimeout(() => this.getLuckyPerson(prize_id), 23000); // ms
         },
         async getLuckyPerson(prize_id) {
             try {
