@@ -43,7 +43,8 @@ class ClearPrize extends Command
             $employee->save();
         }
         // Clear from Redis
-        Redis::del('prize' . $prize_id . ':*');
+        Redis::del('prize' . $prize_id . ':1');
+        Redis::del('prize' . $prize_id . ':2');
 
         //Reset prize
         $prize = Prize::find($prize_id);
