@@ -40,15 +40,15 @@ class DrawPrize extends Command
         $prize_id = $this->argument('prize_id');
         $lucky_person = $employeeRepository->getEmployeesByPrizeId($prize_id);
         if ($lucky_person->count() !== 0) {
-            $this->error('Prize was already draw');
+            $this->error('Prize was already draw because have data in Redis');
             return Command::FAILURE;
         }
         $prize = Prize::find($prize_id);
         if ($prize->enable === false) {
-            $this->error('Prize was already draw');
+            $this->error('Prize was already draw because prize isnt enable');
             return Command::FAILURE;
         }
-        
+
         $prize->enable = false;
         $prize->save();
         $amount = $prize->left_amount;

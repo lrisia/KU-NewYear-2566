@@ -46,7 +46,7 @@
                 <div class="mt-16 p-6 rounded-lg bg-white">
                     <qrcode-vue :value="this.qrcode_url" class="mx-auto" :size="400" />
                 </div>
-                <div class="mt-7 mb-16">
+                <div class="mt-7 mb-16" v-if="this.prize_data.prize_no >= 2">
                     <mini-count-down :minute="10"></mini-count-down>
                 </div>
             </div>
@@ -104,6 +104,10 @@ export default {
         video_name: {
             type: String,
             required: true,
+        },
+        countDown: {
+            type: Boolean,
+            default: true
         }
     },
     mounted() {
@@ -181,8 +185,8 @@ export default {
                 // video.hidden = false;
                 video.style.opacity = "100%";
                 video.classList.add('fade-in');
-            }, 1000);
-            setTimeout(() => video.play(), 1000);
+            }, 100);
+            setTimeout(() => video.play(), 100);
             setTimeout(() => this.getLuckyPerson(prize_id), 23000); // ms
         },
         async getLuckyPerson(prize_id) {
@@ -190,8 +194,8 @@ export default {
                 const response = await axios.get(this.url + `/api/prize/${prize_id}/employee`);
                 const prize = await axios.get(this.url + `/api/prize/${prize_id}/get`);
                 this.lucky_person = response.data;
-                console.log(this.lucky_person)
                 this.prize_data = prize.data;
+                console.log(this.prize_data)
                 this.drawing = true;
             } catch (e) {
                 console.log(e);
