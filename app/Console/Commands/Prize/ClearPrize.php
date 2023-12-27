@@ -22,7 +22,7 @@ class ClearPrize extends Command
      *
      * @var string
      */
-    protected $description = 'Clear prize by id to ready for draw again';
+    protected $description = 'Clear prize by id to ready for draw again eiei';
 
     /**
      * Execute the console command.
